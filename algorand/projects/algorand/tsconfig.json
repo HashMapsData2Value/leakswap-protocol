@@ -19,8 +19,7 @@
     "noEmit": true
   },
   "include": [
-    "smart_contracts/**/*.ts",
-    "../../../leakswap-utils/src/algorand-utils.ts"
+    "smart_contracts/**/*.ts"
   ],
   "exclude": [
     "node_modules",

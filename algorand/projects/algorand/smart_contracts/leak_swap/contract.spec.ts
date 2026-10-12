@@ -2,9 +2,7 @@ import { TestExecutionContext } from '@algorandfoundation/algorand-typescript-te
 import { describe, expect, it } from 'vitest'
 import { Bytes } from '@algorandfoundation/algorand-typescript'
 import { LeakSwap } from './contract.algo'
-// import { genScalar } from '../../../../../leakswap-utils/src/algorand-utils'
-import { genPrivateSpendKey } from '../../../../../leakswap-utils/src/monero-utils'
-import { getPK, leakySign, hexToUint8Array } from '../../../../../leakswap-utils/src/common'
+import { genPrivateSpendKey, getPK, leakySign, hexToUint8Array } from 'leakswap-utils'
 import { ed25519 } from '@noble/curves/ed25519'
 
 export enum LeakSwapState {
