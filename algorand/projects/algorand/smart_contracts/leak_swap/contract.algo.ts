@@ -76,9 +76,13 @@ export class LeakSwap extends Contract {
   /*
     Ali sets the contract to ready once Xin has locked up funds on the xternal chain.
     (If Ali times out, the contract will enter an equivalent "ready" state after t0.)
+
+    sponsorPayment is the paired fee-sponsor LogicSig payment (see sponsor_lsig.algo.ts),
+    used to top Ali up when she has no Algo left to pay for this call herself.
   */
-  public setReady(): void {
+  public setReady(sponsorPayment: gtxn.PaymentTxn): void {
     assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can set the contract to ready!')
+    assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
     this.aliReady.value = true
   }
 
@@ -104,10 +108,13 @@ export class LeakSwap extends Contract {
    * wants to refund her Algo/ASA. But the refund leaks Ali's xternal secret key, in case
    * Xin actually does lock up funds.
    */
-  public leakyRefund(signature: bytes): void {
+  @abimethod({ allowActions: 'DeleteApplication' })
+  public leakyRefund(signature: bytes, sponsorPayment: gtxn.PaymentTxn): void {
+    ensureBudget(2000)
     assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do leaky refund!')
     assert(Global.latestTimestamp <= this.t0.value, 'Cannot refund after t0!')
     assert(!this.aliReady.value, 'Cannot refund after set ready!')
+    assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
 
     // Forces Ali to leak xternal secret key
     this.leakyVerifyEd25519(signature, this.aliXternalPK.value)
@@ -120,11 +127,13 @@ export class LeakSwap extends Contract {
    * Xin locked funds up) or because t0 has passed. Xin can now claim Ali's Algo/ASA, doing so by
    * leaking the xternal secret key. That will allow Ali to claim the xternal funds
   */
-  public leakyClaim(signature: bytes): void {
+  @abimethod({ allowActions: 'DeleteApplication' })
+  public leakyClaim(signature: bytes, sponsorPayment: gtxn.PaymentTxn): void {
     ensureBudget(2000)
     assertMatch(Txn, { sender: this.xinAlgoAddr.value }, 'Only Xin can do leaky claim!')
     assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
     assert(Global.latestTimestamp < this.t1.value, 'Cannot claim after t1!')
+    assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
 
     // Forces Xin to leak xternal secret key
     this.leakyVerifyEd25519(signature, this.xinXternalPK.value)
@@ -137,9 +146,11 @@ export class LeakSwap extends Contract {
     This will disburse the funds to Ali, without forcing Ali to reveal their external PK.
     Xin's locked up funds will be foreer out of reachl.
   */
-  public punishRefund(): void {
+  @abimethod({ allowActions: 'DeleteApplication' })
+  public punishRefund(sponsorPayment: gtxn.PaymentTxn): void {
     assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do punish refund!')
     assert(Global.latestTimestamp >= this.t1.value, 'Cannot punish refund before t1!')
+    assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
     this.disburseFunds(this.aliAlgoAddr.value)
   }
 

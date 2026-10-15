@@ -1,9 +1,9 @@
 {
   "version": 3,
   "sources": [
-    "/Users/yared/dev/hashmapsdata2value/leakswap/algorand/projects/algorand/smart_contracts/leak_swap/contract.algo.ts"
+    "/Users/yared/dev/hashmapsdata2value/monero-swaps-stuff/leakswap-all/leakswap-protocol/algorand/projects/algorand/smart_contracts/leak_swap/contract.algo.ts"
   ],
-  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAeS;AAAuC;AAA9C;AAXF;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;;;;;;;;;;AAAA;;AAuIE;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;AAjBA;;AAAA;AAAA;AAAA;;AAAA;AAtHF;;;AAAA;;;AAsHE;;;AAAA;;AAhBA;;AAAA;AAAA;AAAA;;AAAA;AAtGF;;;AAAA;;;AAsGE;;;AAAA;;AAlBA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AATA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;;AAxBA;;AAAA;AAAA;AAAA;;AAAA;AAnDF;;;AAAA;;;AAAA;;;AAAA;;;AAmDE;;;AAAA;;AAnCC;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAhBH;;;AAAA;;;AAAA;;;AAAA;AAAA;;AAAA;;;AAAA;;;AAAA;;;AAAA;AAAA;;;AAAA;AAgBG;;;AAAA;;AAAD;;;AAdO;AAuB2B;;AAAhC;AApBK;;AAqBL;;AAAA;AAvBK;;AAyBL;;AAAA;AAtBK;;AAuBL;;AAAA;AArBK;AAuBL;;AAAA;AAtBK;AAuBL;;AAAA;AAEO;;AAAA;;AAAA;AAAP;AACO;;AAAY;;AAAZ;AAAP;AACO;;AAAY;;AAAZ;AAAP;;AAGF;;;AACE;;;;;;;;;AAEY;;;AAFZ;;;AAAA;;;AAAA;;AAWF;;;AACE;;AAAA;;AAAA;;;;AAWF;;;AAEI;;AAAA;;;AAA8B;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAA9B;AADF;AAGgC;;AAAzB;;AAAA;;AAAA;AAAP;;AASA;;AA1EK;AAAA;AAAA;AAAA;AA0EL;AAAA;AAjEK;AAkEiB;AAAtB;;AAQW;;AA5EN;AAAA;AAAA;AAAA;AA4ED;AAAJ;;;AACS;;AAAP;AAES;;AAhFN;AAAA;AAAA;AAAA;AAgFD;AAAJ;;;AACS;;AAAP;AA9EG;AAAA;AAAA;AAAA;AAgFL;;;AACS;AAAP;AAEK;AAAP;AAQF;;;AACE;;AArGK;AAAA;AAAA;AAAA;AAqGL;AAAA;AACc;;AAhGT;AAAA;AAAA;AAAA;AAgGE;AAAP;AA7FK;AAAA;AAAA;AAAA;AA8FE;AAAP;AApGK;AAAA;;AAAA;AAAA;AAuGL;;AAAA;AAAA;;;AA1GK;AAAA;AAAA;AAAA;AA4GL;;;;AAQF;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAEE;;AArHK;AAAA;;AAAA;AAAA;AAqHL;AAAA;AACc;;AAjHT;AAAA;AAAA;AAAA;AAiHE;AAAA;;;AA9GF;AAAA;AAAA;AAAA;AA8GE;;;;AAAP;AACc;;AAjHT;AAAA;AAAA;AAAA;AAiHE;AAAP;AApHK;AAAA;;AAAA;AAAA;AAuHL;;AAAA;AAAA;;;AA1HK;AAAA;;AAAA;AAAA;AA4HL;;;;;;;;AASA;;AAtIK;AAAA;AAAA;AAAA;AAsIL;AAAA;AACc;;AAhIT;AAAA;AAAA;AAAA;AAgIE;AAAP;AAvIK;AAAA;AAAA;AAAA;AAwIL;;;",
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAeS;AAAuC;AAA9C;AAXF;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;;;;;;;;;;AAAA;;AAgJG;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAhJH;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;AAgJG;;;AAAA;;AAnBA;;AAAA;AAAA;AAAA;AAAA;;AAAA;AA7HH;;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;AA6HG;;;AAAA;;AAnBA;;AAAA;AAAA;AAAA;AAAA;;AAAA;AA1GH;;;AAAA;;;AAAA;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;AA0GG;;;AAAA;;AAlBD;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;;;;AAAA;AAAA;AAAA;AAAA;;AAVA;;AAAA;AAAA;AAAA;;AAAA;AA9EF;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;AA8EE;;;AAAA;;AA3BA;;AAAA;AAAA;AAAA;;AAAA;AAnDF;;;AAAA;;;AAAA;;;AAAA;;;AAmDE;;;AAAA;;AAnCC;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAhBH;;;AAAA;;;AAAA;;;AAAA;AAAA;;AAAA;;;AAAA;;;AAAA;;;AAAA;AAAA;;;AAAA;AAgBG;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAD;;;AAdO;AAuB2B;;AAAhC;AApBK;;AAqBL;;AAAA;AAvBK;;AAyBL;;AAAA;AAtBK;;AAuBL;;AAAA;AArBK;AAuBL;;AAAA;AAtBK;AAuBL;;AAAA;AAEO;;AAAA;;AAAA;AAAP;AACO;;AAAY;;AAAZ;AAAP;AACO;;AAAY;;AAAZ;AAAP;;AAGF;;;AACE;;;;;;;;;AAEY;;;AAFZ;;;AAAA;;;AAAA;;AAWF;;;AACE;;AAAA;;AAAA;;;;AAWF;;;AAEI;;AAAA;;;AAA8B;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAA9B;AADF;AAGgC;;AAAzB;;AAAA;;AAAA;AAAP;;AAWF;;;AACE;;AA7EK;AAAA;AAAA;AAAA;AA6EL;AAAA;AACsB;;AAAA;;AAAf;AAAP;AArEK;AAsEiB;AAAtB;;AAQW;;AAhFN;AAAA;AAAA;AAAA;AAgFD;AAAJ;;;AACS;;AAAP;AAES;;AApFN;AAAA;AAAA;AAAA;AAoFD;AAAJ;;;AACS;;AAAP;AAlFG;AAAA;AAAA;AAAA;AAoFL;;;AACS;AAAP;AAEK;AAAP;AAQF;;;AAEe;AAAb;AAAA;;;AACA;;AA3GK;AAAA;AAAA;AAAA;AA2GL;AAAA;AACc;;AAtGT;AAAA;AAAA;AAAA;AAsGE;AAAP;AAnGK;AAAA;AAAA;AAAA;AAoGE;AAAP;AACsB;;AAAA;;AAAf;AAAP;AA3GK;AAAA;;AAAA;AAAA;AA8GL;;AAAA;AAAA;;;AAjHK;AAAA;AAAA;AAAA;AAmHL;;;;AAQF;;;AAEe;AAAb;AAAA;;;AACA;;AA7HK;AAAA;;AAAA;AAAA;AA6HL;AAAA;AACc;;AAzHT;AAAA;AAAA;AAAA;AAyHE;AAAA;;;AAtHF;AAAA;AAAA;AAAA;AAsHE;;;;AAAP;AACc;;AAzHT;AAAA;AAAA;AAAA;AAyHE;AAAP;AACsB;;AAAA;;AAAf;AAAP;AA7HK;AAAA;;AAAA;AAAA;AAgIL;;AAAA;AAAA;;;AAnIK;AAAA;;AAAA;AAAA;AAqIL;;;;;;;;AAQF;;;AAEE;;AAhJK;AAAA;AAAA;AAAA;AAgJL;AAAA;AACc;;AA1IT;AAAA;AAAA;AAAA;AA0IE;AAAP;AACsB;;AAAA;;AAAf;AAAP;AAlJK;AAAA;AAAA;AAAA;AAmJL;;;",
   "op_pc_offset": 0,
   "pc_events": {
     "1": {
@@ -11,12 +11,12 @@
       "params": {},
       "block": "main",
       "stack_in": [],
-      "op": "intcblock 0 1"
+      "op": "intcblock 0 1 5 2000"
     },
-    "5": {
-      "op": "bytecblock \"aliAlgoAddr\" \"aliReady\" \"t0\" \"t1\" \"xinAlgoAddr\" \"aliXternalPK\" \"xinXternalPK\" 0x068101"
+    "8": {
+      "op": "bytecblock \"aliAlgoAddr\" \"aliReady\" \"t0\" \"t1\" \"xinAlgoAddr\" 0x068101 \"aliXternalPK\" \"xinXternalPK\""
     },
-    "76": {
+    "79": {
       "op": "txn ApplicationID",
       "defined_out": [
         "reinterpret_bool%0#0"
@@ -25,11 +25,11 @@
         "reinterpret_bool%0#0"
       ]
     },
-    "78": {
+    "81": {
       "op": "bnz main_after_if_else@2",
       "stack_out": []
     },
-    "81": {
+    "84": {
       "op": "bytec_1 // \"aliReady\"",
       "defined_out": [
         "\"aliReady\""
@@ -38,7 +38,7 @@
         "\"aliReady\""
       ]
     },
-    "82": {
+    "85": {
       "op": "intc_0 // 0",
       "defined_out": [
         "\"aliReady\"",
@@ -49,11 +49,11 @@
         "0"
       ]
     },
-    "83": {
+    "86": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "84": {
+    "87": {
       "block": "main_after_if_else@2",
       "stack_in": [],
       "op": "txn NumAppArgs",
@@ -64,59 +64,59 @@
         "tmp%0#1"
       ]
     },
-    "86": {
+    "89": {
       "op": "bz main_after_if_else@15",
       "stack_out": []
     },
-    "89": {
-      "op": "pushbytess 0xadeb06dd 0x21b51b08 0x180425f6 0x13f22628 0x9ee84c01 0xdda88be3 0x084e7c58 // method \"createApplication(byte[],account,byte[],uint64,uint64)void\", method \"verifySignature(byte[],byte[])void\", method \"setReady()void\", method \"getContractState()uint64\", method \"leakyRefund(byte[])void\", method \"leakyClaim(byte[])void\", method \"punishRefund()void\"",
+    "92": {
+      "op": "pushbytess 0xadeb06dd 0x21b51b08 0xdda05a7a 0x13f22628 0x4801e829 0xc5ba2d44 0x66671879 // method \"createApplication(byte[],account,byte[],uint64,uint64)void\", method \"verifySignature(byte[],byte[])void\", method \"setReady(pay)void\", method \"getContractState()uint64\", method \"leakyRefund(byte[],pay)void\", method \"leakyClaim(byte[],pay)void\", method \"punishRefund(pay)void\"",
       "defined_out": [
         "Method(createApplication(byte[],account,byte[],uint64,uint64)void)",
         "Method(getContractState()uint64)",
-        "Method(leakyClaim(byte[])void)",
-        "Method(leakyRefund(byte[])void)",
-        "Method(punishRefund()void)",
-        "Method(setReady()void)",
+        "Method(leakyClaim(byte[],pay)void)",
+        "Method(leakyRefund(byte[],pay)void)",
+        "Method(punishRefund(pay)void)",
+        "Method(setReady(pay)void)",
         "Method(verifySignature(byte[],byte[])void)"
       ],
       "stack_out": [
         "Method(createApplication(byte[],account,byte[],uint64,uint64)void)",
         "Method(verifySignature(byte[],byte[])void)",
-        "Method(setReady()void)",
+        "Method(setReady(pay)void)",
         "Method(getContractState()uint64)",
-        "Method(leakyRefund(byte[])void)",
-        "Method(leakyClaim(byte[])void)",
-        "Method(punishRefund()void)"
+        "Method(leakyRefund(byte[],pay)void)",
+        "Method(leakyClaim(byte[],pay)void)",
+        "Method(punishRefund(pay)void)"
       ]
     },
-    "126": {
+    "129": {
       "op": "txna ApplicationArgs 0",
       "defined_out": [
         "Method(createApplication(byte[],account,byte[],uint64,uint64)void)",
         "Method(getContractState()uint64)",
-        "Method(leakyClaim(byte[])void)",
-        "Method(leakyRefund(byte[])void)",
-        "Method(punishRefund()void)",
-        "Method(setReady()void)",
+        "Method(leakyClaim(byte[],pay)void)",
+        "Method(leakyRefund(byte[],pay)void)",
+        "Method(punishRefund(pay)void)",
+        "Method(setReady(pay)void)",
         "Method(verifySignature(byte[],byte[])void)",
         "tmp%2#0"
       ],
       "stack_out": [
         "Method(createApplication(byte[],account,byte[],uint64,uint64)void)",
         "Method(verifySignature(byte[],byte[])void)",
-        "Method(setReady()void)",
+        "Method(setReady(pay)void)",
         "Method(getContractState()uint64)",
-        "Method(leakyRefund(byte[])void)",
-        "Method(leakyClaim(byte[])void)",
-        "Method(punishRefund()void)",
+        "Method(leakyRefund(byte[],pay)void)",
+        "Method(leakyClaim(byte[],pay)void)",
+        "Method(punishRefund(pay)void)",
         "tmp%2#0"
       ]
     },
-    "129": {
+    "132": {
       "op": "match main_createApplication_route@5 main_verifySignature_route@6 main_setReady_route@7 main_getContractState_route@8 main_leakyRefund_route@9 main_leakyClaim_route@10 main_punishRefund_route@11",
       "stack_out": []
     },
-    "145": {
+    "148": {
       "block": "main_after_if_else@15",
       "stack_in": [],
       "op": "intc_0 // 0",
@@ -127,54 +127,148 @@
         "tmp%0#0"
       ]
     },
-    "146": {
+    "149": {
       "op": "return",
       "stack_out": []
     },
-    "147": {
+    "150": {
       "block": "main_punishRefund_route@11",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%44#0"
+        "tmp%47#0"
       ],
       "stack_out": [
-        "tmp%44#0"
+        "tmp%47#0"
       ]
     },
-    "149": {
-      "op": "!",
+    "152": {
+      "op": "intc_2 // DeleteApplication",
       "defined_out": [
-        "tmp%45#0"
+        "DeleteApplication",
+        "tmp%47#0"
       ],
       "stack_out": [
-        "tmp%45#0"
-      ]
-    },
-    "150": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "151": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%46#0"
-      ],
-      "stack_out": [
-        "tmp%46#0"
+        "tmp%47#0",
+        "DeleteApplication"
       ]
     },
     "153": {
+      "op": "==",
+      "defined_out": [
+        "tmp%48#0"
+      ],
+      "stack_out": [
+        "tmp%48#0"
+      ]
+    },
+    "154": {
+      "error": "OnCompletion is not DeleteApplication",
+      "op": "assert // OnCompletion is not DeleteApplication",
+      "stack_out": []
+    },
+    "155": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%49#0"
+      ],
+      "stack_out": [
+        "tmp%49#0"
+      ]
+    },
+    "157": {
       "error": "can only call when not creating",
       "op": "assert // can only call when not creating",
       "stack_out": []
     },
-    "154": {
-      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.punishRefund",
-      "op": "callsub punishRefund"
+    "158": {
+      "op": "txn GroupIndex",
+      "defined_out": [
+        "tmp%51#0"
+      ],
+      "stack_out": [
+        "tmp%51#0"
+      ]
     },
-    "157": {
+    "160": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1",
+        "tmp%51#0"
+      ],
+      "stack_out": [
+        "tmp%51#0",
+        "1"
+      ]
+    },
+    "161": {
+      "op": "-",
+      "defined_out": [
+        "gtxn_idx%3#0"
+      ],
+      "stack_out": [
+        "gtxn_idx%3#0"
+      ]
+    },
+    "162": {
+      "op": "dup",
+      "defined_out": [
+        "gtxn_idx%3#0",
+        "gtxn_idx%3#0 (copy)"
+      ],
+      "stack_out": [
+        "gtxn_idx%3#0",
+        "gtxn_idx%3#0 (copy)"
+      ]
+    },
+    "163": {
+      "op": "gtxns TypeEnum",
+      "defined_out": [
+        "gtxn_idx%3#0",
+        "gtxn_type%3#0"
+      ],
+      "stack_out": [
+        "gtxn_idx%3#0",
+        "gtxn_type%3#0"
+      ]
+    },
+    "165": {
+      "op": "intc_1 // pay",
+      "defined_out": [
+        "gtxn_idx%3#0",
+        "gtxn_type%3#0",
+        "pay"
+      ],
+      "stack_out": [
+        "gtxn_idx%3#0",
+        "gtxn_type%3#0",
+        "pay"
+      ]
+    },
+    "166": {
+      "op": "==",
+      "defined_out": [
+        "gtxn_idx%3#0",
+        "gtxn_type_matches%3#0"
+      ],
+      "stack_out": [
+        "gtxn_idx%3#0",
+        "gtxn_type_matches%3#0"
+      ]
+    },
+    "167": {
+      "error": "transaction type is pay",
+      "op": "assert // transaction type is pay",
+      "stack_out": [
+        "gtxn_idx%3#0"
+      ]
+    },
+    "168": {
+      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.punishRefund",
+      "op": "callsub punishRefund",
+      "stack_out": []
+    },
+    "171": {
       "op": "intc_1 // 1",
       "defined_out": [
         "tmp%0#0"
@@ -183,73 +277,181 @@
         "tmp%0#0"
       ]
     },
-    "158": {
+    "172": {
       "op": "return",
       "stack_out": []
     },
-    "159": {
+    "173": {
       "block": "main_leakyClaim_route@10",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%38#0"
+        "tmp%40#0"
       ],
       "stack_out": [
-        "tmp%38#0"
+        "tmp%40#0"
       ]
     },
-    "161": {
-      "op": "!",
+    "175": {
+      "op": "intc_2 // DeleteApplication",
       "defined_out": [
-        "tmp%39#0"
+        "DeleteApplication",
+        "tmp%40#0"
       ],
       "stack_out": [
-        "tmp%39#0"
+        "tmp%40#0",
+        "DeleteApplication"
       ]
     },
-    "162": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
+    "176": {
+      "op": "==",
+      "defined_out": [
+        "tmp%41#0"
+      ],
+      "stack_out": [
+        "tmp%41#0"
+      ]
+    },
+    "177": {
+      "error": "OnCompletion is not DeleteApplication",
+      "op": "assert // OnCompletion is not DeleteApplication",
       "stack_out": []
     },
-    "163": {
+    "178": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%40#0"
+        "tmp%42#0"
       ],
       "stack_out": [
-        "tmp%40#0"
+        "tmp%42#0"
       ]
     },
-    "165": {
+    "180": {
       "error": "can only call when not creating",
       "op": "assert // can only call when not creating",
       "stack_out": []
     },
-    "166": {
+    "181": {
       "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "tmp%42#0"
+        "tmp%44#0"
       ],
       "stack_out": [
-        "tmp%42#0"
+        "tmp%44#0"
       ]
     },
-    "169": {
+    "184": {
       "op": "extract 2 0",
       "defined_out": [
-        "tmp%43#0"
+        "tmp%45#0"
       ],
       "stack_out": [
-        "tmp%43#0"
+        "tmp%45#0"
       ]
     },
-    "172": {
+    "187": {
+      "op": "txn GroupIndex",
+      "defined_out": [
+        "tmp%45#0",
+        "tmp%46#0"
+      ],
+      "stack_out": [
+        "tmp%45#0",
+        "tmp%46#0"
+      ]
+    },
+    "189": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1",
+        "tmp%45#0",
+        "tmp%46#0"
+      ],
+      "stack_out": [
+        "tmp%45#0",
+        "tmp%46#0",
+        "1"
+      ]
+    },
+    "190": {
+      "op": "-",
+      "defined_out": [
+        "gtxn_idx%2#0",
+        "tmp%45#0"
+      ],
+      "stack_out": [
+        "tmp%45#0",
+        "gtxn_idx%2#0"
+      ]
+    },
+    "191": {
+      "op": "dup",
+      "defined_out": [
+        "gtxn_idx%2#0",
+        "gtxn_idx%2#0 (copy)",
+        "tmp%45#0"
+      ],
+      "stack_out": [
+        "tmp%45#0",
+        "gtxn_idx%2#0",
+        "gtxn_idx%2#0 (copy)"
+      ]
+    },
+    "192": {
+      "op": "gtxns TypeEnum",
+      "defined_out": [
+        "gtxn_idx%2#0",
+        "gtxn_type%2#0",
+        "tmp%45#0"
+      ],
+      "stack_out": [
+        "tmp%45#0",
+        "gtxn_idx%2#0",
+        "gtxn_type%2#0"
+      ]
+    },
+    "194": {
+      "op": "intc_1 // pay",
+      "defined_out": [
+        "gtxn_idx%2#0",
+        "gtxn_type%2#0",
+        "pay",
+        "tmp%45#0"
+      ],
+      "stack_out": [
+        "tmp%45#0",
+        "gtxn_idx%2#0",
+        "gtxn_type%2#0",
+        "pay"
+      ]
+    },
+    "195": {
+      "op": "==",
+      "defined_out": [
+        "gtxn_idx%2#0",
+        "gtxn_type_matches%2#0",
+        "tmp%45#0"
+      ],
+      "stack_out": [
+        "tmp%45#0",
+        "gtxn_idx%2#0",
+        "gtxn_type_matches%2#0"
+      ]
+    },
+    "196": {
+      "error": "transaction type is pay",
+      "op": "assert // transaction type is pay",
+      "stack_out": [
+        "tmp%45#0",
+        "gtxn_idx%2#0"
+      ]
+    },
+    "197": {
       "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyClaim",
       "op": "callsub leakyClaim",
       "stack_out": []
     },
-    "175": {
+    "200": {
       "op": "intc_1 // 1",
       "defined_out": [
         "tmp%0#0"
@@ -258,73 +460,181 @@
         "tmp%0#0"
       ]
     },
-    "176": {
+    "201": {
       "op": "return",
       "stack_out": []
     },
-    "177": {
+    "202": {
       "block": "main_leakyRefund_route@9",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%32#0"
+        "tmp%33#0"
       ],
       "stack_out": [
-        "tmp%32#0"
+        "tmp%33#0"
       ]
     },
-    "179": {
-      "op": "!",
+    "204": {
+      "op": "intc_2 // DeleteApplication",
       "defined_out": [
+        "DeleteApplication",
         "tmp%33#0"
       ],
       "stack_out": [
-        "tmp%33#0"
+        "tmp%33#0",
+        "DeleteApplication"
       ]
     },
-    "180": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
+    "205": {
+      "op": "==",
+      "defined_out": [
+        "tmp%34#0"
+      ],
+      "stack_out": [
+        "tmp%34#0"
+      ]
+    },
+    "206": {
+      "error": "OnCompletion is not DeleteApplication",
+      "op": "assert // OnCompletion is not DeleteApplication",
       "stack_out": []
     },
-    "181": {
+    "207": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%34#0"
+        "tmp%35#0"
       ],
       "stack_out": [
-        "tmp%34#0"
+        "tmp%35#0"
       ]
     },
-    "183": {
+    "209": {
       "error": "can only call when not creating",
       "op": "assert // can only call when not creating",
       "stack_out": []
     },
-    "184": {
+    "210": {
       "op": "txna ApplicationArgs 1",
       "defined_out": [
-        "tmp%36#0"
+        "tmp%37#0"
       ],
       "stack_out": [
-        "tmp%36#0"
+        "tmp%37#0"
       ]
     },
-    "187": {
+    "213": {
       "op": "extract 2 0",
       "defined_out": [
-        "tmp%37#0"
+        "tmp%38#0"
       ],
       "stack_out": [
-        "tmp%37#0"
+        "tmp%38#0"
       ]
     },
-    "190": {
+    "216": {
+      "op": "txn GroupIndex",
+      "defined_out": [
+        "tmp%38#0",
+        "tmp%39#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "tmp%39#0"
+      ]
+    },
+    "218": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1",
+        "tmp%38#0",
+        "tmp%39#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "tmp%39#0",
+        "1"
+      ]
+    },
+    "219": {
+      "op": "-",
+      "defined_out": [
+        "gtxn_idx%1#0",
+        "tmp%38#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "gtxn_idx%1#0"
+      ]
+    },
+    "220": {
+      "op": "dup",
+      "defined_out": [
+        "gtxn_idx%1#0",
+        "gtxn_idx%1#0 (copy)",
+        "tmp%38#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "gtxn_idx%1#0",
+        "gtxn_idx%1#0 (copy)"
+      ]
+    },
+    "221": {
+      "op": "gtxns TypeEnum",
+      "defined_out": [
+        "gtxn_idx%1#0",
+        "gtxn_type%1#0",
+        "tmp%38#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "gtxn_idx%1#0",
+        "gtxn_type%1#0"
+      ]
+    },
+    "223": {
+      "op": "intc_1 // pay",
+      "defined_out": [
+        "gtxn_idx%1#0",
+        "gtxn_type%1#0",
+        "pay",
+        "tmp%38#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "gtxn_idx%1#0",
+        "gtxn_type%1#0",
+        "pay"
+      ]
+    },
+    "224": {
+      "op": "==",
+      "defined_out": [
+        "gtxn_idx%1#0",
+        "gtxn_type_matches%1#0",
+        "tmp%38#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "gtxn_idx%1#0",
+        "gtxn_type_matches%1#0"
+      ]
+    },
+    "225": {
+      "error": "transaction type is pay",
+      "op": "assert // transaction type is pay",
+      "stack_out": [
+        "tmp%38#0",
+        "gtxn_idx%1#0"
+      ]
+    },
+    "226": {
       "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyRefund",
       "op": "callsub leakyRefund",
       "stack_out": []
     },
-    "193": {
+    "229": {
       "op": "intc_1 // 1",
       "defined_out": [
         "tmp%0#0"
@@ -333,50 +643,50 @@
         "tmp%0#0"
       ]
     },
-    "194": {
+    "230": {
       "op": "return",
       "stack_out": []
     },
-    "195": {
+    "231": {
       "block": "main_getContractState_route@8",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%27#0"
+        "tmp%28#0"
       ],
       "stack_out": [
-        "tmp%27#0"
+        "tmp%28#0"
       ]
     },
-    "197": {
+    "233": {
       "op": "!",
       "defined_out": [
-        "tmp%28#0"
+        "tmp%29#0"
       ],
       "stack_out": [
-        "tmp%28#0"
+        "tmp%29#0"
       ]
     },
-    "198": {
+    "234": {
       "error": "OnCompletion is not NoOp",
       "op": "assert // OnCompletion is not NoOp",
       "stack_out": []
     },
-    "199": {
+    "235": {
       "op": "txn ApplicationID",
       "defined_out": [
-        "tmp%29#0"
+        "tmp%30#0"
       ],
       "stack_out": [
-        "tmp%29#0"
+        "tmp%30#0"
       ]
     },
-    "201": {
+    "237": {
       "error": "can only call when not creating",
       "op": "assert // can only call when not creating",
       "stack_out": []
     },
-    "202": {
+    "238": {
       "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.getContractState",
       "op": "callsub getContractState",
       "defined_out": [
@@ -386,7 +696,7 @@
         "to_encode%0#0"
       ]
     },
-    "205": {
+    "241": {
       "op": "itob",
       "defined_out": [
         "val_as_bytes%0#0"
@@ -395,7 +705,7 @@
         "val_as_bytes%0#0"
       ]
     },
-    "206": {
+    "242": {
       "op": "pushbytes 0x151f7c75",
       "defined_out": [
         "0x151f7c75",
@@ -406,177 +716,24 @@
         "0x151f7c75"
       ]
     },
-    "212": {
+    "248": {
       "op": "swap",
       "stack_out": [
         "0x151f7c75",
         "val_as_bytes%0#0"
       ]
     },
-    "213": {
+    "249": {
       "op": "concat",
       "defined_out": [
-        "tmp%31#0"
+        "tmp%32#0"
       ],
       "stack_out": [
-        "tmp%31#0"
+        "tmp%32#0"
       ]
     },
-    "214": {
+    "250": {
       "op": "log",
-      "stack_out": []
-    },
-    "215": {
-      "op": "intc_1 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "216": {
-      "op": "return",
-      "stack_out": []
-    },
-    "217": {
-      "block": "main_setReady_route@7",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%23#0"
-      ],
-      "stack_out": [
-        "tmp%23#0"
-      ]
-    },
-    "219": {
-      "op": "!",
-      "defined_out": [
-        "tmp%24#0"
-      ],
-      "stack_out": [
-        "tmp%24#0"
-      ]
-    },
-    "220": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "221": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%25#0"
-      ],
-      "stack_out": [
-        "tmp%25#0"
-      ]
-    },
-    "223": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
-    },
-    "224": {
-      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.setReady",
-      "op": "callsub setReady"
-    },
-    "227": {
-      "op": "intc_1 // 1",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "228": {
-      "op": "return",
-      "stack_out": []
-    },
-    "229": {
-      "block": "main_verifySignature_route@6",
-      "stack_in": [],
-      "op": "txn OnCompletion",
-      "defined_out": [
-        "tmp%15#0"
-      ],
-      "stack_out": [
-        "tmp%15#0"
-      ]
-    },
-    "231": {
-      "op": "!",
-      "defined_out": [
-        "tmp%16#0"
-      ],
-      "stack_out": [
-        "tmp%16#0"
-      ]
-    },
-    "232": {
-      "error": "OnCompletion is not NoOp",
-      "op": "assert // OnCompletion is not NoOp",
-      "stack_out": []
-    },
-    "233": {
-      "op": "txn ApplicationID",
-      "defined_out": [
-        "tmp%17#0"
-      ],
-      "stack_out": [
-        "tmp%17#0"
-      ]
-    },
-    "235": {
-      "error": "can only call when not creating",
-      "op": "assert // can only call when not creating",
-      "stack_out": []
-    },
-    "236": {
-      "op": "txna ApplicationArgs 1",
-      "defined_out": [
-        "tmp%19#0"
-      ],
-      "stack_out": [
-        "tmp%19#0"
-      ]
-    },
-    "239": {
-      "op": "extract 2 0",
-      "defined_out": [
-        "tmp%20#0"
-      ],
-      "stack_out": [
-        "tmp%20#0"
-      ]
-    },
-    "242": {
-      "op": "txna ApplicationArgs 2",
-      "defined_out": [
-        "tmp%20#0",
-        "tmp%21#0"
-      ],
-      "stack_out": [
-        "tmp%20#0",
-        "tmp%21#0"
-      ]
-    },
-    "245": {
-      "op": "extract 2 0",
-      "defined_out": [
-        "tmp%20#0",
-        "tmp%22#0"
-      ],
-      "stack_out": [
-        "tmp%20#0",
-        "tmp%22#0"
-      ]
-    },
-    "248": {
-      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.verifySignature",
-      "op": "callsub verifySignature",
       "stack_out": []
     },
     "251": {
@@ -593,23 +750,23 @@
       "stack_out": []
     },
     "253": {
-      "block": "main_createApplication_route@5",
+      "block": "main_setReady_route@7",
       "stack_in": [],
       "op": "txn OnCompletion",
       "defined_out": [
-        "tmp%3#0"
+        "tmp%23#0"
       ],
       "stack_out": [
-        "tmp%3#0"
+        "tmp%23#0"
       ]
     },
     "255": {
       "op": "!",
       "defined_out": [
-        "tmp%4#0"
+        "tmp%24#0"
       ],
       "stack_out": [
-        "tmp%4#0"
+        "tmp%24#0"
       ]
     },
     "256": {
@@ -620,13 +777,249 @@
     "257": {
       "op": "txn ApplicationID",
       "defined_out": [
+        "tmp%25#0"
+      ],
+      "stack_out": [
+        "tmp%25#0"
+      ]
+    },
+    "259": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "260": {
+      "op": "txn GroupIndex",
+      "defined_out": [
+        "tmp%27#0"
+      ],
+      "stack_out": [
+        "tmp%27#0"
+      ]
+    },
+    "262": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1",
+        "tmp%27#0"
+      ],
+      "stack_out": [
+        "tmp%27#0",
+        "1"
+      ]
+    },
+    "263": {
+      "op": "-",
+      "defined_out": [
+        "gtxn_idx%0#0"
+      ],
+      "stack_out": [
+        "gtxn_idx%0#0"
+      ]
+    },
+    "264": {
+      "op": "dup",
+      "defined_out": [
+        "gtxn_idx%0#0",
+        "gtxn_idx%0#0 (copy)"
+      ],
+      "stack_out": [
+        "gtxn_idx%0#0",
+        "gtxn_idx%0#0 (copy)"
+      ]
+    },
+    "265": {
+      "op": "gtxns TypeEnum",
+      "defined_out": [
+        "gtxn_idx%0#0",
+        "gtxn_type%0#0"
+      ],
+      "stack_out": [
+        "gtxn_idx%0#0",
+        "gtxn_type%0#0"
+      ]
+    },
+    "267": {
+      "op": "intc_1 // pay",
+      "defined_out": [
+        "gtxn_idx%0#0",
+        "gtxn_type%0#0",
+        "pay"
+      ],
+      "stack_out": [
+        "gtxn_idx%0#0",
+        "gtxn_type%0#0",
+        "pay"
+      ]
+    },
+    "268": {
+      "op": "==",
+      "defined_out": [
+        "gtxn_idx%0#0",
+        "gtxn_type_matches%0#0"
+      ],
+      "stack_out": [
+        "gtxn_idx%0#0",
+        "gtxn_type_matches%0#0"
+      ]
+    },
+    "269": {
+      "error": "transaction type is pay",
+      "op": "assert // transaction type is pay",
+      "stack_out": [
+        "gtxn_idx%0#0"
+      ]
+    },
+    "270": {
+      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.setReady",
+      "op": "callsub setReady",
+      "stack_out": []
+    },
+    "273": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "274": {
+      "op": "return",
+      "stack_out": []
+    },
+    "275": {
+      "block": "main_verifySignature_route@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%15#0"
+      ]
+    },
+    "277": {
+      "op": "!",
+      "defined_out": [
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%16#0"
+      ]
+    },
+    "278": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "279": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%17#0"
+      ]
+    },
+    "281": {
+      "error": "can only call when not creating",
+      "op": "assert // can only call when not creating",
+      "stack_out": []
+    },
+    "282": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%19#0"
+      ]
+    },
+    "285": {
+      "op": "extract 2 0",
+      "defined_out": [
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%20#0"
+      ]
+    },
+    "288": {
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "tmp%20#0",
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "tmp%20#0",
+        "tmp%21#0"
+      ]
+    },
+    "291": {
+      "op": "extract 2 0",
+      "defined_out": [
+        "tmp%20#0",
+        "tmp%22#0"
+      ],
+      "stack_out": [
+        "tmp%20#0",
+        "tmp%22#0"
+      ]
+    },
+    "294": {
+      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.verifySignature",
+      "op": "callsub verifySignature",
+      "stack_out": []
+    },
+    "297": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "298": {
+      "op": "return",
+      "stack_out": []
+    },
+    "299": {
+      "block": "main_createApplication_route@5",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "301": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "302": {
+      "error": "OnCompletion is not NoOp",
+      "op": "assert // OnCompletion is not NoOp",
+      "stack_out": []
+    },
+    "303": {
+      "op": "txn ApplicationID",
+      "defined_out": [
         "tmp%5#0"
       ],
       "stack_out": [
         "tmp%5#0"
       ]
     },
-    "259": {
+    "305": {
       "op": "!",
       "defined_out": [
         "tmp%6#0"
@@ -635,12 +1028,12 @@
         "tmp%6#0"
       ]
     },
-    "260": {
+    "306": {
       "error": "can only call when creating",
       "op": "assert // can only call when creating",
       "stack_out": []
     },
-    "261": {
+    "307": {
       "op": "txna ApplicationArgs 1",
       "defined_out": [
         "tmp%7#0"
@@ -649,7 +1042,7 @@
         "tmp%7#0"
       ]
     },
-    "264": {
+    "310": {
       "op": "extract 2 0",
       "defined_out": [
         "tmp%8#0"
@@ -658,7 +1051,7 @@
         "tmp%8#0"
       ]
     },
-    "267": {
+    "313": {
       "op": "txna ApplicationArgs 2",
       "defined_out": [
         "reinterpret_bytes[1]%0#0",
@@ -669,7 +1062,7 @@
         "reinterpret_bytes[1]%0#0"
       ]
     },
-    "270": {
+    "316": {
       "op": "btoi",
       "defined_out": [
         "tmp%8#0",
@@ -680,7 +1073,7 @@
         "tmp%9#0"
       ]
     },
-    "271": {
+    "317": {
       "op": "txnas Accounts",
       "defined_out": [
         "tmp%10#0",
@@ -691,7 +1084,7 @@
         "tmp%10#0"
       ]
     },
-    "273": {
+    "319": {
       "op": "txna ApplicationArgs 3",
       "defined_out": [
         "tmp%10#0",
@@ -704,7 +1097,7 @@
         "tmp%11#0"
       ]
     },
-    "276": {
+    "322": {
       "op": "extract 2 0",
       "defined_out": [
         "tmp%10#0",
@@ -717,7 +1110,7 @@
         "tmp%12#0"
       ]
     },
-    "279": {
+    "325": {
       "op": "txna ApplicationArgs 4",
       "defined_out": [
         "reinterpret_bytes[8]%0#0",
@@ -732,7 +1125,7 @@
         "reinterpret_bytes[8]%0#0"
       ]
     },
-    "282": {
+    "328": {
       "op": "btoi",
       "defined_out": [
         "tmp%10#0",
@@ -747,7 +1140,7 @@
         "tmp%13#0"
       ]
     },
-    "283": {
+    "329": {
       "op": "txna ApplicationArgs 5",
       "defined_out": [
         "reinterpret_bytes[8]%1#0",
@@ -764,7 +1157,7 @@
         "reinterpret_bytes[8]%1#0"
       ]
     },
-    "286": {
+    "332": {
       "op": "btoi",
       "defined_out": [
         "tmp%10#0",
@@ -781,12 +1174,12 @@
         "tmp%14#0"
       ]
     },
-    "287": {
+    "333": {
       "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.createApplication",
       "op": "callsub createApplication",
       "stack_out": []
     },
-    "290": {
+    "336": {
       "op": "intc_1 // 1",
       "defined_out": [
         "tmp%0#0"
@@ -795,11 +1188,241 @@
         "tmp%0#0"
       ]
     },
-    "291": {
+    "337": {
       "op": "return",
       "stack_out": []
     },
-    "292": {
+    "338": {
+      "subroutine": "_puya_lib.util.ensure_budget",
+      "params": {
+        "required_budget#0": "uint64",
+        "fee_source#0": "uint64"
+      },
+      "block": "ensure_budget",
+      "stack_in": [],
+      "op": "proto 2 0"
+    },
+    "341": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "required_budget#0 (copy)"
+      ],
+      "stack_out": [
+        "required_budget#0 (copy)"
+      ]
+    },
+    "343": {
+      "op": "pushint 10 // 10",
+      "defined_out": [
+        "10",
+        "required_budget#0 (copy)"
+      ],
+      "stack_out": [
+        "required_budget#0 (copy)",
+        "10"
+      ]
+    },
+    "345": {
+      "op": "+",
+      "defined_out": [
+        "required_budget_with_buffer#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "346": {
+      "block": "ensure_budget_while_top@1",
+      "stack_in": [
+        "required_budget_with_buffer#0"
+      ],
+      "op": "frame_dig 0",
+      "defined_out": [
+        "required_budget_with_buffer#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "348": {
+      "op": "global OpcodeBudget",
+      "defined_out": [
+        "required_budget_with_buffer#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "required_budget_with_buffer#0",
+        "tmp%0#0"
+      ]
+    },
+    "350": {
+      "op": ">",
+      "defined_out": [
+        "required_budget_with_buffer#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "tmp%1#0"
+      ]
+    },
+    "351": {
+      "op": "bz ensure_budget_after_while@7",
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "354": {
+      "op": "itxn_begin"
+    },
+    "355": {
+      "op": "pushint 6 // appl",
+      "defined_out": [
+        "appl",
+        "required_budget_with_buffer#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "appl"
+      ]
+    },
+    "357": {
+      "op": "itxn_field TypeEnum",
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "359": {
+      "op": "intc_2 // DeleteApplication",
+      "defined_out": [
+        "DeleteApplication",
+        "required_budget_with_buffer#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "DeleteApplication"
+      ]
+    },
+    "360": {
+      "op": "itxn_field OnCompletion",
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "362": {
+      "op": "bytec 5 // 0x068101",
+      "defined_out": [
+        "0x068101",
+        "required_budget_with_buffer#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "0x068101"
+      ]
+    },
+    "364": {
+      "op": "itxn_field ApprovalProgram",
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "366": {
+      "op": "bytec 5 // 0x068101",
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "0x068101"
+      ]
+    },
+    "368": {
+      "op": "itxn_field ClearStateProgram",
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "370": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "fee_source#0 (copy)",
+        "required_budget_with_buffer#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "fee_source#0 (copy)"
+      ]
+    },
+    "372": {
+      "op": "switch ensure_budget_switch_case_0@3 ensure_budget_switch_case_1@4",
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "378": {
+      "block": "ensure_budget_switch_case_next@6",
+      "stack_in": [
+        "required_budget_with_buffer#0"
+      ],
+      "op": "itxn_submit"
+    },
+    "379": {
+      "op": "b ensure_budget_while_top@1"
+    },
+    "382": {
+      "block": "ensure_budget_switch_case_1@4",
+      "stack_in": [
+        "required_budget_with_buffer#0"
+      ],
+      "op": "global MinTxnFee",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "tmp%2#0"
+      ]
+    },
+    "384": {
+      "op": "itxn_field Fee",
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "386": {
+      "op": "b ensure_budget_switch_case_next@6"
+    },
+    "389": {
+      "block": "ensure_budget_switch_case_0@3",
+      "stack_in": [
+        "required_budget_with_buffer#0"
+      ],
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "required_budget_with_buffer#0",
+        "0"
+      ]
+    },
+    "390": {
+      "op": "itxn_field Fee",
+      "stack_out": [
+        "required_budget_with_buffer#0"
+      ]
+    },
+    "392": {
+      "op": "b ensure_budget_switch_case_next@6"
+    },
+    "395": {
+      "block": "ensure_budget_after_while@7",
+      "stack_in": [
+        "required_budget_with_buffer#0"
+      ],
+      "retsub": true,
+      "op": "retsub"
+    },
+    "396": {
       "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.createApplication",
       "params": {
         "aliXternalPK#0": "bytes",
@@ -812,7 +1435,7 @@
       "stack_in": [],
       "op": "proto 5 0"
     },
-    "295": {
+    "399": {
       "op": "bytec_0 // \"aliAlgoAddr\"",
       "defined_out": [
         "\"aliAlgoAddr\""
@@ -821,7 +1444,7 @@
         "\"aliAlgoAddr\""
       ]
     },
-    "296": {
+    "400": {
       "op": "global CreatorAddress",
       "defined_out": [
         "\"aliAlgoAddr\"",
@@ -832,12 +1455,12 @@
         "new_state_value%0#0"
       ]
     },
-    "298": {
+    "402": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "299": {
-      "op": "bytec 5 // \"aliXternalPK\"",
+    "403": {
+      "op": "bytec 6 // \"aliXternalPK\"",
       "defined_out": [
         "\"aliXternalPK\""
       ],
@@ -845,7 +1468,7 @@
         "\"aliXternalPK\""
       ]
     },
-    "301": {
+    "405": {
       "op": "frame_dig -5",
       "defined_out": [
         "\"aliXternalPK\"",
@@ -856,11 +1479,11 @@
         "aliXternalPK#0 (copy)"
       ]
     },
-    "303": {
+    "407": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "304": {
+    "408": {
       "op": "bytec 4 // \"xinAlgoAddr\"",
       "defined_out": [
         "\"xinAlgoAddr\""
@@ -869,7 +1492,7 @@
         "\"xinAlgoAddr\""
       ]
     },
-    "306": {
+    "410": {
       "op": "frame_dig -4",
       "defined_out": [
         "\"xinAlgoAddr\"",
@@ -880,12 +1503,12 @@
         "xinAlgoAddr#0 (copy)"
       ]
     },
-    "308": {
+    "412": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "309": {
-      "op": "bytec 6 // \"xinXternalPK\"",
+    "413": {
+      "op": "bytec 7 // \"xinXternalPK\"",
       "defined_out": [
         "\"xinXternalPK\""
       ],
@@ -893,7 +1516,7 @@
         "\"xinXternalPK\""
       ]
     },
-    "311": {
+    "415": {
       "op": "frame_dig -3",
       "defined_out": [
         "\"xinXternalPK\"",
@@ -904,11 +1527,11 @@
         "xinXternalPK#0 (copy)"
       ]
     },
-    "313": {
+    "417": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "314": {
+    "418": {
       "op": "bytec_2 // \"t0\"",
       "defined_out": [
         "\"t0\""
@@ -917,7 +1540,7 @@
         "\"t0\""
       ]
     },
-    "315": {
+    "419": {
       "op": "frame_dig -2",
       "defined_out": [
         "\"t0\"",
@@ -928,11 +1551,11 @@
         "t0#0 (copy)"
       ]
     },
-    "317": {
+    "421": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "318": {
+    "422": {
       "op": "bytec_3 // \"t1\"",
       "defined_out": [
         "\"t1\""
@@ -941,7 +1564,7 @@
         "\"t1\""
       ]
     },
-    "319": {
+    "423": {
       "op": "frame_dig -1",
       "defined_out": [
         "\"t1\"",
@@ -952,24 +1575,24 @@
         "t1#0 (copy)"
       ]
     },
-    "321": {
+    "425": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "322": {
+    "426": {
       "op": "frame_dig -1",
       "stack_out": [
         "t1#0 (copy)"
       ]
     },
-    "324": {
+    "428": {
       "op": "frame_dig -2",
       "stack_out": [
         "t1#0 (copy)",
         "t0#0 (copy)"
       ]
     },
-    "326": {
+    "430": {
       "op": ">",
       "defined_out": [
         "tmp%0#0"
@@ -978,18 +1601,18 @@
         "tmp%0#0"
       ]
     },
-    "327": {
+    "431": {
       "error": "t1 must be greater than t0",
       "op": "assert // t1 must be greater than t0",
       "stack_out": []
     },
-    "328": {
+    "432": {
       "op": "frame_dig -2",
       "stack_out": [
         "t0#0 (copy)"
       ]
     },
-    "330": {
+    "434": {
       "op": "global LatestTimestamp",
       "defined_out": [
         "t0#0 (copy)",
@@ -1000,7 +1623,7 @@
         "tmp%1#0"
       ]
     },
-    "332": {
+    "436": {
       "op": ">",
       "defined_out": [
         "tmp%2#0"
@@ -1009,18 +1632,18 @@
         "tmp%2#0"
       ]
     },
-    "333": {
+    "437": {
       "error": "t0 must be in the future",
       "op": "assert // t0 must be in the future",
       "stack_out": []
     },
-    "334": {
+    "438": {
       "op": "frame_dig -1",
       "stack_out": [
         "t1#0 (copy)"
       ]
     },
-    "336": {
+    "440": {
       "op": "global LatestTimestamp",
       "defined_out": [
         "t1#0 (copy)",
@@ -1031,7 +1654,7 @@
         "tmp%3#0"
       ]
     },
-    "338": {
+    "442": {
       "op": ">",
       "defined_out": [
         "tmp%4#0"
@@ -1040,16 +1663,16 @@
         "tmp%4#0"
       ]
     },
-    "339": {
+    "443": {
       "error": "t1 must be in the future",
       "op": "assert // t1 must be in the future",
       "stack_out": []
     },
-    "340": {
+    "444": {
       "retsub": true,
       "op": "retsub"
     },
-    "341": {
+    "445": {
       "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.disburseFunds",
       "params": {
         "recipient#0": "bytes"
@@ -1058,10 +1681,10 @@
       "stack_in": [],
       "op": "proto 1 0"
     },
-    "344": {
+    "448": {
       "op": "itxn_begin"
     },
-    "345": {
+    "449": {
       "op": "frame_dig -1",
       "defined_out": [
         "recipient#0 (copy)"
@@ -1070,21 +1693,21 @@
         "recipient#0 (copy)"
       ]
     },
-    "347": {
+    "451": {
       "op": "itxn_field Receiver",
       "stack_out": []
     },
-    "349": {
+    "453": {
       "op": "frame_dig -1",
       "stack_out": [
         "recipient#0 (copy)"
       ]
     },
-    "351": {
+    "455": {
       "op": "itxn_field CloseRemainderTo",
       "stack_out": []
     },
-    "353": {
+    "457": {
       "op": "intc_0 // 0",
       "defined_out": [
         "0"
@@ -1093,11 +1716,11 @@
         "0"
       ]
     },
-    "354": {
+    "458": {
       "op": "itxn_field Amount",
       "stack_out": []
     },
-    "356": {
+    "460": {
       "op": "intc_1 // 1",
       "defined_out": [
         "1"
@@ -1106,28 +1729,28 @@
         "1"
       ]
     },
-    "357": {
+    "461": {
       "op": "itxn_field TypeEnum",
       "stack_out": []
     },
-    "359": {
+    "463": {
       "op": "intc_0 // 0",
       "stack_out": [
         "0"
       ]
     },
-    "360": {
+    "464": {
       "op": "itxn_field Fee",
       "stack_out": []
     },
-    "362": {
+    "466": {
       "op": "itxn_submit"
     },
-    "363": {
+    "467": {
       "retsub": true,
       "op": "retsub"
     },
-    "364": {
+    "468": {
       "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.verifySignature",
       "params": {
         "signature#0": "bytes",
@@ -1137,7 +1760,7 @@
       "stack_in": [],
       "op": "proto 2 0"
     },
-    "367": {
+    "471": {
       "op": "frame_dig -2",
       "defined_out": [
         "signature#0 (copy)"
@@ -1146,7 +1769,7 @@
         "signature#0 (copy)"
       ]
     },
-    "369": {
+    "473": {
       "op": "frame_dig -1",
       "defined_out": [
         "signature#0 (copy)",
@@ -1157,16 +1780,16 @@
         "xternalPK#0 (copy)"
       ]
     },
-    "371": {
+    "475": {
       "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyVerifyEd25519",
       "op": "callsub leakyVerifyEd25519",
       "stack_out": []
     },
-    "374": {
+    "478": {
       "retsub": true,
       "op": "retsub"
     },
-    "375": {
+    "479": {
       "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyVerifyEd25519",
       "params": {
         "signature#0": "bytes",
@@ -1176,7 +1799,7 @@
       "stack_in": [],
       "op": "proto 2 0"
     },
-    "378": {
+    "482": {
       "op": "frame_dig -2",
       "defined_out": [
         "signature#0 (copy)"
@@ -1185,7 +1808,7 @@
         "signature#0 (copy)"
       ]
     },
-    "380": {
+    "484": {
       "op": "extract 0 32",
       "defined_out": [
         "tmp%0#0"
@@ -1194,7 +1817,7 @@
         "tmp%0#0"
       ]
     },
-    "383": {
+    "487": {
       "op": "pushbytes 0x5866666666666666666666666666666666666666666666666666666666666666",
       "defined_out": [
         "0x5866666666666666666666666666666666666666666666666666666666666666",
@@ -1205,7 +1828,7 @@
         "0x5866666666666666666666666666666666666666666666666666666666666666"
       ]
     },
-    "417": {
+    "521": {
       "op": "==",
       "defined_out": [
         "tmp%1#0"
@@ -1214,12 +1837,12 @@
         "tmp%1#0"
       ]
     },
-    "418": {
+    "522": {
       "error": "R-point encoding not 0x58666... . Signature R must be broken (=BASEPOINT) to allow the secret key to be leaked!",
       "op": "assert // R-point encoding not 0x58666... . Signature R must be broken (=BASEPOINT) to allow the secret key to be leaked!",
       "stack_out": []
     },
-    "419": {
+    "523": {
       "op": "global CurrentApplicationAddress",
       "defined_out": [
         "tmp%2#0"
@@ -1228,14 +1851,14 @@
         "tmp%2#0"
       ]
     },
-    "421": {
+    "525": {
       "op": "frame_dig -2",
       "stack_out": [
         "tmp%2#0",
         "signature#0 (copy)"
       ]
     },
-    "423": {
+    "527": {
       "op": "frame_dig -1",
       "defined_out": [
         "signature#0 (copy)",
@@ -1248,7 +1871,7 @@
         "xternalPK#0 (copy)"
       ]
     },
-    "425": {
+    "529": {
       "op": "ed25519verify_bare",
       "defined_out": [
         "tmp%3#0"
@@ -1257,20 +1880,25 @@
         "tmp%3#0"
       ]
     },
-    "426": {
+    "530": {
       "error": "Signature verification failed!",
       "op": "assert // Signature verification failed!",
       "stack_out": []
     },
-    "427": {
+    "531": {
       "retsub": true,
       "op": "retsub"
     },
-    "428": {
+    "532": {
       "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.setReady",
-      "params": {},
+      "params": {
+        "sponsorPayment#0": "uint64"
+      },
       "block": "setReady",
       "stack_in": [],
+      "op": "proto 1 0"
+    },
+    "535": {
       "op": "txn Sender",
       "defined_out": [
         "tmp%0#0"
@@ -1279,7 +1907,7 @@
         "tmp%0#0"
       ]
     },
-    "430": {
+    "537": {
       "op": "intc_0 // 0",
       "defined_out": [
         "0",
@@ -1290,7 +1918,7 @@
         "0"
       ]
     },
-    "431": {
+    "538": {
       "op": "bytec_0 // \"aliAlgoAddr\"",
       "defined_out": [
         "\"aliAlgoAddr\"",
@@ -1303,7 +1931,7 @@
         "\"aliAlgoAddr\""
       ]
     },
-    "432": {
+    "539": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%0#0",
@@ -1316,7 +1944,7 @@
         "maybe_exists%0#0"
       ]
     },
-    "433": {
+    "540": {
       "error": "check GlobalState exists",
       "op": "assert // check GlobalState exists",
       "stack_out": [
@@ -1324,7 +1952,7 @@
         "maybe_value%0#0"
       ]
     },
-    "434": {
+    "541": {
       "op": "==",
       "defined_out": [
         "tmp%1#0"
@@ -1333,12 +1961,44 @@
         "tmp%1#0"
       ]
     },
-    "435": {
+    "542": {
       "error": "Only Ali can set the contract to ready!",
       "op": "assert // Only Ali can set the contract to ready!",
       "stack_out": []
     },
-    "436": {
+    "543": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "sponsorPayment#0 (copy)"
+      ],
+      "stack_out": [
+        "sponsorPayment#0 (copy)"
+      ]
+    },
+    "545": {
+      "op": "gtxns Fee",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "547": {
+      "op": "!",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "548": {
+      "error": "Sponsor payment must not pay a fee",
+      "op": "assert // Sponsor payment must not pay a fee",
+      "stack_out": []
+    },
+    "549": {
       "op": "bytec_1 // \"aliReady\"",
       "defined_out": [
         "\"aliReady\""
@@ -1347,7 +2007,7 @@
         "\"aliReady\""
       ]
     },
-    "437": {
+    "550": {
       "op": "intc_1 // 1",
       "defined_out": [
         "\"aliReady\"",
@@ -1358,15 +2018,15 @@
         "1"
       ]
     },
-    "438": {
+    "551": {
       "op": "app_global_put",
       "stack_out": []
     },
-    "439": {
+    "552": {
       "retsub": true,
       "op": "retsub"
     },
-    "440": {
+    "553": {
       "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.getContractState",
       "params": {},
       "block": "getContractState",
@@ -1379,7 +2039,7 @@
         "tmp%0#0"
       ]
     },
-    "442": {
+    "555": {
       "op": "intc_0 // 0",
       "defined_out": [
         "0",
@@ -1390,7 +2050,7 @@
         "0"
       ]
     },
-    "443": {
+    "556": {
       "op": "bytec_3 // \"t1\"",
       "defined_out": [
         "\"t1\"",
@@ -1403,7 +2063,7 @@
         "\"t1\""
       ]
     },
-    "444": {
+    "557": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%0#0",
@@ -1416,7 +2076,7 @@
         "maybe_exists%0#0"
       ]
     },
-    "445": {
+    "558": {
       "error": "check GlobalState exists",
       "op": "assert // check GlobalState exists",
       "stack_out": [
@@ -1424,7 +2084,7 @@
         "maybe_value%0#0"
       ]
     },
-    "446": {
+    "559": {
       "op": ">",
       "defined_out": [
         "tmp%1#0"
@@ -1433,11 +2093,11 @@
         "tmp%1#0"
       ]
     },
-    "447": {
+    "560": {
       "op": "bz getContractState_after_if_else@2",
       "stack_out": []
     },
-    "450": {
+    "563": {
       "op": "pushint 3 // 3",
       "defined_out": [
         "3"
@@ -1446,11 +2106,11 @@
         "3"
       ]
     },
-    "452": {
+    "565": {
       "retsub": true,
       "op": "retsub"
     },
-    "453": {
+    "566": {
       "block": "getContractState_after_if_else@2",
       "stack_in": [],
       "op": "global LatestTimestamp",
@@ -1461,633 +2121,12 @@
         "tmp%2#0"
       ]
     },
-    "455": {
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "0",
-        "tmp%2#0"
-      ],
-      "stack_out": [
-        "tmp%2#0",
-        "0"
-      ]
-    },
-    "456": {
-      "op": "bytec_2 // \"t0\"",
-      "defined_out": [
-        "\"t0\"",
-        "0",
-        "tmp%2#0"
-      ],
-      "stack_out": [
-        "tmp%2#0",
-        "0",
-        "\"t0\""
-      ]
-    },
-    "457": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%1#0",
-        "maybe_value%1#0",
-        "tmp%2#0"
-      ],
-      "stack_out": [
-        "tmp%2#0",
-        "maybe_value%1#0",
-        "maybe_exists%1#0"
-      ]
-    },
-    "458": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "tmp%2#0",
-        "maybe_value%1#0"
-      ]
-    },
-    "459": {
-      "op": ">",
-      "defined_out": [
-        "tmp%3#0"
-      ],
-      "stack_out": [
-        "tmp%3#0"
-      ]
-    },
-    "460": {
-      "op": "bz getContractState_after_if_else@4",
-      "stack_out": []
-    },
-    "463": {
-      "op": "pushint 2 // 2",
-      "defined_out": [
-        "2"
-      ],
-      "stack_out": [
-        "2"
-      ]
-    },
-    "465": {
-      "retsub": true,
-      "op": "retsub"
-    },
-    "466": {
-      "block": "getContractState_after_if_else@4",
-      "stack_in": [],
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "0"
-      ],
-      "stack_out": [
-        "0"
-      ]
-    },
-    "467": {
-      "op": "bytec_1 // \"aliReady\"",
-      "defined_out": [
-        "\"aliReady\"",
-        "0"
-      ],
-      "stack_out": [
-        "0",
-        "\"aliReady\""
-      ]
-    },
-    "468": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%2#0",
-        "maybe_value%2#0"
-      ],
-      "stack_out": [
-        "maybe_value%2#0",
-        "maybe_exists%2#0"
-      ]
-    },
-    "469": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "maybe_value%2#0"
-      ]
-    },
-    "470": {
-      "op": "bz getContractState_after_if_else@6",
-      "stack_out": []
-    },
-    "473": {
-      "op": "intc_1 // 1",
-      "defined_out": [
-        "1"
-      ],
-      "stack_out": [
-        "1"
-      ]
-    },
-    "474": {
-      "retsub": true,
-      "op": "retsub"
-    },
-    "475": {
-      "block": "getContractState_after_if_else@6",
-      "stack_in": [],
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "0"
-      ],
-      "stack_out": [
-        "0"
-      ]
-    },
-    "476": {
-      "retsub": true,
-      "op": "retsub"
-    },
-    "477": {
-      "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyRefund",
-      "params": {
-        "signature#0": "bytes"
-      },
-      "block": "leakyRefund",
-      "stack_in": [],
-      "op": "proto 1 0"
-    },
-    "480": {
-      "op": "txn Sender",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "482": {
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "0",
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0",
-        "0"
-      ]
-    },
-    "483": {
-      "op": "bytec_0 // \"aliAlgoAddr\"",
-      "defined_out": [
-        "\"aliAlgoAddr\"",
-        "0",
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0",
-        "0",
-        "\"aliAlgoAddr\""
-      ]
-    },
-    "484": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%0#0",
-        "maybe_value%0#0",
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0",
-        "maybe_value%0#0",
-        "maybe_exists%0#0"
-      ]
-    },
-    "485": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "tmp%0#0",
-        "maybe_value%0#0"
-      ]
-    },
-    "486": {
-      "op": "==",
-      "defined_out": [
-        "tmp%1#0"
-      ],
-      "stack_out": [
-        "tmp%1#0"
-      ]
-    },
-    "487": {
-      "error": "Only Ali can do leaky refund!",
-      "op": "assert // Only Ali can do leaky refund!",
-      "stack_out": []
-    },
-    "488": {
-      "op": "global LatestTimestamp",
-      "defined_out": [
-        "tmp%2#0"
-      ],
-      "stack_out": [
-        "tmp%2#0"
-      ]
-    },
-    "490": {
-      "op": "intc_0 // 0",
-      "stack_out": [
-        "tmp%2#0",
-        "0"
-      ]
-    },
-    "491": {
-      "op": "bytec_2 // \"t0\"",
-      "defined_out": [
-        "\"t0\"",
-        "0",
-        "tmp%2#0"
-      ],
-      "stack_out": [
-        "tmp%2#0",
-        "0",
-        "\"t0\""
-      ]
-    },
-    "492": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%1#0",
-        "maybe_value%1#0",
-        "tmp%2#0"
-      ],
-      "stack_out": [
-        "tmp%2#0",
-        "maybe_value%1#0",
-        "maybe_exists%1#0"
-      ]
-    },
-    "493": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "tmp%2#0",
-        "maybe_value%1#0"
-      ]
-    },
-    "494": {
-      "op": "<=",
-      "defined_out": [
-        "tmp%3#0"
-      ],
-      "stack_out": [
-        "tmp%3#0"
-      ]
-    },
-    "495": {
-      "error": "Cannot refund after t0!",
-      "op": "assert // Cannot refund after t0!",
-      "stack_out": []
-    },
-    "496": {
-      "op": "intc_0 // 0",
-      "stack_out": [
-        "0"
-      ]
-    },
-    "497": {
-      "op": "bytec_1 // \"aliReady\"",
-      "defined_out": [
-        "\"aliReady\"",
-        "0"
-      ],
-      "stack_out": [
-        "0",
-        "\"aliReady\""
-      ]
-    },
-    "498": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%2#0",
-        "maybe_value%2#0"
-      ],
-      "stack_out": [
-        "maybe_value%2#0",
-        "maybe_exists%2#0"
-      ]
-    },
-    "499": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "maybe_value%2#0"
-      ]
-    },
-    "500": {
-      "op": "!",
-      "defined_out": [
-        "tmp%4#0"
-      ],
-      "stack_out": [
-        "tmp%4#0"
-      ]
-    },
-    "501": {
-      "error": "Cannot refund after set ready!",
-      "op": "assert // Cannot refund after set ready!",
-      "stack_out": []
-    },
-    "502": {
-      "op": "intc_0 // 0",
-      "stack_out": [
-        "0"
-      ]
-    },
-    "503": {
-      "op": "bytec 5 // \"aliXternalPK\"",
-      "defined_out": [
-        "\"aliXternalPK\"",
-        "0"
-      ],
-      "stack_out": [
-        "0",
-        "\"aliXternalPK\""
-      ]
-    },
-    "505": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%3#0",
-        "maybe_value%3#0"
-      ],
-      "stack_out": [
-        "maybe_value%3#0",
-        "maybe_exists%3#0"
-      ]
-    },
-    "506": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "maybe_value%3#0"
-      ]
-    },
-    "507": {
-      "op": "frame_dig -1",
-      "defined_out": [
-        "maybe_value%3#0",
-        "signature#0 (copy)"
-      ],
-      "stack_out": [
-        "maybe_value%3#0",
-        "signature#0 (copy)"
-      ]
-    },
-    "509": {
-      "op": "swap",
-      "stack_out": [
-        "signature#0 (copy)",
-        "maybe_value%3#0"
-      ]
-    },
-    "510": {
-      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyVerifyEd25519",
-      "op": "callsub leakyVerifyEd25519",
-      "stack_out": []
-    },
-    "513": {
-      "op": "intc_0 // 0",
-      "stack_out": [
-        "0"
-      ]
-    },
-    "514": {
-      "op": "bytec_0 // \"aliAlgoAddr\"",
-      "stack_out": [
-        "0",
-        "\"aliAlgoAddr\""
-      ]
-    },
-    "515": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%4#0",
-        "maybe_value%4#0"
-      ],
-      "stack_out": [
-        "maybe_value%4#0",
-        "maybe_exists%4#0"
-      ]
-    },
-    "516": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "maybe_value%4#0"
-      ]
-    },
-    "517": {
-      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.disburseFunds",
-      "op": "callsub disburseFunds",
-      "stack_out": []
-    },
-    "520": {
-      "retsub": true,
-      "op": "retsub"
-    },
-    "521": {
-      "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyClaim",
-      "params": {
-        "signature#0": "bytes"
-      },
-      "block": "leakyClaim",
-      "stack_in": [],
-      "op": "proto 1 0"
-    },
-    "524": {
-      "block": "leakyClaim_while_top@6",
-      "stack_in": [],
-      "op": "pushint 2010 // 2010",
-      "defined_out": [
-        "2010"
-      ],
-      "stack_out": [
-        "2010"
-      ]
-    },
-    "527": {
-      "op": "global OpcodeBudget",
-      "defined_out": [
-        "2010",
-        "tmp%0#1"
-      ],
-      "stack_out": [
-        "2010",
-        "tmp%0#1"
-      ]
-    },
-    "529": {
-      "op": ">",
-      "defined_out": [
-        "tmp%1#0"
-      ],
-      "stack_out": [
-        "tmp%1#0"
-      ]
-    },
-    "530": {
-      "op": "bz leakyClaim_after_while@11",
-      "stack_out": []
-    },
-    "533": {
-      "op": "itxn_begin"
-    },
-    "534": {
-      "op": "pushint 6 // appl",
-      "defined_out": [
-        "appl"
-      ],
-      "stack_out": [
-        "appl"
-      ]
-    },
-    "536": {
-      "op": "itxn_field TypeEnum",
-      "stack_out": []
-    },
-    "538": {
-      "op": "pushint 5 // DeleteApplication",
-      "defined_out": [
-        "DeleteApplication"
-      ],
-      "stack_out": [
-        "DeleteApplication"
-      ]
-    },
-    "540": {
-      "op": "itxn_field OnCompletion",
-      "stack_out": []
-    },
-    "542": {
-      "op": "bytec 7 // 0x068101",
-      "defined_out": [
-        "0x068101"
-      ],
-      "stack_out": [
-        "0x068101"
-      ]
-    },
-    "544": {
-      "op": "itxn_field ApprovalProgram",
-      "stack_out": []
-    },
-    "546": {
-      "op": "bytec 7 // 0x068101",
-      "stack_out": [
-        "0x068101"
-      ]
-    },
-    "548": {
-      "op": "itxn_field ClearStateProgram",
-      "stack_out": []
-    },
-    "550": {
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "0"
-      ],
-      "stack_out": [
-        "0"
-      ]
-    },
-    "551": {
-      "op": "itxn_field Fee",
-      "stack_out": []
-    },
-    "553": {
-      "op": "itxn_submit"
-    },
-    "554": {
-      "op": "b leakyClaim_while_top@6"
-    },
-    "557": {
-      "block": "leakyClaim_after_while@11",
-      "stack_in": [],
-      "op": "txn Sender",
-      "defined_out": [
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0"
-      ]
-    },
-    "559": {
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "0",
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0",
-        "0"
-      ]
-    },
-    "560": {
-      "op": "bytec 4 // \"xinAlgoAddr\"",
-      "defined_out": [
-        "\"xinAlgoAddr\"",
-        "0",
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0",
-        "0",
-        "\"xinAlgoAddr\""
-      ]
-    },
-    "562": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%0#0",
-        "maybe_value%0#0",
-        "tmp%0#0"
-      ],
-      "stack_out": [
-        "tmp%0#0",
-        "maybe_value%0#0",
-        "maybe_exists%0#0"
-      ]
-    },
-    "563": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "tmp%0#0",
-        "maybe_value%0#0"
-      ]
-    },
-    "564": {
-      "op": "==",
-      "defined_out": [
-        "tmp%1#0"
-      ],
-      "stack_out": [
-        "tmp%1#0"
-      ]
-    },
-    "565": {
-      "error": "Only Xin can do leaky claim!",
-      "op": "assert // Only Xin can do leaky claim!",
-      "stack_out": []
-    },
-    "566": {
-      "op": "global LatestTimestamp",
-      "defined_out": [
-        "tmp%2#0"
-      ],
-      "stack_out": [
-        "tmp%2#0"
-      ]
-    },
     "568": {
       "op": "intc_0 // 0",
+      "defined_out": [
+        "0",
+        "tmp%2#0"
+      ],
       "stack_out": [
         "tmp%2#0",
         "0"
@@ -2137,16 +2176,34 @@
       ]
     },
     "573": {
-      "op": "bnz leakyClaim_bool_true@2",
+      "op": "bz getContractState_after_if_else@4",
       "stack_out": []
     },
     "576": {
+      "op": "pushint 2 // 2",
+      "defined_out": [
+        "2"
+      ],
+      "stack_out": [
+        "2"
+      ]
+    },
+    "578": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "579": {
+      "block": "getContractState_after_if_else@4",
+      "stack_in": [],
       "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
       "stack_out": [
         "0"
       ]
     },
-    "577": {
+    "580": {
       "op": "bytec_1 // \"aliReady\"",
       "defined_out": [
         "\"aliReady\"",
@@ -2157,7 +2214,7 @@
         "\"aliReady\""
       ]
     },
-    "578": {
+    "581": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%2#0",
@@ -2168,227 +2225,81 @@
         "maybe_exists%2#0"
       ]
     },
-    "579": {
+    "582": {
       "error": "check GlobalState exists",
       "op": "assert // check GlobalState exists",
       "stack_out": [
         "maybe_value%2#0"
       ]
     },
-    "580": {
-      "op": "bz leakyClaim_bool_false@3",
+    "583": {
+      "op": "bz getContractState_after_if_else@6",
       "stack_out": []
     },
-    "583": {
-      "block": "leakyClaim_bool_true@2",
-      "stack_in": [],
+    "586": {
       "op": "intc_1 // 1",
       "defined_out": [
-        "or_result%0#0"
+        "1"
       ],
       "stack_out": [
-        "or_result%0#0"
-      ]
-    },
-    "584": {
-      "block": "leakyClaim_bool_merge@4",
-      "stack_in": [
-        "or_result%0#0"
-      ],
-      "error": "Cannot claim: time must be past t0 OR Ali must have set ready!",
-      "op": "assert // Cannot claim: time must be past t0 OR Ali must have set ready!",
-      "defined_out": [],
-      "stack_out": []
-    },
-    "585": {
-      "op": "global LatestTimestamp",
-      "defined_out": [
-        "tmp%4#0"
-      ],
-      "stack_out": [
-        "tmp%4#0"
+        "1"
       ]
     },
     "587": {
-      "op": "intc_0 // 0",
-      "defined_out": [
-        "0",
-        "tmp%4#0"
-      ],
-      "stack_out": [
-        "tmp%4#0",
-        "0"
-      ]
-    },
-    "588": {
-      "op": "bytec_3 // \"t1\"",
-      "defined_out": [
-        "\"t1\"",
-        "0",
-        "tmp%4#0"
-      ],
-      "stack_out": [
-        "tmp%4#0",
-        "0",
-        "\"t1\""
-      ]
-    },
-    "589": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%3#0",
-        "maybe_value%3#0",
-        "tmp%4#0"
-      ],
-      "stack_out": [
-        "tmp%4#0",
-        "maybe_value%3#0",
-        "maybe_exists%3#0"
-      ]
-    },
-    "590": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "tmp%4#0",
-        "maybe_value%3#0"
-      ]
-    },
-    "591": {
-      "op": "<",
-      "defined_out": [
-        "tmp%5#0"
-      ],
-      "stack_out": [
-        "tmp%5#0"
-      ]
-    },
-    "592": {
-      "error": "Cannot claim after t1!",
-      "op": "assert // Cannot claim after t1!",
-      "stack_out": []
-    },
-    "593": {
-      "op": "intc_0 // 0",
-      "stack_out": [
-        "0"
-      ]
-    },
-    "594": {
-      "op": "bytec 6 // \"xinXternalPK\"",
-      "defined_out": [
-        "\"xinXternalPK\"",
-        "0"
-      ],
-      "stack_out": [
-        "0",
-        "\"xinXternalPK\""
-      ]
-    },
-    "596": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%4#0",
-        "maybe_value%4#0"
-      ],
-      "stack_out": [
-        "maybe_value%4#0",
-        "maybe_exists%4#0"
-      ]
-    },
-    "597": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "maybe_value%4#0"
-      ]
-    },
-    "598": {
-      "op": "frame_dig -1",
-      "defined_out": [
-        "maybe_value%4#0",
-        "signature#0 (copy)"
-      ],
-      "stack_out": [
-        "maybe_value%4#0",
-        "signature#0 (copy)"
-      ]
-    },
-    "600": {
-      "op": "swap",
-      "stack_out": [
-        "signature#0 (copy)",
-        "maybe_value%4#0"
-      ]
-    },
-    "601": {
-      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyVerifyEd25519",
-      "op": "callsub leakyVerifyEd25519",
-      "stack_out": []
-    },
-    "604": {
-      "op": "intc_0 // 0",
-      "stack_out": [
-        "0"
-      ]
-    },
-    "605": {
-      "op": "bytec 4 // \"xinAlgoAddr\"",
-      "defined_out": [
-        "\"xinAlgoAddr\"",
-        "0"
-      ],
-      "stack_out": [
-        "0",
-        "\"xinAlgoAddr\""
-      ]
-    },
-    "607": {
-      "op": "app_global_get_ex",
-      "defined_out": [
-        "maybe_exists%5#0",
-        "maybe_value%5#0"
-      ],
-      "stack_out": [
-        "maybe_value%5#0",
-        "maybe_exists%5#0"
-      ]
-    },
-    "608": {
-      "error": "check GlobalState exists",
-      "op": "assert // check GlobalState exists",
-      "stack_out": [
-        "maybe_value%5#0"
-      ]
-    },
-    "609": {
-      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.disburseFunds",
-      "op": "callsub disburseFunds",
-      "stack_out": []
-    },
-    "612": {
       "retsub": true,
       "op": "retsub"
     },
-    "613": {
-      "block": "leakyClaim_bool_false@3",
+    "588": {
+      "block": "getContractState_after_if_else@6",
       "stack_in": [],
       "op": "intc_0 // 0",
       "defined_out": [
-        "or_result%0#0"
+        "0"
       ],
       "stack_out": [
-        "or_result%0#0"
+        "0"
       ]
     },
-    "614": {
-      "op": "b leakyClaim_bool_merge@4"
+    "589": {
+      "retsub": true,
+      "op": "retsub"
     },
-    "617": {
-      "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.punishRefund",
-      "params": {},
-      "block": "punishRefund",
+    "590": {
+      "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyRefund",
+      "params": {
+        "signature#0": "bytes",
+        "sponsorPayment#0": "uint64"
+      },
+      "block": "leakyRefund",
       "stack_in": [],
+      "op": "proto 2 0"
+    },
+    "593": {
+      "op": "intc_3 // 2000",
+      "defined_out": [
+        "2000"
+      ],
+      "stack_out": [
+        "2000"
+      ]
+    },
+    "594": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0",
+        "2000"
+      ],
+      "stack_out": [
+        "2000",
+        "0"
+      ]
+    },
+    "595": {
+      "callsub": "_puya_lib.util.ensure_budget",
+      "op": "callsub ensure_budget",
+      "stack_out": []
+    },
+    "598": {
       "op": "txn Sender",
       "defined_out": [
         "tmp%0#0"
@@ -2397,18 +2308,14 @@
         "tmp%0#0"
       ]
     },
-    "619": {
+    "600": {
       "op": "intc_0 // 0",
-      "defined_out": [
-        "0",
-        "tmp%0#0"
-      ],
       "stack_out": [
         "tmp%0#0",
         "0"
       ]
     },
-    "620": {
+    "601": {
       "op": "bytec_0 // \"aliAlgoAddr\"",
       "defined_out": [
         "\"aliAlgoAddr\"",
@@ -2421,7 +2328,7 @@
         "\"aliAlgoAddr\""
       ]
     },
-    "621": {
+    "602": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%0#0",
@@ -2434,7 +2341,7 @@
         "maybe_exists%0#0"
       ]
     },
-    "622": {
+    "603": {
       "error": "check GlobalState exists",
       "op": "assert // check GlobalState exists",
       "stack_out": [
@@ -2442,7 +2349,7 @@
         "maybe_value%0#0"
       ]
     },
-    "623": {
+    "604": {
       "op": "==",
       "defined_out": [
         "tmp%1#0"
@@ -2451,12 +2358,12 @@
         "tmp%1#0"
       ]
     },
-    "624": {
-      "error": "Only Ali can do punish refund!",
-      "op": "assert // Only Ali can do punish refund!",
+    "605": {
+      "error": "Only Ali can do leaky refund!",
+      "op": "assert // Only Ali can do leaky refund!",
       "stack_out": []
     },
-    "625": {
+    "606": {
       "op": "global LatestTimestamp",
       "defined_out": [
         "tmp%2#0"
@@ -2465,27 +2372,27 @@
         "tmp%2#0"
       ]
     },
-    "627": {
+    "608": {
       "op": "intc_0 // 0",
       "stack_out": [
         "tmp%2#0",
         "0"
       ]
     },
-    "628": {
-      "op": "bytec_3 // \"t1\"",
+    "609": {
+      "op": "bytec_2 // \"t0\"",
       "defined_out": [
-        "\"t1\"",
+        "\"t0\"",
         "0",
         "tmp%2#0"
       ],
       "stack_out": [
         "tmp%2#0",
         "0",
-        "\"t1\""
+        "\"t0\""
       ]
     },
-    "629": {
+    "610": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%1#0",
@@ -2498,7 +2405,7 @@
         "maybe_exists%1#0"
       ]
     },
-    "630": {
+    "611": {
       "error": "check GlobalState exists",
       "op": "assert // check GlobalState exists",
       "stack_out": [
@@ -2506,8 +2413,8 @@
         "maybe_value%1#0"
       ]
     },
-    "631": {
-      "op": ">=",
+    "612": {
+      "op": "<=",
       "defined_out": [
         "tmp%3#0"
       ],
@@ -2515,25 +2422,29 @@
         "tmp%3#0"
       ]
     },
-    "632": {
-      "error": "Cannot punish refund before t1!",
-      "op": "assert // Cannot punish refund before t1!",
+    "613": {
+      "error": "Cannot refund after t0!",
+      "op": "assert // Cannot refund after t0!",
       "stack_out": []
     },
-    "633": {
+    "614": {
       "op": "intc_0 // 0",
       "stack_out": [
         "0"
       ]
     },
-    "634": {
-      "op": "bytec_0 // \"aliAlgoAddr\"",
+    "615": {
+      "op": "bytec_1 // \"aliReady\"",
+      "defined_out": [
+        "\"aliReady\"",
+        "0"
+      ],
       "stack_out": [
         "0",
-        "\"aliAlgoAddr\""
+        "\"aliReady\""
       ]
     },
-    "635": {
+    "616": {
       "op": "app_global_get_ex",
       "defined_out": [
         "maybe_exists%2#0",
@@ -2544,19 +2455,805 @@
         "maybe_exists%2#0"
       ]
     },
-    "636": {
+    "617": {
       "error": "check GlobalState exists",
       "op": "assert // check GlobalState exists",
       "stack_out": [
         "maybe_value%2#0"
       ]
     },
+    "618": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "619": {
+      "error": "Cannot refund after set ready!",
+      "op": "assert // Cannot refund after set ready!",
+      "stack_out": []
+    },
+    "620": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "sponsorPayment#0 (copy)"
+      ],
+      "stack_out": [
+        "sponsorPayment#0 (copy)"
+      ]
+    },
+    "622": {
+      "op": "gtxns Fee",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "624": {
+      "op": "!",
+      "defined_out": [
+        "tmp%6#0"
+      ],
+      "stack_out": [
+        "tmp%6#0"
+      ]
+    },
+    "625": {
+      "error": "Sponsor payment must not pay a fee",
+      "op": "assert // Sponsor payment must not pay a fee",
+      "stack_out": []
+    },
+    "626": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "0"
+      ]
+    },
+    "627": {
+      "op": "bytec 6 // \"aliXternalPK\"",
+      "defined_out": [
+        "\"aliXternalPK\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"aliXternalPK\""
+      ]
+    },
+    "629": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%3#0",
+        "maybe_value%3#0"
+      ],
+      "stack_out": [
+        "maybe_value%3#0",
+        "maybe_exists%3#0"
+      ]
+    },
+    "630": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "maybe_value%3#0"
+      ]
+    },
+    "631": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "maybe_value%3#0",
+        "signature#0 (copy)"
+      ],
+      "stack_out": [
+        "maybe_value%3#0",
+        "signature#0 (copy)"
+      ]
+    },
+    "633": {
+      "op": "swap",
+      "stack_out": [
+        "signature#0 (copy)",
+        "maybe_value%3#0"
+      ]
+    },
+    "634": {
+      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyVerifyEd25519",
+      "op": "callsub leakyVerifyEd25519",
+      "stack_out": []
+    },
     "637": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "0"
+      ]
+    },
+    "638": {
+      "op": "bytec_0 // \"aliAlgoAddr\"",
+      "stack_out": [
+        "0",
+        "\"aliAlgoAddr\""
+      ]
+    },
+    "639": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%4#0",
+        "maybe_value%4#0"
+      ],
+      "stack_out": [
+        "maybe_value%4#0",
+        "maybe_exists%4#0"
+      ]
+    },
+    "640": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "maybe_value%4#0"
+      ]
+    },
+    "641": {
       "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.disburseFunds",
       "op": "callsub disburseFunds",
       "stack_out": []
     },
-    "640": {
+    "644": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "645": {
+      "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyClaim",
+      "params": {
+        "signature#0": "bytes",
+        "sponsorPayment#0": "uint64"
+      },
+      "block": "leakyClaim",
+      "stack_in": [],
+      "op": "proto 2 0"
+    },
+    "648": {
+      "op": "intc_3 // 2000",
+      "defined_out": [
+        "2000"
+      ],
+      "stack_out": [
+        "2000"
+      ]
+    },
+    "649": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0",
+        "2000"
+      ],
+      "stack_out": [
+        "2000",
+        "0"
+      ]
+    },
+    "650": {
+      "callsub": "_puya_lib.util.ensure_budget",
+      "op": "callsub ensure_budget",
+      "stack_out": []
+    },
+    "653": {
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "655": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "tmp%0#0",
+        "0"
+      ]
+    },
+    "656": {
+      "op": "bytec 4 // \"xinAlgoAddr\"",
+      "defined_out": [
+        "\"xinAlgoAddr\"",
+        "0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "0",
+        "\"xinAlgoAddr\""
+      ]
+    },
+    "658": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "659": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0"
+      ]
+    },
+    "660": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "661": {
+      "error": "Only Xin can do leaky claim!",
+      "op": "assert // Only Xin can do leaky claim!",
+      "stack_out": []
+    },
+    "662": {
+      "op": "global LatestTimestamp",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "664": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "tmp%2#0",
+        "0"
+      ]
+    },
+    "665": {
+      "op": "bytec_2 // \"t0\"",
+      "defined_out": [
+        "\"t0\"",
+        "0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0",
+        "0",
+        "\"t0\""
+      ]
+    },
+    "666": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "maybe_value%1#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0",
+        "maybe_value%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "667": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "tmp%2#0",
+        "maybe_value%1#0"
+      ]
+    },
+    "668": {
+      "op": ">",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "669": {
+      "op": "bnz leakyClaim_bool_true@2",
+      "stack_out": []
+    },
+    "672": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "0"
+      ]
+    },
+    "673": {
+      "op": "bytec_1 // \"aliReady\"",
+      "defined_out": [
+        "\"aliReady\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"aliReady\""
+      ]
+    },
+    "674": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%2#0",
+        "maybe_value%2#0"
+      ],
+      "stack_out": [
+        "maybe_value%2#0",
+        "maybe_exists%2#0"
+      ]
+    },
+    "675": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "maybe_value%2#0"
+      ]
+    },
+    "676": {
+      "op": "bz leakyClaim_bool_false@3",
+      "stack_out": []
+    },
+    "679": {
+      "block": "leakyClaim_bool_true@2",
+      "stack_in": [],
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "or_result%0#0"
+      ],
+      "stack_out": [
+        "or_result%0#0"
+      ]
+    },
+    "680": {
+      "block": "leakyClaim_bool_merge@4",
+      "stack_in": [
+        "or_result%0#0"
+      ],
+      "error": "Cannot claim: time must be past t0 OR Ali must have set ready!",
+      "op": "assert // Cannot claim: time must be past t0 OR Ali must have set ready!",
+      "defined_out": [],
+      "stack_out": []
+    },
+    "681": {
+      "op": "global LatestTimestamp",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "683": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0",
+        "0"
+      ]
+    },
+    "684": {
+      "op": "bytec_3 // \"t1\"",
+      "defined_out": [
+        "\"t1\"",
+        "0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0",
+        "0",
+        "\"t1\""
+      ]
+    },
+    "685": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%3#0",
+        "maybe_value%3#0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0",
+        "maybe_value%3#0",
+        "maybe_exists%3#0"
+      ]
+    },
+    "686": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "tmp%4#0",
+        "maybe_value%3#0"
+      ]
+    },
+    "687": {
+      "op": "<",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "688": {
+      "error": "Cannot claim after t1!",
+      "op": "assert // Cannot claim after t1!",
+      "stack_out": []
+    },
+    "689": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "sponsorPayment#0 (copy)"
+      ],
+      "stack_out": [
+        "sponsorPayment#0 (copy)"
+      ]
+    },
+    "691": {
+      "op": "gtxns Fee",
+      "defined_out": [
+        "tmp%6#0"
+      ],
+      "stack_out": [
+        "tmp%6#0"
+      ]
+    },
+    "693": {
+      "op": "!",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "694": {
+      "error": "Sponsor payment must not pay a fee",
+      "op": "assert // Sponsor payment must not pay a fee",
+      "stack_out": []
+    },
+    "695": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "0"
+      ]
+    },
+    "696": {
+      "op": "bytec 7 // \"xinXternalPK\"",
+      "defined_out": [
+        "\"xinXternalPK\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"xinXternalPK\""
+      ]
+    },
+    "698": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%4#0",
+        "maybe_value%4#0"
+      ],
+      "stack_out": [
+        "maybe_value%4#0",
+        "maybe_exists%4#0"
+      ]
+    },
+    "699": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "maybe_value%4#0"
+      ]
+    },
+    "700": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "maybe_value%4#0",
+        "signature#0 (copy)"
+      ],
+      "stack_out": [
+        "maybe_value%4#0",
+        "signature#0 (copy)"
+      ]
+    },
+    "702": {
+      "op": "swap",
+      "stack_out": [
+        "signature#0 (copy)",
+        "maybe_value%4#0"
+      ]
+    },
+    "703": {
+      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyVerifyEd25519",
+      "op": "callsub leakyVerifyEd25519",
+      "stack_out": []
+    },
+    "706": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "0"
+      ]
+    },
+    "707": {
+      "op": "bytec 4 // \"xinAlgoAddr\"",
+      "defined_out": [
+        "\"xinAlgoAddr\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"xinAlgoAddr\""
+      ]
+    },
+    "709": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%5#0",
+        "maybe_value%5#0"
+      ],
+      "stack_out": [
+        "maybe_value%5#0",
+        "maybe_exists%5#0"
+      ]
+    },
+    "710": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "maybe_value%5#0"
+      ]
+    },
+    "711": {
+      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.disburseFunds",
+      "op": "callsub disburseFunds",
+      "stack_out": []
+    },
+    "714": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "715": {
+      "block": "leakyClaim_bool_false@3",
+      "stack_in": [],
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "or_result%0#0"
+      ],
+      "stack_out": [
+        "or_result%0#0"
+      ]
+    },
+    "716": {
+      "op": "b leakyClaim_bool_merge@4"
+    },
+    "719": {
+      "subroutine": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.punishRefund",
+      "params": {
+        "sponsorPayment#0": "uint64"
+      },
+      "block": "punishRefund",
+      "stack_in": [],
+      "op": "proto 1 0"
+    },
+    "722": {
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "724": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "0"
+      ]
+    },
+    "725": {
+      "op": "bytec_0 // \"aliAlgoAddr\"",
+      "defined_out": [
+        "\"aliAlgoAddr\"",
+        "0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "0",
+        "\"aliAlgoAddr\""
+      ]
+    },
+    "726": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "727": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0"
+      ]
+    },
+    "728": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "729": {
+      "error": "Only Ali can do punish refund!",
+      "op": "assert // Only Ali can do punish refund!",
+      "stack_out": []
+    },
+    "730": {
+      "op": "global LatestTimestamp",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "732": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "tmp%2#0",
+        "0"
+      ]
+    },
+    "733": {
+      "op": "bytec_3 // \"t1\"",
+      "defined_out": [
+        "\"t1\"",
+        "0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0",
+        "0",
+        "\"t1\""
+      ]
+    },
+    "734": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "maybe_value%1#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0",
+        "maybe_value%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "735": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "tmp%2#0",
+        "maybe_value%1#0"
+      ]
+    },
+    "736": {
+      "op": ">=",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "737": {
+      "error": "Cannot punish refund before t1!",
+      "op": "assert // Cannot punish refund before t1!",
+      "stack_out": []
+    },
+    "738": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "sponsorPayment#0 (copy)"
+      ],
+      "stack_out": [
+        "sponsorPayment#0 (copy)"
+      ]
+    },
+    "740": {
+      "op": "gtxns Fee",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "742": {
+      "op": "!",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "743": {
+      "error": "Sponsor payment must not pay a fee",
+      "op": "assert // Sponsor payment must not pay a fee",
+      "stack_out": []
+    },
+    "744": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "0"
+      ]
+    },
+    "745": {
+      "op": "bytec_0 // \"aliAlgoAddr\"",
+      "stack_out": [
+        "0",
+        "\"aliAlgoAddr\""
+      ]
+    },
+    "746": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%2#0",
+        "maybe_value%2#0"
+      ],
+      "stack_out": [
+        "maybe_value%2#0",
+        "maybe_exists%2#0"
+      ]
+    },
+    "747": {
+      "error": "check GlobalState exists",
+      "op": "assert // check GlobalState exists",
+      "stack_out": [
+        "maybe_value%2#0"
+      ]
+    },
+    "748": {
+      "callsub": "smart_contracts/leak_swap/contract.algo.ts::LeakSwap.disburseFunds",
+      "op": "callsub disburseFunds",
+      "stack_out": []
+    },
+    "751": {
       "retsub": true,
       "op": "retsub"
     }

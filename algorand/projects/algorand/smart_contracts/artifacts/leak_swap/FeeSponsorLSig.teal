@@ -1,0 +1,168 @@
+#pragma version 10
+#pragma typetrack false
+
+// smart_contracts/leak_swap/sponsor_lsig.algo.ts::program() -> uint64:
+main:
+    intcblock 1 0 5 TMPL_APP_ID
+    bytecblock TMPL_ALI_ADDR TMPL_XIN_ADDR
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:18
+    // const aliAddr = TemplateVar<Account>('ALI_ADDR')
+    bytec_0 // TMPL_ALI_ADDR
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:19
+    // const xinAddr = TemplateVar<Account>('XIN_ADDR')
+    bytec_1 // TMPL_XIN_ADDR
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:17
+    // const appId = TemplateVar<uint64>('APP_ID')
+    intc_3 // TMPL_APP_ID
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:21
+    // assert(Txn.fee === Uint64(0), 'Sponsor payment must not pay a fee')
+    txn Fee
+    !
+    assert // Sponsor payment must not pay a fee
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:22
+    // assert(Txn.rekeyTo === Global.zeroAddress, 'Sponsor payment must not rekey')
+    txn RekeyTo
+    global ZeroAddress
+    ==
+    assert // Sponsor payment must not rekey
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:25
+    // const appCall = gtxn.ApplicationCallTxn(Txn.groupIndex + Uint64(1))
+    txn GroupIndex
+    intc_0 // 1
+    +
+    dup
+    cover 2
+    dup
+    gtxns TypeEnum
+    pushint 6 // appl
+    ==
+    assert // transaction type is appl
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:26
+    // assert(appCall.appId.id === appId, 'Must be paired with the LeakSwap app call')
+    dup
+    gtxns ApplicationID
+    uncover 2
+    ==
+    assert // Must be paired with the LeakSwap app call
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:27
+    // const selector = appCall.appArgs(Uint64(0))
+    intc_1 // 0
+    gtxnsas ApplicationArgs
+    dup
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:32
+    // if (selector === arc4.methodSelector('setReady(pay)void')) {
+    pushbytes 0xdda05a7a // method "setReady(pay)void"
+    ==
+    bz main_after_if_else@2
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:33
+    // assert(appCall.onCompletion === OnCompleteAction.NoOp, 'setReady must not delete the application')
+    dig 1
+    gtxns OnCompletion
+    !
+    assert // setReady must not delete the application
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:34
+    // assert(Txn.closeRemainderTo === Global.zeroAddress, 'Cannot close out for setReady')
+    txn CloseRemainderTo
+    global ZeroAddress
+    ==
+    assert // Cannot close out for setReady
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:35
+    // assert(Txn.receiver === aliAddr, 'setReady funding must go to Ali')
+    txn Receiver
+    dig 4
+    ==
+    assert // setReady funding must go to Ali
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:36
+    // assert(Txn.amount === Global.minBalance + Global.minTxnFee * Uint64(2), 'Wrong setReady funding amount')
+    txn Amount
+    global MinBalance
+    global MinTxnFee
+    pushint 2 // 2
+    *
+    +
+    ==
+    assert // Wrong setReady funding amount
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:37
+    // return true
+    intc_0 // 1
+    return
+
+main_after_if_else@2:
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:43
+    // if (selector === arc4.methodSelector('leakyClaim(byte[],pay)void')) {
+    dup
+    pushbytes 0xc5ba2d44 // method "leakyClaim(byte[],pay)void"
+    ==
+    bz main_after_if_else@4
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:44
+    // assert(appCall.onCompletion === OnCompleteAction.DeleteApplication, 'Claim must delete the application')
+    dig 1
+    gtxns OnCompletion
+    intc_2 // 5
+    ==
+    assert // Claim must delete the application
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:45
+    // assert(Txn.amount === Uint64(0), 'leakyClaim funding must not transfer an extra amount')
+    txn Amount
+    !
+    assert // leakyClaim funding must not transfer an extra amount
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:46
+    // assert(Txn.closeRemainderTo === xinAddr, 'leakyClaim must sweep the remainder to Xin')
+    txn CloseRemainderTo
+    dig 3
+    ==
+    assert // leakyClaim must sweep the remainder to Xin
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:47
+    // return true
+    intc_0 // 1
+    return
+
+main_after_if_else@4:
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:50
+    // selector === arc4.methodSelector('leakyRefund(byte[],pay)void') ||
+    dup
+    pushbytes 0x4801e829 // method "leakyRefund(byte[],pay)void"
+    ==
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:50-51
+    // selector === arc4.methodSelector('leakyRefund(byte[],pay)void') ||
+    // selector === arc4.methodSelector('punishRefund(pay)void')
+    bnz main_if_body@6
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:51
+    // selector === arc4.methodSelector('punishRefund(pay)void')
+    dup
+    pushbytes 0x66671879 // method "punishRefund(pay)void"
+    ==
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:50-51
+    // selector === arc4.methodSelector('leakyRefund(byte[],pay)void') ||
+    // selector === arc4.methodSelector('punishRefund(pay)void')
+    bz main_after_if_else@7
+
+main_if_body@6:
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:53
+    // assert(appCall.onCompletion === OnCompleteAction.DeleteApplication, 'Refund must delete the application')
+    dig 1
+    gtxns OnCompletion
+    intc_2 // 5
+    ==
+    assert // Refund must delete the application
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:54
+    // assert(Txn.amount === Uint64(0), 'refund funding must not transfer an extra amount')
+    txn Amount
+    !
+    assert // refund funding must not transfer an extra amount
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:55
+    // assert(Txn.closeRemainderTo === aliAddr, 'refund must sweep the remainder to Ali')
+    txn CloseRemainderTo
+    dig 4
+    ==
+    assert // refund must sweep the remainder to Ali
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:56
+    // return true
+    intc_0 // 1
+    return
+
+main_after_if_else@7:
+    // smart_contracts/leak_swap/sponsor_lsig.algo.ts:59
+    // return false
+    intc_1 // 0
+    return

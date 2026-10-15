@@ -1,0 +1,1339 @@
+{
+  "version": 3,
+  "sources": [
+    "/Users/yared/dev/hashmapsdata2value/monero-swaps-stuff/leakswap-all/leakswap-protocol/algorand/projects/algorand/smart_contracts/leak_swap/sponsor_lsig.algo.ts"
+  ],
+  "mappings": "AAiBoB;AACA;AAFF;AAIH;;AAAJ;AAAP;AACW;;AAAmB;;AAAvB;AAAP;AAG4C;;AAAoB;AAAxB;AAAA;AAAA;;AAAxB;AAAA;;AAAA;;AAAA;AAAA;AACD;AAAA;;AAAR;;AAAA;AAAP;AACwC;AAAvB;;AAAX;AAKW;;;;;;AAAb;AAAJ;;;AACiB;;AAAA;;AAAR;AAAP;AACW;;AAA4B;;AAAhC;AAAP;AACW;;AAAJ;;AAAA;AAAP;AACW;;AAAkB;;AAAoB;;AAAmB;;AAA1B;AAApB;AAAf;AAAP;AACO;AAAP;AAME;AAAa;;;;;;AAAb;AAAJ;;;AACiB;;AAAA;;AAAkC;AAA1C;AAAP;AACW;;AAAJ;AAAP;AACW;;AAAJ;;AAAA;AAAP;AACO;AAAP;AAGA;AAAa;;;;;;AAAb;AAAA;;;AACA;AAAa;;;;;;AAAb;AADA;;;AAGe;;AAAA;;AAAkC;AAA1C;AAAP;AACW;;AAAJ;AAAP;AACW;;AAAJ;;AAAA;AAAP;AACO;AAAP;AAGK;AAAP",
+  "op_pc_offset": 2,
+  "pc_events": {
+    "0": {
+      "op": "bytec_0 // TMPL_ALI_ADDR"
+    },
+    "1": {
+      "op": "bytec_1 // TMPL_XIN_ADDR"
+    },
+    "2": {
+      "op": "intc_3 // TMPL_APP_ID"
+    },
+    "3": {
+      "op": "txn Fee",
+      "defined_out": [
+        "aliAddr#0",
+        "appId#0",
+        "tmp%0#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "tmp%0#0"
+      ]
+    },
+    "5": {
+      "op": "!",
+      "defined_out": [
+        "aliAddr#0",
+        "appId#0",
+        "tmp%1#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "tmp%1#0"
+      ]
+    },
+    "6": {
+      "error": "Sponsor payment must not pay a fee",
+      "op": "assert // Sponsor payment must not pay a fee",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0"
+      ]
+    },
+    "7": {
+      "op": "txn RekeyTo",
+      "defined_out": [
+        "aliAddr#0",
+        "appId#0",
+        "tmp%2#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "tmp%2#0"
+      ]
+    },
+    "9": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "aliAddr#0",
+        "appId#0",
+        "tmp%2#0",
+        "tmp%3#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "tmp%2#0",
+        "tmp%3#0"
+      ]
+    },
+    "11": {
+      "op": "==",
+      "defined_out": [
+        "aliAddr#0",
+        "appId#0",
+        "tmp%4#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "tmp%4#0"
+      ]
+    },
+    "12": {
+      "error": "Sponsor payment must not rekey",
+      "op": "assert // Sponsor payment must not rekey",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0"
+      ]
+    },
+    "13": {
+      "op": "txn GroupIndex",
+      "defined_out": [
+        "aliAddr#0",
+        "appId#0",
+        "tmp%5#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "tmp%5#0"
+      ]
+    },
+    "15": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "aliAddr#0",
+        "appId#0",
+        "tmp%5#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "tmp%5#0",
+        "1"
+      ]
+    },
+    "16": {
+      "op": "+",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "appId#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "appCall#0"
+      ]
+    },
+    "17": {
+      "op": "dup",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appId#0",
+        "appCall#0",
+        "appCall#0"
+      ]
+    },
+    "18": {
+      "op": "cover 2",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "appId#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appCall#0"
+      ]
+    },
+    "20": {
+      "op": "dup",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "appCall#0 (copy)",
+        "appId#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appCall#0",
+        "appCall#0 (copy)"
+      ]
+    },
+    "21": {
+      "op": "gtxns TypeEnum",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "appId#0",
+        "gtxn_type%0#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appCall#0",
+        "gtxn_type%0#0"
+      ]
+    },
+    "23": {
+      "op": "pushint 6 // appl",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appl",
+        "gtxn_type%0#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appCall#0",
+        "gtxn_type%0#0",
+        "appl"
+      ]
+    },
+    "25": {
+      "op": "==",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "appId#0",
+        "gtxn_type_matches%0#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appCall#0",
+        "gtxn_type_matches%0#0"
+      ]
+    },
+    "26": {
+      "error": "transaction type is appl",
+      "op": "assert // transaction type is appl",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appCall#0"
+      ]
+    },
+    "27": {
+      "op": "dup",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appCall#0",
+        "appCall#0 (copy)"
+      ]
+    },
+    "28": {
+      "op": "gtxns ApplicationID",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "appId#0",
+        "tmp%6#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appId#0",
+        "appCall#0",
+        "tmp%6#0"
+      ]
+    },
+    "30": {
+      "op": "uncover 2",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appCall#0",
+        "tmp%6#0",
+        "appId#0"
+      ]
+    },
+    "32": {
+      "op": "==",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "tmp%7#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appCall#0",
+        "tmp%7#0"
+      ]
+    },
+    "33": {
+      "error": "Must be paired with the LeakSwap app call",
+      "op": "assert // Must be paired with the LeakSwap app call",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appCall#0"
+      ]
+    },
+    "34": {
+      "op": "intc_1 // 0",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "appCall#0",
+        "0"
+      ]
+    },
+    "35": {
+      "op": "gtxnsas ApplicationArgs",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "37": {
+      "op": "dup",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "selector#0"
+      ]
+    },
+    "38": {
+      "op": "pushbytes 0xdda05a7a // method \"setReady(pay)void\"",
+      "defined_out": [
+        "Method(setReady(pay)void)",
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "selector#0",
+        "Method(setReady(pay)void)"
+      ]
+    },
+    "44": {
+      "op": "==",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%8#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%8#0"
+      ]
+    },
+    "45": {
+      "op": "bz main_after_if_else@2",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "48": {
+      "op": "dig 1",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "appCall#0"
+      ]
+    },
+    "50": {
+      "op": "gtxns OnCompletion",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%9#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%9#0"
+      ]
+    },
+    "52": {
+      "op": "!",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%10#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%10#0"
+      ]
+    },
+    "53": {
+      "error": "setReady must not delete the application",
+      "op": "assert // setReady must not delete the application",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "54": {
+      "op": "txn CloseRemainderTo",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%11#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%11#0"
+      ]
+    },
+    "56": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%11#0",
+        "tmp%12#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%11#0",
+        "tmp%12#0"
+      ]
+    },
+    "58": {
+      "op": "==",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%13#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%13#0"
+      ]
+    },
+    "59": {
+      "error": "Cannot close out for setReady",
+      "op": "assert // Cannot close out for setReady",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "60": {
+      "op": "txn Receiver",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%14#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%14#0"
+      ]
+    },
+    "62": {
+      "op": "dig 4",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%14#0",
+        "aliAddr#0"
+      ]
+    },
+    "64": {
+      "op": "==",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%15#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%15#0"
+      ]
+    },
+    "65": {
+      "error": "setReady funding must go to Ali",
+      "op": "assert // setReady funding must go to Ali",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "66": {
+      "op": "txn Amount",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0"
+      ]
+    },
+    "68": {
+      "op": "global MinBalance",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%17#0"
+      ]
+    },
+    "70": {
+      "op": "global MinTxnFee",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "tmp%18#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "tmp%18#0"
+      ]
+    },
+    "72": {
+      "op": "pushint 2 // 2",
+      "defined_out": [
+        "2",
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "tmp%18#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "tmp%18#0",
+        "2"
+      ]
+    },
+    "74": {
+      "op": "*",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "tmp%19#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "tmp%19#0"
+      ]
+    },
+    "75": {
+      "op": "+",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%20#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%16#0",
+        "tmp%20#0"
+      ]
+    },
+    "76": {
+      "op": "==",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%21#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%21#0"
+      ]
+    },
+    "77": {
+      "error": "Wrong setReady funding amount",
+      "op": "assert // Wrong setReady funding amount",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "78": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "1"
+      ]
+    },
+    "79": {
+      "op": "return",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "80": {
+      "block": "main_after_if_else@2",
+      "stack_in": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ],
+      "op": "dup",
+      "defined_out": [
+        "selector#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "selector#0"
+      ]
+    },
+    "81": {
+      "op": "pushbytes 0xc5ba2d44 // method \"leakyClaim(byte[],pay)void\"",
+      "defined_out": [
+        "Method(leakyClaim(byte[],pay)void)",
+        "selector#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "selector#0",
+        "Method(leakyClaim(byte[],pay)void)"
+      ]
+    },
+    "87": {
+      "op": "==",
+      "defined_out": [
+        "selector#0",
+        "tmp%22#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%22#0"
+      ]
+    },
+    "88": {
+      "op": "bz main_after_if_else@4",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "91": {
+      "op": "dig 1",
+      "defined_out": [
+        "appCall#0",
+        "selector#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "appCall#0"
+      ]
+    },
+    "93": {
+      "op": "gtxns OnCompletion",
+      "defined_out": [
+        "appCall#0",
+        "selector#0",
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%23#0"
+      ]
+    },
+    "95": {
+      "op": "intc_2 // 5",
+      "defined_out": [
+        "5",
+        "appCall#0",
+        "selector#0",
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%23#0",
+        "5"
+      ]
+    },
+    "96": {
+      "op": "==",
+      "defined_out": [
+        "appCall#0",
+        "selector#0",
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%24#0"
+      ]
+    },
+    "97": {
+      "error": "Claim must delete the application",
+      "op": "assert // Claim must delete the application",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "98": {
+      "op": "txn Amount",
+      "defined_out": [
+        "appCall#0",
+        "selector#0",
+        "tmp%25#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%25#0"
+      ]
+    },
+    "100": {
+      "op": "!",
+      "defined_out": [
+        "appCall#0",
+        "selector#0",
+        "tmp%26#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%26#0"
+      ]
+    },
+    "101": {
+      "error": "leakyClaim funding must not transfer an extra amount",
+      "op": "assert // leakyClaim funding must not transfer an extra amount",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "102": {
+      "op": "txn CloseRemainderTo",
+      "defined_out": [
+        "appCall#0",
+        "selector#0",
+        "tmp%27#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%27#0"
+      ]
+    },
+    "104": {
+      "op": "dig 3",
+      "defined_out": [
+        "appCall#0",
+        "selector#0",
+        "tmp%27#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%27#0",
+        "xinAddr#0"
+      ]
+    },
+    "106": {
+      "op": "==",
+      "defined_out": [
+        "appCall#0",
+        "selector#0",
+        "tmp%28#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%28#0"
+      ]
+    },
+    "107": {
+      "error": "leakyClaim must sweep the remainder to Xin",
+      "op": "assert // leakyClaim must sweep the remainder to Xin",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "108": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "appCall#0",
+        "selector#0",
+        "xinAddr#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "1"
+      ]
+    },
+    "109": {
+      "op": "return",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "110": {
+      "block": "main_after_if_else@4",
+      "stack_in": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ],
+      "op": "dup",
+      "defined_out": [
+        "selector#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "selector#0"
+      ]
+    },
+    "111": {
+      "op": "pushbytes 0x4801e829 // method \"leakyRefund(byte[],pay)void\"",
+      "defined_out": [
+        "Method(leakyRefund(byte[],pay)void)",
+        "selector#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "selector#0",
+        "Method(leakyRefund(byte[],pay)void)"
+      ]
+    },
+    "117": {
+      "op": "==",
+      "defined_out": [
+        "selector#0",
+        "tmp%29#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%29#0"
+      ]
+    },
+    "118": {
+      "op": "bnz main_if_body@6",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "121": {
+      "op": "dup",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "selector#0"
+      ]
+    },
+    "122": {
+      "op": "pushbytes 0x66671879 // method \"punishRefund(pay)void\"",
+      "defined_out": [
+        "Method(punishRefund(pay)void)",
+        "selector#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "selector#0",
+        "Method(punishRefund(pay)void)"
+      ]
+    },
+    "128": {
+      "op": "==",
+      "defined_out": [
+        "selector#0",
+        "tmp%30#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%30#0"
+      ]
+    },
+    "129": {
+      "op": "bz main_after_if_else@7",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "132": {
+      "block": "main_if_body@6",
+      "stack_in": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ],
+      "op": "dig 1",
+      "defined_out": [
+        "appCall#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "appCall#0"
+      ]
+    },
+    "134": {
+      "op": "gtxns OnCompletion",
+      "defined_out": [
+        "appCall#0",
+        "tmp%31#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%31#0"
+      ]
+    },
+    "136": {
+      "op": "intc_2 // 5",
+      "defined_out": [
+        "5",
+        "appCall#0",
+        "tmp%31#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%31#0",
+        "5"
+      ]
+    },
+    "137": {
+      "op": "==",
+      "defined_out": [
+        "appCall#0",
+        "tmp%32#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%32#0"
+      ]
+    },
+    "138": {
+      "error": "Refund must delete the application",
+      "op": "assert // Refund must delete the application",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "139": {
+      "op": "txn Amount",
+      "defined_out": [
+        "appCall#0",
+        "tmp%33#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%33#0"
+      ]
+    },
+    "141": {
+      "op": "!",
+      "defined_out": [
+        "appCall#0",
+        "tmp%34#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%34#0"
+      ]
+    },
+    "142": {
+      "error": "refund funding must not transfer an extra amount",
+      "op": "assert // refund funding must not transfer an extra amount",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "143": {
+      "op": "txn CloseRemainderTo",
+      "defined_out": [
+        "appCall#0",
+        "tmp%35#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%35#0"
+      ]
+    },
+    "145": {
+      "op": "dig 4",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "tmp%35#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%35#0",
+        "aliAddr#0"
+      ]
+    },
+    "147": {
+      "op": "==",
+      "defined_out": [
+        "aliAddr#0",
+        "appCall#0",
+        "tmp%36#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "tmp%36#0"
+      ]
+    },
+    "148": {
+      "error": "refund must sweep the remainder to Ali",
+      "op": "assert // refund must sweep the remainder to Ali",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "149": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "aliAddr#0",
+        "appCall#0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "1"
+      ]
+    },
+    "150": {
+      "op": "return",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    },
+    "151": {
+      "block": "main_after_if_else@7",
+      "stack_in": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0",
+        "0"
+      ]
+    },
+    "152": {
+      "op": "return",
+      "stack_out": [
+        "aliAddr#0",
+        "xinAddr#0",
+        "appCall#0",
+        "selector#0"
+      ]
+    }
+  }
+}

@@ -4,14 +4,26 @@ import { algorandFixture } from '@algorandfoundation/algokit-utils/testing'
 import { beforeAll, beforeEach, describe, test, expect } from 'vitest'
 import { LeakSwapClient, LeakSwapFactory } from '../artifacts/leak_swap/LeakSwapClient'
 import { genPrivateSpendKey, extractScalarFromLeakySignature, hexToUint8Array, getPK, leakySign } from 'leakswap-utils'
-import { Account, Address, Algodv2 } from 'algosdk'
+import algosdk, { Account, Address } from 'algosdk'
 import { IndexerClient } from 'algosdk/dist/types/client/v2/indexer/indexer'
 import { TransactionSignerAccount } from '@algorandfoundation/algokit-utils/types/account'
+import { readFileSync } from 'fs'
+import { join } from 'path'
+
+// Vendored FeeSponsorLSig TEAL *template* - read straight from the build
+// artifact (not copy-pasted), so this test can never drift from the real
+// compiled LSig that sponsor_lsig.algo.ts produces.
+const FEE_SPONSOR_LSIG_TEAL_TEMPLATE = readFileSync(
+  join(__dirname, '../artifacts/leak_swap/FeeSponsorLSig.teal'),
+  'utf-8'
+)
 
 // Helper function to sleep for a given number of milliseconds
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 const fundAmount = (10).algo()
 const methodCallsFees = (4000).microAlgos() // Ensure we have enough budget for the app call
+// Extra fee the app call must pool in, to cover the zero-fee sponsor payment paired with it
+const sponsorLegFee = (1000).microAlgos()
 
 
 type LeakSwapCreateAppParams = {
@@ -57,7 +69,9 @@ describe('LeakSwap contract', () => {
     localnet.algorand.account.ensureFundedFromEnvironment(testAccount, (20).algo())
 
     // TODO: replace with 0 Algo initial funds, funding by calling funder LSIG
-    const xinAlgoAccount = (await localnet.context.generateAccount({ initialFunds: (10).algo(), suppressLog: true }))
+    // Xin starts completely broke - proves the fee-sponsor LSig, not Xin's
+    // own balance, is what covers her leakyClaim call's fees.
+    const xinAlgoAccount = (await localnet.context.generateAccount({ initialFunds: (0).algo(), suppressLog: true }))
     const aliXternalSK = hexToUint8Array(genPrivateSpendKey())//genScalar()
     const xinXternalSK = hexToUint8Array(genPrivateSpendKey())//genScalar()
 
@@ -82,12 +96,23 @@ describe('LeakSwap contract', () => {
       client.appAddress,
     )
 
+    // Fund the fee-sponsor LSig once, up front - mirrors what swap-page's
+    // "Fund Contract" step does right after funding the contract itself.
+    await fundFeeSponsorLsig(
+      localnet.algorand,
+      testAccount,
+      client.appId,
+      testAccount.addr.toString(),
+      xinAlgoAccount.addr.toString(),
+    )
+
     // Ali sets the contract to ready
-    await aliSetReady(client)
+    await aliSetReady(localnet.algorand, testAccount, xinAlgoAccount.addr.toString(), client)
 
     await callLeakyClaimFromXin(
-      localnet.algorand.client.algod,
+      localnet.algorand,
       client.appId,
+      testAccount.addr.toString(),
       xinAlgoAccount,
       leakySign( // Xin's leaky signature leaks his xternal secret key, on purrpose
         client.appAddress.publicKey,
@@ -130,10 +155,98 @@ async function aliFundContract(
   expect((await algorand.client.algod.accountInformation(appAddress).do()).amount).toEqual(fundAmount.microAlgos)
 }
 
+type SponsoredMethod = 'setReady' | 'leakyClaim' | 'leakyRefund' | 'punishRefund'
+
+const MIN_BALANCE_MICROALGOS = 100_000
+const MIN_TXN_FEE_MICROALGOS = 1000
+
+// setReady's fixed payout to Ali (`minBalance + minTxnFee*2`, enforced by the
+// LSig itself), plus a second buffer of the same size for whichever terminal
+// method follows (leakyClaim/leakyRefund/punishRefund are mutually exclusive
+// with each other, so a single swap never needs more than these two
+// sponsor-covered payouts).
+const feeSponsorFundingAmount = 2 * (MIN_BALANCE_MICROALGOS + MIN_TXN_FEE_MICROALGOS * 2)
+
+async function compileFeeSponsorLsig(
+  algorand: AlgorandClient,
+  appId: bigint,
+  aliAddress: string,
+  xinAddress: string
+): Promise<algosdk.LogicSigAccount> {
+  const compiled = await algorand.app.compileTealTemplate(FEE_SPONSOR_LSIG_TEAL_TEMPLATE, {
+    TMPL_APP_ID: appId,
+    TMPL_ALI_ADDR: algosdk.decodeAddress(aliAddress).publicKey,
+    TMPL_XIN_ADDR: algosdk.decodeAddress(xinAddress).publicKey,
+  })
+  return new algosdk.LogicSigAccount(compiled.compiledBase64ToBytes)
+}
+
+// Funds the per-swap FeeSponsorLSig account, mirroring what swap-page's
+// `fundFeeSponsorLsig` does client-side - must happen once, after the
+// contract itself has been deployed and funded.
+async function fundFeeSponsorLsig(
+  algorand: AlgorandClient,
+  funderAccount: Address & Account & TransactionSignerAccount,
+  appId: bigint,
+  aliAddress: string,
+  xinAddress: string
+): Promise<string> {
+  const sponsorLsig = await compileFeeSponsorLsig(algorand, appId, aliAddress, xinAddress)
+  const sponsorAddress = sponsorLsig.address().toString()
+  await algorand.send.payment({
+    sender: funderAccount.addr.toString(),
+    receiver: sponsorAddress,
+    amount: (feeSponsorFundingAmount).microAlgos(),
+  })
+  return sponsorAddress
+}
+
+// Builds the real, compiled-and-signed FeeSponsorLSig payment leg that must
+// be paired with `method`'s app call - see sponsor_lsig.algo.ts for exactly
+// what it checks per method.
+async function buildSponsorPaymentTxn(
+  algorand: AlgorandClient,
+  method: SponsoredMethod,
+  appId: bigint,
+  aliAddress: string,
+  xinAddress: string
+): Promise<algosdk.TransactionWithSigner> {
+  const sponsorLsig = await compileFeeSponsorLsig(algorand, appId, aliAddress, xinAddress)
+  const sponsorAddress = sponsorLsig.address()
+  const zeroFee = (0).microAlgos()
+
+  const txn =
+    method === 'setReady'
+      ? await algorand.createTransaction.payment({
+          sender: sponsorAddress,
+          receiver: aliAddress,
+          amount: (MIN_BALANCE_MICROALGOS + MIN_TXN_FEE_MICROALGOS * 2).microAlgos(),
+          staticFee: zeroFee,
+        })
+      : await algorand.createTransaction.payment({
+          sender: sponsorAddress,
+          receiver: method === 'leakyClaim' ? xinAddress : aliAddress,
+          amount: (0).microAlgos(),
+          closeRemainderTo: method === 'leakyClaim' ? xinAddress : aliAddress,
+          staticFee: zeroFee,
+        })
+
+  return { txn, signer: algosdk.makeLogicSigAccountTransactionSigner(sponsorLsig) }
+}
+
 // After Xin has locked up funds on the xternal chain, Ali sets the contract to ready
 // This function is used to set the contract to ready state after Ali has funded it
-async function aliSetReady(client: LeakSwapClient): Promise<void> {
-  await client.send.setReady()
+async function aliSetReady(
+  algorand: AlgorandClient,
+  aliAccount: Address & Account & TransactionSignerAccount,
+  xinAddress: string,
+  client: LeakSwapClient
+): Promise<void> {
+  const sponsorPayment = await buildSponsorPaymentTxn(algorand, 'setReady', client.appId, aliAccount.addr.toString(), xinAddress)
+  await client.send.setReady({
+    args: [sponsorPayment],
+    extraFee: sponsorLegFee,
+  })
   const state = await client.send.getContractState()
   expect(state.return).toEqual(1n)
 }
@@ -142,31 +255,45 @@ async function aliSetReady(client: LeakSwapClient): Promise<void> {
 // This function will be used to test the leakyClaim functionality
 // It will send a transaction to the LeakSwap contract, passing the leaky signature as an argument
 async function callLeakyClaimFromXin(
-  algod: Algodv2,
+  algorand: AlgorandClient,
   appId: bigint,
+  aliAddress: string,
   xinAlgoAccount: Address & Account & TransactionSignerAccount,
   xinLeakySignature: Uint8Array
 ) {
 
+  const algod = algorand.client.algod
   const xinAlgoBalanceBefore = (await algod.accountInformation(xinAlgoAccount).do()).amount
 
+  const sponsorPayment = await buildSponsorPaymentTxn(algorand, 'leakyClaim', appId, aliAddress, xinAlgoAccount.addr.toString())
+
+  // Static total fee (not the dynamic coverAppCallInnerTransactionFees machinery):
+  // 1000 (own call) + 1000 (disburseFunds' inner itxn) + 1000 (covers the
+  // sponsor leg's fee=0) = 3000, with methodCallsFees' baked-in 2x margin
+  // (4000) comfortably covering the first two, plus the sponsor leg (1000).
   await AlgorandClient.defaultLocalNet()
     .setDefaultSigner(xinAlgoAccount.signer)
     .client.getTypedAppClientById(LeakSwapClient, {
       appId: appId,
       defaultSender: xinAlgoAccount.addr,
       defaultSigner: xinAlgoAccount.signer,
-    }).send.leakyClaim({
-      args: [xinLeakySignature],
-      coverAppCallInnerTransactionFees: true,
-      maxFee: methodCallsFees,
+    }).send.delete.leakyClaim({
+      args: [xinLeakySignature, sponsorPayment],
+      staticFee: (methodCallsFees.microAlgos + sponsorLegFee.microAlgos).microAlgo(),
     })
 
 
   const xinAlgoBalanceAfter = (await algod.accountInformation(xinAlgoAccount).do()).amount
+  await expect(algod.getApplicationByID(appId).do()).rejects.toMatchObject({ status: 404 })
 
-  // Confirm that Xin has received the funds
-  expect(xinAlgoBalanceAfter - xinAlgoBalanceBefore).toEqual(fundAmount.microAlgos - methodCallsFees.microAlgos) // Account for the app call fees
+  // Confirm that Xin has received the funds: the swap payout, plus whatever
+  // remains of the sponsor's balance after setReady already paid out its
+  // fixed 102,000 microAlgo payout to Ali (so only the OTHER half of
+  // feeSponsorFundingAmount is left to sweep to Xin here), minus the fees
+  // she paid.
+  expect(xinAlgoBalanceAfter - xinAlgoBalanceBefore).toEqual(
+    fundAmount.microAlgos - methodCallsFees.microAlgos - sponsorLegFee.microAlgos + BigInt(MIN_BALANCE_MICROALGOS + MIN_TXN_FEE_MICROALGOS * 2)
+  )
 
 }
 

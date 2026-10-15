@@ -1,6 +1,6 @@
 import { TestExecutionContext } from '@algorandfoundation/algorand-typescript-testing'
 import { describe, expect, it } from 'vitest'
-import { Bytes } from '@algorandfoundation/algorand-typescript'
+import { Bytes, OnCompleteAction } from '@algorandfoundation/algorand-typescript'
 import { LeakSwap } from './contract.algo'
 import { genPrivateSpendKey, getPK, leakySign, hexToUint8Array } from 'leakswap-utils'
 import { ed25519 } from '@noble/curves/ed25519'
@@ -16,6 +16,10 @@ describe('LeakSwap contract', () => {
   const ctx = new TestExecutionContext()
   const aliAlgoAddr = ctx.defaultSender
   const xinAlgoAddr = ctx.any.account()
+  // Mock of the fee-sponsor LogicSig's payment, paired with each sponsored call
+  const sponsorPayment = () => ctx.any.txn.payment({ fee: 0 })
+  const settle = (contract: LeakSwap, sender: typeof aliAlgoAddr, action: () => void) =>
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender, onCompletion: OnCompleteAction.DeleteApplication })]).execute(action)
 
   it('testleakySign method in contract', () => {
     const contract = ctx.contract.create(LeakSwap)
@@ -93,7 +97,12 @@ describe('LeakSwap contract', () => {
     )
 
     // Ali sets the contract to ready state
-    contract.setReady()
+    ctx.txn.createScope([
+      ctx.any.txn.applicationCall({
+        appId: contract,
+        sender: aliAlgoAddr,
+      })
+    ]).execute(() => contract.setReady(sponsorPayment()))
 
     // Now the contract should be in ready state
     expect(contract.getContractState()).toEqual(LeakSwapState.Ready)
@@ -105,32 +114,17 @@ describe('LeakSwap contract', () => {
       aliXternalSK
     )
     expect(() => {
-      ctx.txn.createScope([
-        ctx.any.txn.applicationCall({
-          appId: contract,
-          sender: aliAlgoAddr,
-        })
-      ]).execute(() => contract.leakyRefund(Bytes(aliSignature)))
+      settle(contract, aliAlgoAddr, () => contract.leakyRefund(Bytes(aliSignature), sponsorPayment()))
     }).toThrow('Cannot refund after set ready!')
 
     // Ali, maliciously, tries to call punishRefund
     // It should of course fail since the contract t1 has not passed yet
     expect(() => {
-      ctx.txn.createScope([
-        ctx.any.txn.applicationCall({
-          appId: contract,
-          sender: aliAlgoAddr,
-        })
-      ]).execute(() => contract.punishRefund())
+      settle(contract, aliAlgoAddr, () => contract.punishRefund(sponsorPayment()))
     }).toThrow('Cannot punish refund before t1!')
 
     // Xin successfully claims the funds
-    ctx.txn.createScope([
-      ctx.any.txn.applicationCall({
-        appId: contract,
-        sender: xinAlgoAddr,
-      })
-    ]).execute(() => contract.leakyClaim(Bytes(xinSignature)))
+    settle(contract, xinAlgoAddr, () => contract.leakyClaim(Bytes(xinSignature), sponsorPayment()))
 
     // Should be in some final state, e.g. funds are empty, contract deleted, added a 5th "complete" state that gets returned, etc
   })
@@ -170,19 +164,14 @@ describe('LeakSwap contract', () => {
 
     // It should fail since we are not calling from Xin's account
     expect(() => {
-      contract.leakyClaim(Bytes(xinSignature))
+      settle(contract, aliAlgoAddr, () => contract.leakyClaim(Bytes(xinSignature), sponsorPayment()))
     }).toThrow('Only Xin can do leaky claim')
 
     // should error out
     // Xin tries to premptively call leakyClaim before contract in ready state
     // This should fail since the contract is not ready yet
     expect(() => {
-      ctx.txn.createScope([
-        ctx.any.txn.applicationCall({
-          appId: contract,
-          sender: xinAlgoAddr,
-        })
-      ]).execute(() => contract.leakyClaim(Bytes(xinSignature)))
+      settle(contract, xinAlgoAddr, () => contract.leakyClaim(Bytes(xinSignature), sponsorPayment()))
     }).toThrow('Cannot claim: time must be past t0 OR Ali must have set ready!')
     // Should still be in initial state
     expect(contract.getContractState()).toEqual(LeakSwapState.NotReady)
@@ -200,21 +189,11 @@ describe('LeakSwap contract', () => {
       aliXternalSK
     )
     expect(() => {
-      ctx.txn.createScope([
-        ctx.any.txn.applicationCall({
-          appId: contract,
-          sender: aliAlgoAddr,
-        })
-      ]).execute(() => contract.leakyRefund(Bytes(aliSignature)))
+      settle(contract, aliAlgoAddr, () => contract.leakyRefund(Bytes(aliSignature), sponsorPayment()))
     }).toThrow('Cannot refund after t0!')
 
     // Xin successfully claims the funds
-    ctx.txn.createScope([
-      ctx.any.txn.applicationCall({
-        appId: contract,
-        sender: xinAlgoAddr,
-      })
-    ]).execute(() => contract.leakyClaim(Bytes(xinSignature)))
+    settle(contract, xinAlgoAddr, () => contract.leakyClaim(Bytes(xinSignature), sponsorPayment()))
 
     // Should be in some final state, e.g. funds are empty, contract deleted, added a 5th "complete" state that gets returned, etc
   })
@@ -252,7 +231,7 @@ describe('LeakSwap contract', () => {
     )
 
     // Ali calls leakyRefund
-    contract.leakyRefund(Bytes(aliSignature))
+    settle(contract, aliAlgoAddr, () => contract.leakyRefund(Bytes(aliSignature), sponsorPayment()))
 
     // Should be in some final state, e.g. funds are empty, contract deleted, added a 5th "complete" state that gets returned, etc
   })
@@ -295,21 +274,11 @@ describe('LeakSwap contract', () => {
 
     // Xin tries and fails to claim the funds
     expect(() => {
-      ctx.txn.createScope([
-        ctx.any.txn.applicationCall({
-          appId: contract,
-          sender: xinAlgoAddr,
-        })
-      ]).execute(() => contract.leakyClaim(Bytes(xinSignature)))
+      settle(contract, xinAlgoAddr, () => contract.leakyClaim(Bytes(xinSignature), sponsorPayment()))
     }).toThrow('Cannot claim after t1!')
 
     // Ali successfully punishes refund
-    ctx.txn.createScope([
-      ctx.any.txn.applicationCall({
-        appId: contract,
-        sender: aliAlgoAddr,
-      })
-    ]).execute(() => contract.punishRefund())
+    settle(contract, aliAlgoAddr, () => contract.punishRefund(sponsorPayment()))
 
     // Should be in some final state, e.g. funds are empty, contract deleted, added a 5th "complete" state that gets returned, etc
   })
