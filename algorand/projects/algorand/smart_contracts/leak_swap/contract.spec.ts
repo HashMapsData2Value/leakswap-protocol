@@ -13,7 +13,79 @@ export enum LeakSwapState {
 }
 
 describe('LeakSwap contract', () => {
+  const boundaries = [999, 1000, 1001, 1999, 2000, 2001]
+  for (const ready of [false, true]) {
+    for (const timestamp of boundaries) {
+      for (const method of ['claim', 'refund', 'punish'] as const) {
+        it(`${method} at ${timestamp}, ready=${ready}`, () => {
+          const execution = ctx
+          execution.ledger.patchGlobalData({ latestTimestamp: 100 })
+          const contract = execution.contract.create(LeakSwap)
+          const ali = execution.defaultSender
+          const xin = execution.any.account()
+          const aliSecret = hexToUint8Array(genPrivateSpendKey())
+          const xinSecret = hexToUint8Array(genPrivateSpendKey())
+          execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract, sender: ali })])
+            .execute(() => contract.createApplication(Bytes(getPK(aliSecret)), xin, Bytes(getPK(xinSecret)), 1000, 2000))
+          const sponsor = () => execution.any.txn.payment({ fee: 0 })
+          if (ready) execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract, sender: ali })])
+            .execute(() => contract.setReady(sponsor()))
+          execution.ledger.patchGlobalData({ latestTimestamp: timestamp })
+          expect(contract.getContractState()).toEqual(timestamp >= 2000 ? LeakSwapState.T1Passed
+            : timestamp > 1000 ? LeakSwapState.T0Passed : ready ? LeakSwapState.Ready : LeakSwapState.NotReady)
+          const address = Buffer.from(execution.ledger.getApplicationForContract(contract).address.bytes as unknown as string, 'hex')
+          const allowed = method === 'claim' ? (ready || timestamp > 1000) && timestamp < 2000
+            : method === 'refund' ? !ready && timestamp <= 1000 : timestamp >= 2000
+          const action = () => execution.txn.createScope([execution.any.txn.applicationCall({
+            appId: contract, sender: method === 'claim' ? xin : ali, onCompletion: OnCompleteAction.DeleteApplication,
+          })]).execute(() => {
+            if (method === 'claim') contract.leakyClaim(Bytes(leakySign(address, xinSecret)), sponsor())
+            else if (method === 'refund') contract.leakyRefund(Bytes(leakySign(address, aliSecret)), sponsor())
+            else contract.punishRefund(sponsor())
+          })
+          if (allowed) expect(action).not.toThrow()
+          else expect(action).toThrow()
+          execution.ledger.patchGlobalData({ latestTimestamp: 0 })
+          execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract, sender: ali })]).execute(() => {})
+        })
+      }
+    }
+  }
+
   const ctx = new TestExecutionContext()
+  for (const t0 of [999, 1000, 1001]) {
+    it(`deployment uses committed chain time 1000, not browser time: t0=${t0}`, () => {
+      ctx.ledger.patchGlobalData({ latestTimestamp: 1000 })
+      const contract = ctx.contract.create(LeakSwap)
+      const create = () => ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })])
+        .execute(() => contract.createApplication(Bytes(new Uint8Array(32)), ctx.any.account(), Bytes(new Uint8Array(32)), t0, t0 + 1))
+      try {
+        if (t0 <= 1000) expect(create).toThrow('t0 must be in the future')
+        else expect(create).not.toThrow()
+      } finally {
+        ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
+        ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => {})
+      }
+    })
+  }
+
+  it('a stalled chain does not advance expiry; a resumed timestamp may skip the claim window', () => {
+    ctx.ledger.patchGlobalData({ latestTimestamp: 100 })
+    const contract = ctx.contract.create(LeakSwap)
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })])
+      .execute(() => contract.createApplication(Bytes(new Uint8Array(32)), ctx.any.account(), Bytes(new Uint8Array(32)), 1000, 2000))
+    try {
+      ctx.ledger.patchGlobalData({ latestTimestamp: 999 })
+      expect(contract.getContractState()).toEqual(LeakSwapState.NotReady)
+      expect(contract.getContractState()).toEqual(LeakSwapState.NotReady)
+      ctx.ledger.patchGlobalData({ latestTimestamp: 2000 })
+      expect(contract.getContractState()).toEqual(LeakSwapState.T1Passed)
+    } finally {
+      ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
+      ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => {})
+    }
+  })
+
   const aliAlgoAddr = ctx.defaultSender
   const xinAlgoAddr = ctx.any.account()
   // Mock of the fee-sponsor LogicSig's payment, paired with each sponsored call
@@ -21,15 +93,31 @@ describe('LeakSwap contract', () => {
   const settle = (contract: LeakSwap, sender: typeof aliAlgoAddr, action: () => void) =>
     ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender, onCompletion: OnCompleteAction.DeleteApplication })]).execute(action)
 
+  it('rejects an ordinary valid Xin signature even with the correct public key and application address', () => {
+    ctx.ledger.patchGlobalData({ latestTimestamp: 100 })
+    const contract = ctx.contract.create(LeakSwap)
+    const ordinaryKeys = ed25519.keygen()
+    const aliSecret = hexToUint8Array(genPrivateSpendKey())
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: aliAlgoAddr })]).execute(() => {
+      contract.createApplication(Bytes(getPK(aliSecret)), xinAlgoAddr, Bytes(ordinaryKeys.publicKey), 1000, 2000)
+      contract.setReady(sponsorPayment())
+    })
+    const address = Buffer.from(ctx.ledger.getApplicationForContract(contract).address.bytes as unknown as string, 'hex')
+    const signature = ed25519.sign(address, ordinaryKeys.secretKey)
+    expect(ed25519.verify(signature, address, ordinaryKeys.publicKey)).toBe(true)
+    expect(() => settle(contract, xinAlgoAddr, () => contract.leakyClaim(Bytes(signature), sponsorPayment())))
+      .toThrow('Signature R must be broken')
+    ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: aliAlgoAddr })]).execute(() => {})
+  })
+
   it('testleakySign method in contract', () => {
     const contract = ctx.contract.create(LeakSwap)
 
     const a = hexToUint8Array(genPrivateSpendKey())
     const pk = getPK(a);
 
-    // Fixed Contract Address
-    const hexString = '72a43709d7a9981bc3b37f700e56d3cdb295a5fb731085bcec398f48d0a4d436'
-    const messageBytes = Uint8Array.from(Buffer.from(hexString, 'hex'))
+    const messageBytes = Buffer.from(ctx.ledger.getApplicationForContract(contract).address.bytes as unknown as string, 'hex')
 
     const signature = leakySign(messageBytes, a)
 

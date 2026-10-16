@@ -91,7 +91,7 @@ export class LeakSwap extends Contract {
    * Conforms to the LeakSwapState enum.
    */
   public getContractState(): uint64 {
-    if (Global.latestTimestamp > this.t1.value) {
+    if (Global.latestTimestamp >= this.t1.value) {
       return 3
     }
     if (Global.latestTimestamp > this.t0.value) {

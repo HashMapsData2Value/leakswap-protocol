@@ -435,7 +435,7 @@ setReady:
 // smart_contracts/leak_swap/contract.algo.ts::LeakSwap.getContractState() -> uint64:
 getContractState:
     // smart_contracts/leak_swap/contract.algo.ts:94
-    // if (Global.latestTimestamp > this.t1.value) {
+    // if (Global.latestTimestamp >= this.t1.value) {
     global LatestTimestamp
     // smart_contracts/leak_swap/contract.algo.ts:14
     // public t1 = GlobalState<uint64>()
@@ -444,8 +444,8 @@ getContractState:
     app_global_get_ex
     assert // check GlobalState exists
     // smart_contracts/leak_swap/contract.algo.ts:94
-    // if (Global.latestTimestamp > this.t1.value) {
-    >
+    // if (Global.latestTimestamp >= this.t1.value) {
+    >=
     bz getContractState_after_if_else@2
     // smart_contracts/leak_swap/contract.algo.ts:95
     // return 3
