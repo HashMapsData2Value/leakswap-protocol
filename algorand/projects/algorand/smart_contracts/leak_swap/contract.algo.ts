@@ -1,6 +1,6 @@
 import { abimethod, Account, assert, assertMatch, Bytes, bytes, Contract, ensureBudget, Global, GlobalState, itxn, uint64 } from '@algorandfoundation/algorand-typescript'
 import { gtxn } from '@algorandfoundation/algorand-typescript'
-import { ed25519verifyBare, extract, Txn } from '@algorandfoundation/algorand-typescript/op'
+import { AcctParams, ed25519verifyBare, extract, Txn } from '@algorandfoundation/algorand-typescript/op'
 
 export class LeakSwap extends Contract {
 
@@ -129,7 +129,7 @@ export class LeakSwap extends Contract {
   */
   @abimethod({ allowActions: 'DeleteApplication' })
   public leakyClaim(signature: bytes, sponsorPayment: gtxn.PaymentTxn): void {
-    ensureBudget(2000)
+    ensureBudget(2400)
     assertMatch(Txn, { sender: this.xinAlgoAddr.value }, 'Only Xin can do leaky claim!')
     assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
     assert(Global.latestTimestamp < this.t1.value, 'Cannot claim after t1!')
@@ -137,6 +137,15 @@ export class LeakSwap extends Contract {
 
     // Forces Xin to leak xternal secret key
     this.leakyVerifyEd25519(signature, this.xinXternalPK.value)
+    const feeRecipient = Account(Bytes.fromHex('53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874'))
+    const platformFee: uint64 = Global.currentApplicationAddress.balance / 200
+    const [recipientBalance] = AcctParams.acctBalance(feeRecipient)
+    const [minimumBalance, recipientExists] = AcctParams.acctMinBalance(feeRecipient)
+    const recipientMinimum = recipientExists && minimumBalance > Global.minBalance ? minimumBalance : Global.minBalance
+    // Logic ensures that the platform fee is only paid if it does not violate the minimum balance requirements for both the application and the fee recipient.
+    if (platformFee > 0 && Global.currentApplicationAddress.balance - platformFee >= Global.minBalance && (recipientBalance >= recipientMinimum || platformFee >= recipientMinimum - recipientBalance)) {
+      itxn.payment({ receiver: feeRecipient, amount: platformFee, fee: 0 }).submit()
+    }
     // Disbuse the funds to Xin
     this.disburseFunds(this.xinAlgoAddr.value)
   }

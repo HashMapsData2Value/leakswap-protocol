@@ -3,8 +3,8 @@
 
 // @algorandfoundation/algorand-typescript/arc4/index.d.ts::Contract.approvalProgram() -> uint64:
 main:
-    intcblock 0 1 5 2000
-    bytecblock "aliAlgoAddr" "aliReady" "t0" "t1" "xinAlgoAddr" 0x068101 "aliXternalPK" "xinXternalPK"
+    intcblock 0 1 5
+    bytecblock "aliAlgoAddr" "aliReady" "t0" "t1" "xinAlgoAddr" 0x53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874 0x068101 "aliXternalPK" "xinXternalPK"
     txn ApplicationID
     bnz main_after_if_else@2
     // smart_contracts/leak_swap/contract.algo.ts:16
@@ -29,7 +29,7 @@ main_after_if_else@15:
     return
 
 main_punishRefund_route@11:
-    // smart_contracts/leak_swap/contract.algo.ts:149
+    // smart_contracts/leak_swap/contract.algo.ts:158
     // @abimethod({ allowActions: 'DeleteApplication' })
     txn OnCompletion
     intc_2 // DeleteApplication
@@ -47,7 +47,7 @@ main_punishRefund_route@11:
     intc_1 // pay
     ==
     assert // transaction type is pay
-    // smart_contracts/leak_swap/contract.algo.ts:149
+    // smart_contracts/leak_swap/contract.algo.ts:158
     // @abimethod({ allowActions: 'DeleteApplication' })
     callsub punishRefund
     intc_1 // 1
@@ -214,9 +214,9 @@ ensure_budget_while_top@1:
     itxn_field TypeEnum
     intc_2 // DeleteApplication
     itxn_field OnCompletion
-    bytec 5 // 0x068101
+    bytec 6 // 0x068101
     itxn_field ApprovalProgram
-    bytec 5 // 0x068101
+    bytec 6 // 0x068101
     itxn_field ClearStateProgram
     frame_dig -1
     switch ensure_budget_switch_case_0@3 ensure_budget_switch_case_1@4
@@ -260,7 +260,7 @@ createApplication:
     app_global_put
     // smart_contracts/leak_swap/contract.algo.ts:10
     // public aliXternalPK = GlobalState<bytes>()
-    bytec 6 // "aliXternalPK"
+    bytec 7 // "aliXternalPK"
     // smart_contracts/leak_swap/contract.algo.ts:31
     // this.aliXternalPK.value = aliXternalPK
     frame_dig -5
@@ -274,7 +274,7 @@ createApplication:
     app_global_put
     // smart_contracts/leak_swap/contract.algo.ts:11
     // public xinXternalPK = GlobalState<bytes>()
-    bytec 7 // "xinXternalPK"
+    bytec 8 // "xinXternalPK"
     // smart_contracts/leak_swap/contract.algo.ts:34
     // this.xinXternalPK.value = xinXternalPK
     frame_dig -3
@@ -501,7 +501,7 @@ leakyRefund:
     proto 2 0
     // smart_contracts/leak_swap/contract.algo.ts:113
     // ensureBudget(2000)
-    intc_3 // 2000
+    pushint 2000 // 2000
     intc_0 // 0
     callsub ensure_budget
     // smart_contracts/leak_swap/contract.algo.ts:114
@@ -549,7 +549,7 @@ leakyRefund:
     // smart_contracts/leak_swap/contract.algo.ts:10
     // public aliXternalPK = GlobalState<bytes>()
     intc_0 // 0
-    bytec 6 // "aliXternalPK"
+    bytec 7 // "aliXternalPK"
     app_global_get_ex
     assert // check GlobalState exists
     // smart_contracts/leak_swap/contract.algo.ts:120
@@ -575,9 +575,11 @@ leakyClaim:
     // @abimethod({ allowActions: 'DeleteApplication' })
     // public leakyClaim(signature: bytes, sponsorPayment: gtxn.PaymentTxn): void {
     proto 2 0
+    pushbytes ""
+    dupn 3
     // smart_contracts/leak_swap/contract.algo.ts:132
-    // ensureBudget(2000)
-    intc_3 // 2000
+    // ensureBudget(2400)
+    pushint 2400 // 2400
     intc_0 // 0
     callsub ensure_budget
     // smart_contracts/leak_swap/contract.algo.ts:133
@@ -645,7 +647,7 @@ leakyClaim_bool_merge@4:
     // smart_contracts/leak_swap/contract.algo.ts:11
     // public xinXternalPK = GlobalState<bytes>()
     intc_0 // 0
-    bytec 7 // "xinXternalPK"
+    bytec 8 // "xinXternalPK"
     app_global_get_ex
     assert // check GlobalState exists
     // smart_contracts/leak_swap/contract.algo.ts:139
@@ -653,16 +655,100 @@ leakyClaim_bool_merge@4:
     frame_dig -2
     swap
     callsub leakyVerifyEd25519
+    // smart_contracts/leak_swap/contract.algo.ts:141
+    // const platformFee: uint64 = Global.currentApplicationAddress.balance / 200
+    global CurrentApplicationAddress
+    acct_params_get AcctBalance
+    assert // account funded
+    pushint 200 // 200
+    /
+    frame_bury 1
+    // smart_contracts/leak_swap/contract.algo.ts:140
+    // const feeRecipient = Account(Bytes.fromHex('53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874'))
+    bytec 5 // 0x53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874
+    // smart_contracts/leak_swap/contract.algo.ts:142
+    // const [recipientBalance] = AcctParams.acctBalance(feeRecipient)
+    acct_params_get AcctBalance
+    pop
+    frame_bury 2
+    // smart_contracts/leak_swap/contract.algo.ts:140
+    // const feeRecipient = Account(Bytes.fromHex('53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874'))
+    bytec 5 // 0x53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874
+    // smart_contracts/leak_swap/contract.algo.ts:143
+    // const [minimumBalance, recipientExists] = AcctParams.acctMinBalance(feeRecipient)
+    acct_params_get AcctMinBalance
+    swap
+    frame_bury 0
+    // smart_contracts/leak_swap/contract.algo.ts:144
+    // const recipientMinimum = recipientExists && minimumBalance > Global.minBalance ? minimumBalance : Global.minBalance
+    bz leakyClaim_ternary_false@7
+    frame_dig 0
+    global MinBalance
+    >
+    bz leakyClaim_ternary_false@7
+    frame_dig 0
+    frame_bury 3
+
+leakyClaim_ternary_merge@8:
+    // smart_contracts/leak_swap/contract.algo.ts:146
+    // if (platformFee > 0 && Global.currentApplicationAddress.balance - platformFee >= Global.minBalance && (recipientBalance >= recipientMinimum || platformFee >= recipientMinimum - recipientBalance)) {
+    frame_dig 1
+    bz leakyClaim_after_if_else@14
+    global CurrentApplicationAddress
+    acct_params_get AcctBalance
+    assert // account funded
+    frame_dig 1
+    -
+    global MinBalance
+    >=
+    bz leakyClaim_after_if_else@14
+    frame_dig 2
+    frame_dig 3
+    >=
+    bnz leakyClaim_if_body@12
+    frame_dig 3
+    frame_dig 2
+    -
+    frame_dig 1
+    <=
+    bz leakyClaim_after_if_else@14
+
+leakyClaim_if_body@12:
+    // smart_contracts/leak_swap/contract.algo.ts:147
+    // itxn.payment({ receiver: feeRecipient, amount: platformFee, fee: 0 }).submit()
+    itxn_begin
+    frame_dig 1
+    itxn_field Amount
+    // smart_contracts/leak_swap/contract.algo.ts:140
+    // const feeRecipient = Account(Bytes.fromHex('53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874'))
+    bytec 5 // 0x53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874
+    itxn_field Receiver
+    // smart_contracts/leak_swap/contract.algo.ts:147
+    // itxn.payment({ receiver: feeRecipient, amount: platformFee, fee: 0 }).submit()
+    intc_1 // 1
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    itxn_submit
+
+leakyClaim_after_if_else@14:
     // smart_contracts/leak_swap/contract.algo.ts:8
     // public xinAlgoAddr = GlobalState<Account>()
     intc_0 // 0
     bytec 4 // "xinAlgoAddr"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:141
+    // smart_contracts/leak_swap/contract.algo.ts:150
     // this.disburseFunds(this.xinAlgoAddr.value)
     callsub disburseFunds
     retsub
+
+leakyClaim_ternary_false@7:
+    // smart_contracts/leak_swap/contract.algo.ts:144
+    // const recipientMinimum = recipientExists && minimumBalance > Global.minBalance ? minimumBalance : Global.minBalance
+    global MinBalance
+    frame_bury 3
+    b leakyClaim_ternary_merge@8
 
 leakyClaim_bool_false@3:
     intc_0 // 0
@@ -671,11 +757,11 @@ leakyClaim_bool_false@3:
 
 // smart_contracts/leak_swap/contract.algo.ts::LeakSwap.punishRefund(sponsorPayment: uint64) -> void:
 punishRefund:
-    // smart_contracts/leak_swap/contract.algo.ts:149-150
+    // smart_contracts/leak_swap/contract.algo.ts:158-159
     // @abimethod({ allowActions: 'DeleteApplication' })
     // public punishRefund(sponsorPayment: gtxn.PaymentTxn): void {
     proto 1 0
-    // smart_contracts/leak_swap/contract.algo.ts:151
+    // smart_contracts/leak_swap/contract.algo.ts:160
     // assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do punish refund!')
     txn Sender
     // smart_contracts/leak_swap/contract.algo.ts:7
@@ -684,11 +770,11 @@ punishRefund:
     bytec_0 // "aliAlgoAddr"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:151
+    // smart_contracts/leak_swap/contract.algo.ts:160
     // assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do punish refund!')
     ==
     assert // Only Ali can do punish refund!
-    // smart_contracts/leak_swap/contract.algo.ts:152
+    // smart_contracts/leak_swap/contract.algo.ts:161
     // assert(Global.latestTimestamp >= this.t1.value, 'Cannot punish refund before t1!')
     global LatestTimestamp
     // smart_contracts/leak_swap/contract.algo.ts:14
@@ -697,11 +783,11 @@ punishRefund:
     bytec_3 // "t1"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:152
+    // smart_contracts/leak_swap/contract.algo.ts:161
     // assert(Global.latestTimestamp >= this.t1.value, 'Cannot punish refund before t1!')
     >=
     assert // Cannot punish refund before t1!
-    // smart_contracts/leak_swap/contract.algo.ts:153
+    // smart_contracts/leak_swap/contract.algo.ts:162
     // assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
     frame_dig -1
     gtxns Fee
@@ -713,7 +799,7 @@ punishRefund:
     bytec_0 // "aliAlgoAddr"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:154
+    // smart_contracts/leak_swap/contract.algo.ts:163
     // this.disburseFunds(this.aliAlgoAddr.value)
     callsub disburseFunds
     retsub
