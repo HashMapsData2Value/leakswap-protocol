@@ -1,6 +1,6 @@
 import { TestExecutionContext } from '@algorandfoundation/algorand-typescript-testing'
 import { describe, expect, it } from 'vitest'
-import { Bytes, OnCompleteAction } from '@algorandfoundation/algorand-typescript'
+import { Bytes, OnCompleteAction, Uint64 } from '@algorandfoundation/algorand-typescript'
 import { LeakSwap } from './contract.algo'
 import { genPrivateSpendKey, getPK, leakySign, hexToUint8Array } from 'leakswap-utils'
 import { ed25519 } from '@noble/curves/ed25519'
@@ -46,13 +46,59 @@ describe('LeakSwap contract', () => {
           if (allowed) expect(action).not.toThrow()
           else expect(action).toThrow()
           execution.ledger.patchGlobalData({ latestTimestamp: 0 })
-          execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract, sender: ali })]).execute(() => {})
+          execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract, sender: ali })]).execute(() => { })
         })
       }
     }
   }
 
   const ctx = new TestExecutionContext()
+  const treasury = ctx.any.account({ address: Bytes.fromHex('53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874'), balance: 0, minBalance: 0 })
+  for (const [escrow, treasuryBalance, treasuryMinimum, expectedFee] of [
+    [5_000_000n, 0n, 0n, 0n],
+    [19_999_999n, 0n, 0n, 0n],
+    [20_000_000n, 0n, 0n, 100_000n],
+    [5_000_199n, 100_000n, 100_000n, 25_000n],
+    [5_000_200n, 100_000n, 100_000n, 25_001n],
+    [5_000_000n, 200_000n, 200_000n, 25_000n],
+    [100_000n, 100_000n, 100_000n, 0n],
+    [100_501n, 100_000n, 100_000n, 0n],
+    [100_502n, 100_000n, 100_000n, 502n],
+    [100_503n, 100_000n, 100_000n, 502n],
+    [18_446_744_073_709_551_615n, 100_000n, 100_000n, 92_233_720_368_547_758n],
+  ]) {
+    it(`claim fee: escrow=${escrow}, treasury=${treasuryBalance}/${treasuryMinimum}`, () => {
+      const execution = ctx
+      execution.ledger.patchGlobalData({ latestTimestamp: 100, minBalance: 100_000 })
+      execution.ledger.patchAccountData(treasury, { account: { balance: Uint64(treasuryBalance), minBalance: Uint64(treasuryMinimum) } })
+      const contract = execution.contract.create(LeakSwap)
+      const xin = execution.any.account()
+      const xinSecret = hexToUint8Array(genPrivateSpendKey())
+      execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract })]).execute(() => {
+        contract.createApplication(Bytes(new Uint8Array(32)), xin, Bytes(getPK(xinSecret)), 1000, 2000)
+        contract.setReady(execution.any.txn.payment({ fee: 0 }))
+      })
+      const app = execution.ledger.getApplicationForContract(contract)
+      execution.ledger.patchAccountData(app.address, { account: { balance: Uint64(escrow) } })
+      const signature = leakySign(Buffer.from(app.address.bytes as unknown as string, 'hex'), xinSecret)
+      execution.txn.createScope([execution.any.txn.applicationCall({
+        appId: contract, sender: xin, onCompletion: OnCompleteAction.DeleteApplication,
+      })]).execute(() => contract.leakyClaim(Bytes(signature), execution.any.txn.payment({ fee: 0 })))
+      const payments = execution.txn.lastGroup.itxnGroups.flatMap((group) => group.itxns)
+        .filter((transaction) => Number(transaction.type) === 1)
+      expect(payments).toHaveLength(expectedFee > 0n ? 2 : 1)
+      if (expectedFee > 0n) {
+        const payment = execution.txn.lastGroup.getItxnGroup(0).getPaymentInnerTxn()
+        expect(payment.receiver).toEqual(treasury)
+        expect(BigInt(payment.amount.toString())).toEqual(expectedFee)
+        expect(Number(payment.fee)).toEqual(0)
+      }
+      expect(execution.txn.lastGroup.lastItxnGroup().getPaymentInnerTxn().closeRemainderTo).toEqual(xin)
+      execution.ledger.patchGlobalData({ latestTimestamp: 0 })
+      execution.ledger.patchAccountData(treasury, { account: { balance: Uint64(0), minBalance: Uint64(0) } })
+      execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract })]).execute(() => { })
+    })
+  }
   for (const t0 of [999, 1000, 1001]) {
     it(`deployment uses committed chain time 1000, not browser time: t0=${t0}`, () => {
       ctx.ledger.patchGlobalData({ latestTimestamp: 1000 })
@@ -64,7 +110,7 @@ describe('LeakSwap contract', () => {
         else expect(create).not.toThrow()
       } finally {
         ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
-        ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => {})
+        ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => { })
       }
     })
   }
@@ -82,7 +128,7 @@ describe('LeakSwap contract', () => {
       expect(contract.getContractState()).toEqual(LeakSwapState.T1Passed)
     } finally {
       ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
-      ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => {})
+      ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => { })
     }
   })
 
@@ -108,7 +154,7 @@ describe('LeakSwap contract', () => {
     expect(() => settle(contract, xinAlgoAddr, () => contract.leakyClaim(Bytes(signature), sponsorPayment())))
       .toThrow('Signature R must be broken')
     ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
-    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: aliAlgoAddr })]).execute(() => {})
+    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: aliAlgoAddr })]).execute(() => { })
   })
 
   it('testleakySign method in contract', () => {
