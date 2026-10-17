@@ -48,11 +48,13 @@ export function canonicalOffer(value: unknown): SwapOffer {
     || !Number.isSafeInteger(offer.t1) || offer.t1 <= offer.t0 || offer.t1 > 8640000000000
     || typeof offer.aliAlgoAddress !== 'string' || !ADDRESS.test(offer.aliAlgoAddress)
     || ![offer.aliPublicSpendKey, offer.aliPrivateViewKey].every((key) => typeof key === 'string' && HEX_KEY.test(key))) throw new Error('Invalid swap offer.');
-  return { offerId: offer.offerId, createdAt: offer.createdAt, algoGenesisHash: offer.algoGenesisHash,
+  return {
+    offerId: offer.offerId, createdAt: offer.createdAt, algoGenesisHash: offer.algoGenesisHash,
     moneroNetwork: offer.moneroNetwork, algoAmount: offer.algoAmount, xmrAmount: offer.xmrAmount,
     t0: offer.t0, t1: offer.t1, aliAlgoAddress: offer.aliAlgoAddress,
     aliPublicSpendKey: offer.aliPublicSpendKey, aliPrivateViewKey: offer.aliPrivateViewKey,
-    ...(hasRestoreHeight ? { moneroRestoreHeight: offer.moneroRestoreHeight } : {}) };
+    ...(hasRestoreHeight ? { moneroRestoreHeight: offer.moneroRestoreHeight } : {})
+  };
 }
 
 export function canonicalAcceptance(value: unknown): SwapAcceptance {
@@ -61,8 +63,10 @@ export function canonicalAcceptance(value: unknown): SwapAcceptance {
   if (typeof accepted.offerDigest !== 'string' || !HEX_KEY.test(accepted.offerDigest)
     || typeof accepted.xinAlgoAddress !== 'string' || !ADDRESS.test(accepted.xinAlgoAddress)
     || ![accepted.xinPublicSpendKey, accepted.xinPrivateViewKey].every((key) => typeof key === 'string' && HEX_KEY.test(key))) throw new Error('Invalid swap acceptance.');
-  return { offerDigest: accepted.offerDigest, xinAlgoAddress: accepted.xinAlgoAddress,
-    xinPublicSpendKey: accepted.xinPublicSpendKey, xinPrivateViewKey: accepted.xinPrivateViewKey };
+  return {
+    offerDigest: accepted.offerDigest, xinAlgoAddress: accepted.xinAlgoAddress,
+    xinPublicSpendKey: accepted.xinPublicSpendKey, xinPrivateViewKey: accepted.xinPrivateViewKey
+  };
 }
 
 export function handshakeSigningBytes(kind: 'invite' | 'accept', payload: unknown): Uint8Array {
