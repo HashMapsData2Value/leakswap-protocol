@@ -5,7 +5,6 @@ import { beforeAll, beforeEach, describe, test, expect } from 'vitest'
 import { LeakSwapClient, LeakSwapFactory } from '../artifacts/leak_swap/LeakSwapClient'
 import { genPrivateSpendKey, extractScalarFromLeakySignature, hexToUint8Array, getPK, leakySign } from 'leakswap-utils'
 import algosdk, { Account, Address } from 'algosdk'
-import { IndexerClient } from 'algosdk/dist/types/client/v2/indexer/indexer'
 import { TransactionSignerAccount } from '@algorandfoundation/algokit-utils/types/account'
 import { readFileSync } from 'fs'
 import { join } from 'path'
@@ -18,8 +17,6 @@ const FEE_SPONSOR_LSIG_TEAL_TEMPLATE = readFileSync(
   'utf-8'
 )
 
-// Helper function to sleep for a given number of milliseconds
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 const fundAmount = (10).algo()
 // Extra fee the app call must pool in, to cover the zero-fee sponsor payment paired with it
 const sponsorLegFee = (1000).microAlgos()
@@ -116,7 +113,7 @@ describe('LeakSwap contract', () => {
     // Ali sets the contract to ready
     await aliSetReady(localnet.algorand, testAccount, xinAlgoAccount.addr.toString(), client)
 
-    await callLeakyClaimFromXin(
+    const claimTxId = await callLeakyClaimFromXin(
       localnet.algorand,
       client.appId,
       testAccount.addr.toString(),
@@ -126,14 +123,16 @@ describe('LeakSwap contract', () => {
         xinXternalSK,
       ))
 
-    const leakedScalar = await repeatedlySearchForLeakedScalar(
-      localnet.algorand.client.indexer,
-      client.appAddress,
-      getPK(xinXternalSK)
-    )
-
-    console.log(getPK(leakedScalar))
-    console.log(getPK(xinXternalSK))
+    const confirmedClaim = await localnet.algorand.client.algod.pendingTransactionInformation(claimTxId).do()
+    expect(confirmedClaim.confirmedRound).toBeGreaterThan(0n)
+    const transaction = confirmedClaim.txn.txn
+    expect(transaction.sender.toString()).toBe(xinAlgoAccount.addr.toString())
+    expect(transaction.applicationCall?.appIndex).toBe(client.appId)
+    expect(transaction.applicationCall?.onComplete).toBe(algosdk.OnApplicationComplete.DeleteApplicationOC)
+    const appArgs = transaction.applicationCall!.appArgs
+    expect(appArgs[0]).toEqual(algosdk.ABIMethod.fromSignature('leakyClaim(byte[],pay)void').getSelector())
+    const signature = Uint8Array.from(algosdk.ABIType.from('byte[]').decode(new Uint8Array(appArgs[1])) as number[])
+    const leakedScalar = extractScalarFromLeakySignature(signature, client.appAddress.publicKey, getPK(xinXternalSK))
 
     expect(Array.from(getPK(leakedScalar))).toEqual(Array.from(getPK(xinXternalSK)))
 
@@ -300,86 +299,5 @@ async function callLeakyClaimFromXin(
     escrowBefore - platformFee - claimPooledFee.microAlgos - fees
     + BigInt(feeSponsorFundingAmount - MIN_BALANCE_MICROALGOS - MIN_TXN_FEE_MICROALGOS * 2)
   )
-
-}
-
-// We must try to find the leaked scalar with retries. The delay depends on the indexer processing time.
-// We will retry a few times, with a delay between each attempt, until the indexer has processed.
-const repeatedlySearchForLeakedScalar = async (indexer: IndexerClient, appAddress: Address, xinXternalPK: Uint8Array): Promise<Uint8Array> => {
-  let leakedScalar: Uint8Array | undefined
-  const maxRetries = 6
-  const retryDelay = 5000 // 5 seconds
-
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      leakedScalar = await findLeakedScalarInAppHistory(
-        indexer,
-        appAddress,
-        xinXternalPK
-      )
-      break // Success, exit the loop
-    } catch (error) {
-      if (attempt < maxRetries) {
-        await sleep(retryDelay)
-      } else {
-        const errorMessage = error instanceof Error ? error.message : String(error)
-        throw new Error(`Failed to find leaked scalar after ${maxRetries} attempts: ${errorMessage}`)
-      }
-    }
-  }
-
-  if (!leakedScalar) {
-    throw new Error('Leaked scalar not found after all retries')
-  }
-
-  return leakedScalar
-}
-
-
-// Searches through the transaction history of the app to find the leaky signature.
-// Calculates the leaked scalar from the signature, before returning it.
-const findLeakedScalarInAppHistory = async (
-  indexer: IndexerClient,
-  appAddress: Address,
-  xinXternalPK: Uint8Array) => {
-
-  const res = await indexer.searchForTransactions().address(appAddress).do();
-
-  // Look for the transaction with the leaky signature (starts with the broken R-point)
-  const targetRPoint = new Uint8Array([
-    88, 102, 102, 102, 102, 102, 102, 102, 102, 102,
-    102, 102, 102, 102, 102, 102, 102, 102, 102, 102,
-    102, 102, 102, 102, 102, 102, 102, 102, 102, 102,
-    102, 102
-  ])
-
-  let leakySignatureArg: Uint8Array | undefined
-
-  for (const transaction of res.transactions) {
-    const appArgs = transaction.applicationTransaction?.applicationArgs
-    if (appArgs && appArgs.length > 1) {
-      const arg1 = appArgs[1]
-      // Check if this argument starts with the target R-point
-      if (arg1.length == 66) { // 2-byte prefix + 64-byte signature
-        const rPoint = arg1.slice(2, 34)
-        let matches = true
-        for (let i = 0; i < targetRPoint.length; i++) {
-          if (rPoint[i] !== targetRPoint[i]) {
-            matches = false
-            break
-          }
-        }
-        if (matches) {
-          leakySignatureArg = arg1.slice(2, 66) // First two bytes are a prefix
-          break
-        }
-      }
-    }
-  }
-
-  if (!leakySignatureArg) {
-    throw new Error('Could not find leaky signature in transaction history')
-  }
-
-  return extractScalarFromLeakySignature(leakySignatureArg, appAddress.publicKey, xinXternalPK)
+  return result.txIds[result.txIds.length - 1]
 }
