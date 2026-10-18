@@ -1,4 +1,4 @@
-import { MoneroNetworkType } from 'monero-ts';
+import { MoneroNetworkType } from './monero-utils';
 import {
   getPK,
   leakySign,

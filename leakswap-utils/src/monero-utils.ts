@@ -1,11 +1,16 @@
 import { keccak_256 } from 'js-sha3';
-import { MoneroNetworkType } from 'monero-ts';
 import { getPK, hexToUint8Array } from './common';
 import { moneroBase58Encode } from './base58';
 import { genScalar } from './algorand-utils';
 import { ed25519 } from '@noble/curves/ed25519';
 
 export const L = 2n ** 252n + 27742317777372353535851937790883648493n;
+
+export enum MoneroNetworkType {
+  MAINNET = 0,
+  TESTNET = 1,
+  STAGENET = 2,
+}
 
 export function genPrivateSpendKey(): string {
   // Generate 32 random bytes

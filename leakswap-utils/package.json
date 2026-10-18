@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "@noble/curves": "^1.9.6",
-    "js-sha3": "^0.9.3",
-    "monero-ts": "^0.11.5"
+    "js-sha3": "^0.9.3"
   }
 }
