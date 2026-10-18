@@ -1,6 +1,6 @@
 {
   "name": "leakswap-utils",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Utility library for LeakSwap, a cross-chain swaping protocol centered on Algorand and Monero, and possibly more.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

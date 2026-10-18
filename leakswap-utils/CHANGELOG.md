@@ -1,3 +1,10 @@
+# [leakswap-utils-v1.2.1](https://github.com/HashMapsData2Value/leakswap-protocol/compare/leakswap-utils-v1.2.0...leakswap-utils-v1.2.1) (2026-10-18)
+
+
+### Bug Fixes
+
+* **utils:** remove monero-ts dependency for network constants ([a58a9c7](https://github.com/HashMapsData2Value/leakswap-protocol/commit/a58a9c7448a8c9a63d0672ebc5c1184eba1c35ab))
+
 # [leakswap-utils-v1.2.0](https://github.com/HashMapsData2Value/leakswap-protocol/compare/leakswap-utils-v1.1.0...leakswap-utils-v1.2.0) (2026-10-17)
 
 
