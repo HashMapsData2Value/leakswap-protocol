@@ -1,6 +1,7 @@
 import { abimethod, Account, assert, assertMatch, Bytes, bytes, Contract, ensureBudget, Global, GlobalState, itxn, uint64 } from '@algorandfoundation/algorand-typescript'
 import { gtxn } from '@algorandfoundation/algorand-typescript'
 import { AcctParams, ed25519verifyBare, extract, Txn } from '@algorandfoundation/algorand-typescript/op'
+import { sponsorAddress } from './sponsor_address.algo'
 
 export class LeakSwap extends Contract {
 
@@ -39,6 +40,25 @@ export class LeakSwap extends Contract {
     assert(t1 > t0, 't1 must be greater than t0')
     assert(t0 > Global.latestTimestamp, 't0 must be in the future')
     assert(t1 > Global.latestTimestamp, 't1 must be in the future')
+  }
+
+  private requireSponsor(payment: gtxn.PaymentTxn, recipient: Account, ready: boolean): void {
+    assert(Global.groupSize === 2, 'Sponsored group must contain exactly two transactions')
+    assert(Txn.groupIndex === 1, 'Swap application call must be second in the group')
+    assert(payment.groupIndex === 0, 'Sponsor payment must be first in the group')
+    assert(Txn.rekeyTo === Global.zeroAddress, 'Swap application call must not rekey')
+    assert(payment.rekeyTo === Global.zeroAddress, 'Sponsor payment must not rekey')
+    assert(payment.fee === 0, 'Sponsor payment must not pay a fee')
+    assert(payment.receiver === recipient, 'Wrong sponsor payment receiver')
+    if (ready) {
+      assert(payment.amount === Global.minBalance + Global.minTxnFee * 2, 'Wrong setReady funding amount')
+      assert(payment.closeRemainderTo === Global.zeroAddress, 'Cannot close out for setReady')
+    } else {
+      assert(payment.amount === 0, 'Settlement sponsor payment must have zero amount')
+      assert(payment.closeRemainderTo === recipient, 'Wrong sponsor close-out recipient')
+    }
+    const sponsor = sponsorAddress(Global.currentApplicationId.id, this.aliAlgoAddr.value, this.xinAlgoAddr.value)
+    assert(payment.sender === sponsor, 'Payment must come from the designated sponsor')
   }
 
   private disburseFunds(recipient: Account): void {
@@ -82,6 +102,7 @@ export class LeakSwap extends Contract {
   */
   public setReady(sponsorPayment: gtxn.PaymentTxn): void {
     assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can set the contract to ready!')
+    this.requireSponsor(sponsorPayment, this.aliAlgoAddr.value, true)
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
     this.aliReady.value = true
   }
@@ -110,8 +131,9 @@ export class LeakSwap extends Contract {
    */
   @abimethod({ allowActions: 'DeleteApplication' })
   public leakyRefund(signature: bytes, sponsorPayment: gtxn.PaymentTxn): void {
-    ensureBudget(2000)
     assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do leaky refund!')
+    this.requireSponsor(sponsorPayment, this.aliAlgoAddr.value, false)
+    ensureBudget(2400)
     assert(Global.latestTimestamp <= this.t0.value, 'Cannot refund after t0!')
     assert(!this.aliReady.value, 'Cannot refund after set ready!')
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
@@ -129,8 +151,9 @@ export class LeakSwap extends Contract {
   */
   @abimethod({ allowActions: 'DeleteApplication' })
   public leakyClaim(signature: bytes, sponsorPayment: gtxn.PaymentTxn): void {
-    ensureBudget(2400)
     assertMatch(Txn, { sender: this.xinAlgoAddr.value }, 'Only Xin can do leaky claim!')
+    this.requireSponsor(sponsorPayment, this.xinAlgoAddr.value, false)
+    ensureBudget(2400)
     assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
     assert(Global.latestTimestamp < this.t1.value, 'Cannot claim after t1!')
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
@@ -158,6 +181,7 @@ export class LeakSwap extends Contract {
   @abimethod({ allowActions: 'DeleteApplication' })
   public punishRefund(sponsorPayment: gtxn.PaymentTxn): void {
     assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do punish refund!')
+    this.requireSponsor(sponsorPayment, this.aliAlgoAddr.value, false)
     assert(Global.latestTimestamp >= this.t1.value, 'Cannot punish refund before t1!')
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
     this.disburseFunds(this.aliAlgoAddr.value)

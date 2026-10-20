@@ -1,6 +1,9 @@
 import { TestExecutionContext } from '@algorandfoundation/algorand-typescript-testing'
 import { describe, expect, it } from 'vitest'
-import { Bytes, OnCompleteAction, Uint64 } from '@algorandfoundation/algorand-typescript'
+import { Bytes, Global, gtxn, OnCompleteAction, Uint64 } from '@algorandfoundation/algorand-typescript'
+import { sponsorAddress } from './sponsor_address.algo'
+import sponsorFixtures from './sponsor-address-fixtures.json'
+import { Account } from '@algorandfoundation/algorand-typescript'
 import { LeakSwap } from './contract.algo'
 import { genPrivateSpendKey, getPK, leakySign, hexToUint8Array } from 'leakswap-utils'
 import { ed25519 } from '@noble/curves/ed25519'
@@ -27,18 +30,15 @@ describe('LeakSwap contract', () => {
           const xinSecret = hexToUint8Array(genPrivateSpendKey())
           execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract, sender: ali })])
             .execute(() => contract.createApplication(Bytes(getPK(aliSecret)), xin, Bytes(getPK(xinSecret)), 1000, 2000))
-          const sponsor = () => execution.any.txn.payment({ fee: 0 })
-          if (ready) execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract, sender: ali })])
-            .execute(() => contract.setReady(sponsor()))
+          const sponsor = sponsorPayment
+          if (ready) readyCall(contract)
           execution.ledger.patchGlobalData({ latestTimestamp: timestamp })
           expect(contract.getContractState()).toEqual(timestamp >= 2000 ? LeakSwapState.T1Passed
             : timestamp > 1000 ? LeakSwapState.T0Passed : ready ? LeakSwapState.Ready : LeakSwapState.NotReady)
           const address = Buffer.from(execution.ledger.getApplicationForContract(contract).address.bytes as unknown as string, 'hex')
           const allowed = method === 'claim' ? (ready || timestamp > 1000) && timestamp < 2000
             : method === 'refund' ? !ready && timestamp <= 1000 : timestamp >= 2000
-          const action = () => execution.txn.createScope([execution.any.txn.applicationCall({
-            appId: contract, sender: method === 'claim' ? xin : ali, onCompletion: OnCompleteAction.DeleteApplication,
-          })]).execute(() => {
+          const action = () => settle(contract, method === 'claim' ? xin : ali, () => {
             if (method === 'claim') contract.leakyClaim(Bytes(leakySign(address, xinSecret)), sponsor())
             else if (method === 'refund') contract.leakyRefund(Bytes(leakySign(address, aliSecret)), sponsor())
             else contract.punishRefund(sponsor())
@@ -53,6 +53,61 @@ describe('LeakSwap contract', () => {
   }
 
   const ctx = new TestExecutionContext()
+  for (const fixture of sponsorFixtures) {
+    it(`derives the independently compiled sponsor for app ${fixture.appId}`, () => {
+      const address = sponsorAddress(Uint64(BigInt(fixture.appId)), Account(Bytes.fromHex(fixture.ali)), Account(Bytes.fromHex(fixture.xin)))
+      expect(address).toEqual(Account(Bytes.fromHex(fixture.address)))
+    })
+  }
+  for (const method of ['ready', 'claim', 'refund', 'punish'] as const) {
+    for (const attack of ['sender', 'prefix', 'suffix', 'reversed', 'payment-rekey', 'call-rekey', 'receiver', 'amount', 'close', 'fee'] as const) {
+      it(`${method} rejects invalid sponsor ${attack}`, () => {
+        ctx.ledger.patchGlobalData({ latestTimestamp: 100, minBalance: 100_000, minTxnFee: 1000 })
+        const contract = ctx.contract.create(LeakSwap)
+        const xin = ctx.any.account()
+        const secret = hexToUint8Array(genPrivateSpendKey())
+        ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() =>
+          contract.createApplication(Bytes(getPK(secret)), xin, Bytes(getPK(secret)), 1000, 2000))
+        const app = ctx.ledger.getApplicationForContract(contract)
+        const ready = method === 'ready'
+        const recipient = method === 'claim' ? xin : contract.aliAlgoAddr.value
+        const stranger = ctx.any.account()
+        const payment = ctx.any.txn.payment({
+          sender: attack === 'sender' ? stranger : sponsorAddress(app.id, contract.aliAlgoAddr.value, xin),
+          receiver: attack === 'receiver' ? stranger : recipient,
+          fee: attack === 'fee' ? 1 : 0,
+          amount: attack === 'amount' ? 1 : ready ? 102_000 : 0,
+          closeRemainderTo: attack === 'close' ? stranger : ready ? Global.zeroAddress : recipient,
+          rekeyTo: attack === 'payment-rekey' ? stranger : Global.zeroAddress,
+        })
+        const call = ctx.any.txn.applicationCall({ appId: contract, sender: recipient,
+          onCompletion: ready ? OnCompleteAction.NoOp : OnCompleteAction.DeleteApplication,
+          rekeyTo: attack === 'call-rekey' ? stranger : Global.zeroAddress,
+        })
+        const extra = ctx.any.txn.payment()
+        const group = attack === 'prefix' ? [extra, payment, call] : attack === 'suffix' ? [payment, call, extra]
+          : attack === 'reversed' ? [call, payment] : [payment, call]
+        const execute = () => ctx.txn.createScope(group, attack === 'prefix' ? 2 : attack === 'reversed' ? 0 : 1).execute(() => {
+          if (ready) contract.setReady(payment)
+          else if (method === 'claim') contract.leakyClaim(Bytes(new Uint8Array(64)), payment)
+          else if (method === 'refund') contract.leakyRefund(Bytes(new Uint8Array(64)), payment)
+          else contract.punishRefund(payment)
+        })
+        expect(execute).toThrow(attack === 'sender' ? 'Payment must come from the designated sponsor'
+          : attack === 'prefix' || attack === 'suffix' ? 'Sponsored group must contain exactly two transactions'
+            : attack === 'reversed' ? 'Swap application call must be second'
+              : attack === 'payment-rekey' ? 'Sponsor payment must not rekey'
+                : attack === 'call-rekey' ? 'Swap application call must not rekey'
+                  : attack === 'receiver' ? 'Wrong sponsor payment receiver'
+                    : attack === 'amount' ? ready ? 'Wrong setReady funding amount' : 'Settlement sponsor payment must have zero amount'
+                      : attack === 'close' ? ready ? 'Cannot close out for setReady' : 'Wrong sponsor close-out recipient'
+                        : 'Sponsor payment must not pay a fee')
+        expect(contract.aliReady.value).toBe(false)
+        ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
+        ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => {})
+      })
+    }
+  }
   const treasury = ctx.any.account({ address: Bytes.fromHex('53221b015cfadb890ec7d16db87c2bc96ea3de91c9b72ad1cd384e6eb1e16874'), balance: 0, minBalance: 0 })
   for (const [escrow, treasuryBalance, treasuryMinimum, expectedFee] of [
     [5_000_000n, 0n, 0n, 0n],
@@ -76,14 +131,12 @@ describe('LeakSwap contract', () => {
       const xinSecret = hexToUint8Array(genPrivateSpendKey())
       execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract })]).execute(() => {
         contract.createApplication(Bytes(new Uint8Array(32)), xin, Bytes(getPK(xinSecret)), 1000, 2000)
-        contract.setReady(execution.any.txn.payment({ fee: 0 }))
       })
+      readyCall(contract)
       const app = execution.ledger.getApplicationForContract(contract)
       execution.ledger.patchAccountData(app.address, { account: { balance: Uint64(escrow) } })
       const signature = leakySign(Buffer.from(app.address.bytes as unknown as string, 'hex'), xinSecret)
-      execution.txn.createScope([execution.any.txn.applicationCall({
-        appId: contract, sender: xin, onCompletion: OnCompleteAction.DeleteApplication,
-      })]).execute(() => contract.leakyClaim(Bytes(signature), execution.any.txn.payment({ fee: 0 })))
+      settle(contract, xin, () => contract.leakyClaim(Bytes(signature), sponsorPayment()))
       const payments = execution.txn.lastGroup.itxnGroups.flatMap((group) => group.itxns)
         .filter((transaction) => Number(transaction.type) === 1)
       expect(payments).toHaveLength(expectedFee > 0n ? 2 : 1)
@@ -135,9 +188,17 @@ describe('LeakSwap contract', () => {
   const aliAlgoAddr = ctx.defaultSender
   const xinAlgoAddr = ctx.any.account()
   // Mock of the fee-sponsor LogicSig's payment, paired with each sponsored call
-  const sponsorPayment = () => ctx.any.txn.payment({ fee: 0 })
+  const sponsorPayment = () => gtxn.PaymentTxn(0)
+  const paymentFor = (contract: LeakSwap, recipient = contract.aliAlgoAddr.value, ready = false) => ctx.any.txn.payment({ fee: 0,
+    receiver: recipient, amount: ready ? Global.minBalance + Global.minTxnFee * 2 : 0,
+    closeRemainderTo: ready ? Global.zeroAddress : recipient,
+    sender: sponsorAddress(ctx.ledger.getApplicationForContract(contract).id, contract.aliAlgoAddr.value, contract.xinAlgoAddr.value),
+  })
+  const readyCall = (contract: LeakSwap) => ctx.txn.createScope([
+    paymentFor(contract, contract.aliAlgoAddr.value, true), ctx.any.txn.applicationCall({ appId: contract, sender: contract.aliAlgoAddr.value }),
+  ], 1).execute(() => contract.setReady(sponsorPayment()))
   const settle = (contract: LeakSwap, sender: typeof aliAlgoAddr, action: () => void) =>
-    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender, onCompletion: OnCompleteAction.DeleteApplication })]).execute(action)
+    ctx.txn.createScope([paymentFor(contract, sender), ctx.any.txn.applicationCall({ appId: contract, sender, onCompletion: OnCompleteAction.DeleteApplication })], 1).execute(action)
 
   it('rejects an ordinary valid Xin signature even with the correct public key and application address', () => {
     ctx.ledger.patchGlobalData({ latestTimestamp: 100 })
@@ -146,8 +207,8 @@ describe('LeakSwap contract', () => {
     const aliSecret = hexToUint8Array(genPrivateSpendKey())
     ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: aliAlgoAddr })]).execute(() => {
       contract.createApplication(Bytes(getPK(aliSecret)), xinAlgoAddr, Bytes(ordinaryKeys.publicKey), 1000, 2000)
-      contract.setReady(sponsorPayment())
     })
+    readyCall(contract)
     const address = Buffer.from(ctx.ledger.getApplicationForContract(contract).address.bytes as unknown as string, 'hex')
     const signature = ed25519.sign(address, ordinaryKeys.secretKey)
     expect(ed25519.verify(signature, address, ordinaryKeys.publicKey)).toBe(true)
@@ -231,12 +292,7 @@ describe('LeakSwap contract', () => {
     )
 
     // Ali sets the contract to ready state
-    ctx.txn.createScope([
-      ctx.any.txn.applicationCall({
-        appId: contract,
-        sender: aliAlgoAddr,
-      })
-    ]).execute(() => contract.setReady(sponsorPayment()))
+    readyCall(contract)
 
     // Now the contract should be in ready state
     expect(contract.getContractState()).toEqual(LeakSwapState.Ready)

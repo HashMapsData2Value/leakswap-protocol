@@ -18,6 +18,8 @@ export class FeeSponsorLSig extends LogicSig {
     const aliAddr = TemplateVar<Account>('ALI_ADDR')
     const xinAddr = TemplateVar<Account>('XIN_ADDR')
 
+    assert(Global.groupSize === Uint64(2), 'Sponsored group must contain exactly two transactions')
+    assert(Txn.groupIndex === Uint64(0), 'Sponsor payment must be first in the group')
     assert(Txn.fee === Uint64(0), 'Sponsor payment must not pay a fee')
     assert(Txn.rekeyTo === Global.zeroAddress, 'Sponsor payment must not rekey')
 

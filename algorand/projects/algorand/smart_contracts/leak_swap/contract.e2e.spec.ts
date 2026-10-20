@@ -8,6 +8,7 @@ import algosdk, { Account, Address } from 'algosdk'
 import { TransactionSignerAccount } from '@algorandfoundation/algokit-utils/types/account'
 import { readFileSync } from 'fs'
 import { join } from 'path'
+import sponsorFixtures from './sponsor-address-fixtures.json'
 
 // Vendored FeeSponsorLSig TEAL *template* - read straight from the build
 // artifact (not copy-pasted), so this test can never drift from the real
@@ -64,7 +65,7 @@ describe('LeakSwap contract', () => {
 
   test('LeakSwap: Happy Path', { timeout: 60000 }, async () => {
     const { testAccount } = localnet.context
-    localnet.algorand.account.ensureFundedFromEnvironment(testAccount, (20).algo())
+    await localnet.algorand.account.ensureFundedFromEnvironment(testAccount, (20).algo())
 
     // TODO: replace with 0 Algo initial funds, funding by calling funder LSIG
     // Xin starts completely broke - proves the fee-sponsor LSig, not Xin's
@@ -77,8 +78,8 @@ describe('LeakSwap contract', () => {
       aliXternalPK: getPK(aliXternalSK),
       xinAlgoAddr: xinAlgoAccount.addr.toString(),
       xinXternalPK: getPK(xinXternalSK),
-      t0: Date.now() + 3600, // 1 hour from now
-      t1: Date.now() + 5400, // 1.5 hours from now
+      t0: Math.floor(Date.now() / 1000) + 3600,
+      t1: Math.floor(Date.now() / 1000) + 5400,
     }
 
     const { client } = await deploy(testAccount.addr.toString(), leakySwapCreateParams)
@@ -138,6 +139,141 @@ describe('LeakSwap contract', () => {
 
   })
 
+  test('Algod sponsor assembly matches generated address fixtures', { timeout: 60000 }, async () => {
+    for (const fixture of sponsorFixtures) {
+      const sponsor = await compileFeeSponsorLsig(localnet.algorand, BigInt(fixture.appId),
+        algosdk.encodeAddress(Buffer.from(fixture.ali, 'hex')),
+        algosdk.encodeAddress(Buffer.from(fixture.xin, 'hex')))
+      expect(Buffer.from(sponsor.address().publicKey).toString('hex')).toBe(fixture.address)
+    }
+  })
+
+  test('application rejects substitute sponsors and malformed groups without changing balances or state', { timeout: 60000 }, async () => {
+    const { testAccount } = localnet.context
+    await localnet.algorand.account.ensureFundedFromEnvironment(testAccount, (30).algo())
+    const xin = await localnet.context.generateAccount({ initialFunds: (1).algo(), suppressLog: true })
+    const substitute = await localnet.context.generateAccount({ initialFunds: (1).algo(), suppressLog: true })
+    const secret = hexToUint8Array(genPrivateSpendKey())
+    const { client } = await deploy(testAccount.addr.toString(), {
+      aliXternalPK: getPK(secret), xinAlgoAddr: xin.addr.toString(), xinXternalPK: getPK(secret),
+      t0: Math.floor(Date.now() / 1000) + 3600, t1: Math.floor(Date.now() / 1000) + 7200,
+    })
+    const algorand = localnet.algorand
+    const algod = algorand.client.algod
+    await aliFundContract(algorand, testAccount, client.appAddress)
+    const sponsor = await fundFeeSponsorLsig(algorand, testAccount, client.appId,
+      testAccount.addr.toString(), xin.addr.toString())
+    const balances = async () => Promise.all([testAccount.addr.toString(), xin.addr.toString(), substitute.addr.toString(), sponsor, client.appAddress.toString()]
+      .map(async address => (await algod.accountInformation(address).do()).amount))
+    for (const method of ['setReady', 'leakyClaim', 'leakyRefund', 'punishRefund'] as const) {
+      for (const layout of ['pair', 'prefix', 'suffix', 'repeated', 'reversed', 'rekey'] as const) {
+        const ready = method === 'setReady'
+        const actor = method === 'leakyClaim' ? xin : testAccount
+        const params = await algod.getTransactionParams().do()
+        const payment = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+          sender: substitute.addr, receiver: actor.addr,
+          amount: ready ? 102000 : 0,
+          closeRemainderTo: ready ? undefined : actor.addr,
+          suggestedParams: { ...params, flatFee: true, fee: 0 },
+        })
+        const call = algosdk.makeApplicationCallTxnFromObject({
+          sender: actor.addr, appIndex: client.appId,
+          onComplete: ready ? algosdk.OnApplicationComplete.NoOpOC : algosdk.OnApplicationComplete.DeleteApplicationOC,
+          rekeyTo: layout === 'rekey' ? xin.addr : undefined,
+          appArgs: [algosdk.ABIMethod.fromSignature(ready || method === 'punishRefund'
+            ? `${method}(pay)void` : `${method}(byte[],pay)void`).getSelector(),
+          ...(!ready && method !== 'punishRefund' ? [algosdk.ABIType.from('byte[]').encode(leakySign(client.appAddress.publicKey, secret))] : [])],
+          suggestedParams: { ...params, flatFee: true, fee: 7000 },
+        })
+        const extra = algosdk.makePaymentTxnWithSuggestedParamsFromObject({ sender: testAccount.addr,
+          receiver: testAccount.addr, amount: 0, suggestedParams: { ...params, flatFee: true, fee: 1000 } })
+        const group = layout === 'prefix' ? [extra, payment, call] : layout === 'suffix' ? [payment, call, extra]
+          : layout === 'repeated' ? [payment, call, algosdk.decodeUnsignedTransaction(algosdk.encodeUnsignedTransaction(payment)), algosdk.decodeUnsignedTransaction(algosdk.encodeUnsignedTransaction(call))]
+            : layout === 'reversed' ? [call, payment] : [payment, call]
+        algosdk.assignGroupID(group)
+        const signed = await Promise.all(group.map(async (txn) => {
+          const signer = txn.sender.toString() === substitute.addr.toString() ? substitute.signer
+            : txn.sender.toString() === xin.addr.toString() ? xin.signer : testAccount.signer
+          return (await signer([txn], [0]))[0]
+        }))
+        const before = await balances()
+        try {
+          await algod.sendRawTransaction(signed).do()
+          throw new Error(`Unexpected acceptance: ${method}/${layout}`)
+        } catch (error) {
+          expect(String(error), `${method}/${layout}`).toMatch(/logic eval error/)
+          expect(String(error), `${method}/${layout}`).toContain(`app=${client.appId}`)
+        }
+        expect(await balances()).toEqual(before)
+        const app = await algod.getApplicationByID(client.appId).do()
+        const state = app.params.globalState!.find(entry => Buffer.from(entry.key).toString() === 'aliReady')
+        expect(state!.value.uint).toBe(0n)
+      }
+    }
+    const payment = await buildSponsorPaymentTxn(algorand, 'leakyRefund', client.appId,
+      testAccount.addr.toString(), xin.addr.toString())
+    await client.send.delete.leakyRefund({ args: [leakySign(client.appAddress.publicKey, secret), payment], staticFee: claimPooledFee })
+  })
+
+  test('real sponsor rejects malformed groups and then permits early refund', { timeout: 60000 }, async () => {
+    const { testAccount } = localnet.context
+    await localnet.algorand.account.ensureFundedFromEnvironment(testAccount, (20).algo())
+    const xin = await localnet.context.generateAccount({ initialFunds: (0).algo(), suppressLog: true })
+    const secret = hexToUint8Array(genPrivateSpendKey())
+    const { client } = await deploy(testAccount.addr.toString(), {
+      aliXternalPK: getPK(secret), xinAlgoAddr: xin.addr.toString(), xinXternalPK: getPK(secret),
+      t0: Math.floor(Date.now() / 1000) + 3600, t1: Math.floor(Date.now() / 1000) + 7200,
+    })
+    await aliFundContract(localnet.algorand, testAccount, client.appAddress)
+    const sponsor = await fundFeeSponsorLsig(localnet.algorand, testAccount, client.appId,
+      testAccount.addr.toString(), xin.addr.toString())
+    const algod = localnet.algorand.client.algod
+    for (const attack of ['prefix', 'suffix', 'repeated', 'reversed', 'payment-rekey', 'payment-fee'] as const) {
+      const params = await algod.getTransactionParams().do()
+      const leg = await buildSponsorPaymentTxn(localnet.algorand, 'setReady', client.appId,
+        testAccount.addr.toString(), xin.addr.toString())
+      if (attack === 'payment-rekey') leg.txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+        sender: sponsor, receiver: testAccount.addr, amount: 102000, rekeyTo: xin.addr,
+        suggestedParams: { ...params, flatFee: true, fee: 0 },
+      })
+      if (attack === 'payment-fee') leg.txn.fee = 1000n
+      const call = algosdk.makeApplicationCallTxnFromObject({ sender: testAccount.addr, appIndex: client.appId,
+        onComplete: algosdk.OnApplicationComplete.NoOpOC,
+        appArgs: [algosdk.ABIMethod.fromSignature('setReady(pay)void').getSelector()],
+        suggestedParams: { ...params, flatFee: true, fee: 7000 } })
+      const extra = algosdk.makePaymentTxnWithSuggestedParamsFromObject({ sender: testAccount.addr,
+        receiver: testAccount.addr, amount: 0, suggestedParams: { ...params, flatFee: true, fee: 1000 } })
+      const group = attack === 'prefix' ? [extra, leg.txn, call] : attack === 'suffix' ? [leg.txn, call, extra]
+        : attack === 'repeated' ? [leg.txn, call, algosdk.decodeUnsignedTransaction(algosdk.encodeUnsignedTransaction(leg.txn)), algosdk.decodeUnsignedTransaction(algosdk.encodeUnsignedTransaction(call))]
+          : attack === 'reversed' ? [call, leg.txn] : [leg.txn, call]
+      algosdk.assignGroupID(group)
+      const signed = await Promise.all(group.map(async txn => (await (txn.sender.toString() === sponsor
+        ? leg.signer : testAccount.signer)([txn], [0]))[0]))
+      const addresses = [testAccount.addr.toString(), xin.addr.toString(), sponsor, client.appAddress.toString()]
+      const balances = async () => Promise.all(addresses.map(async address => (await algod.accountInformation(address).do()).amount))
+      const before = await balances()
+      try {
+        await algod.sendRawTransaction(signed).do()
+        throw new Error(`Unexpected acceptance: ${attack}`)
+      } catch (error) {
+        expect(String(error), attack).toMatch(/reject.*logic|logic.*(?:reject|fail)/i)
+        expect(String(error), attack).not.toContain(`app=${client.appId}`)
+      }
+      expect(await balances()).toEqual(before)
+      const app = await algod.getApplicationByID(client.appId).do()
+      expect(app.params.globalState!.find(entry => Buffer.from(entry.key).toString() === 'aliReady')!.value.uint).toBe(0n)
+      expect((await algod.accountInformation(sponsor).do()).authAddr).toBeUndefined()
+    }
+    const payment = await buildSponsorPaymentTxn(localnet.algorand, 'leakyRefund', client.appId,
+      testAccount.addr.toString(), xin.addr.toString())
+    const result = await client.send.delete.leakyRefund({
+      args: [leakySign(client.appAddress.publicKey, secret), payment], staticFee: claimPooledFee,
+    })
+    expect((await algod.pendingTransactionInformation(result.txIds[result.txIds.length - 1]).do()).confirmedRound).toBeGreaterThan(0n)
+    await expect(algod.getApplicationByID(client.appId).do()).rejects.toMatchObject({ status: 404 })
+    expect((await algod.accountInformation(sponsor).do()).amount).toBe(0n)
+    expect((await algod.accountInformation(client.appAddress).do()).amount).toBe(0n)
+  })
 })
 
 
