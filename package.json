@@ -1,0 +1,13 @@
+{
+  "name": "leakswap-protocol-tooling",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:staged": "node scripts/check-staged-format.mjs",
+    "hooks:install": "git config --local core.hooksPath .githooks"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
+}
