@@ -1,3 +1,13 @@
+# [leakswap-utils-v2.0.0](https://github.com/HashMapsData2Value/leakswap-protocol/compare/leakswap-utils-v1.2.1...leakswap-utils-v2.0.0) (2026-10-24)
+
+
+* feat(protocol)!: enforce round-based swap deadlines ([4deaf70](https://github.com/HashMapsData2Value/leakswap-protocol/commit/4deaf7067208dce4805947bab17c15e64feee546))
+
+
+### BREAKING CHANGES
+
+* all swap offers and saved agreements require round deadlines; configured minutes convert at 20 rounds per minute.
+
 # [leakswap-utils-v1.2.1](https://github.com/HashMapsData2Value/leakswap-protocol/compare/leakswap-utils-v1.2.0...leakswap-utils-v1.2.1) (2026-10-18)
 
 
