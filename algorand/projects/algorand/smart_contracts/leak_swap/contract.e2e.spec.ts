@@ -54,8 +54,8 @@ describe('LeakSwap contract', () => {
         params.aliXternalPK,
         params.xinAlgoAddr,
         params.xinXternalPK,
-        params.t0, // Convert to seconds
-        params.t1, // Convert to seconds
+        params.t0,
+        params.t1,
       ],
       extraProgramPages: 0,
     })
@@ -73,13 +73,14 @@ describe('LeakSwap contract', () => {
     const xinAlgoAccount = (await localnet.context.generateAccount({ initialFunds: (0).algo(), suppressLog: true }))
     const aliXternalSK = hexToUint8Array(genPrivateSpendKey())//genScalar()
     const xinXternalSK = hexToUint8Array(genPrivateSpendKey())//genScalar()
+    const currentRound = Number((await localnet.algorand.client.algod.status().do()).lastRound)
 
     const leakySwapCreateParams: LeakSwapCreateAppParams = {
       aliXternalPK: getPK(aliXternalSK),
       xinAlgoAddr: xinAlgoAccount.addr.toString(),
       xinXternalPK: getPK(xinXternalSK),
-      t0: Math.floor(Date.now() / 1000) + 3600,
-      t1: Math.floor(Date.now() / 1000) + 5400,
+      t0: currentRound + 1200,
+      t1: currentRound + 1800,
     }
 
     const { client } = await deploy(testAccount.addr.toString(), leakySwapCreateParams)
@@ -154,9 +155,10 @@ describe('LeakSwap contract', () => {
     const xin = await localnet.context.generateAccount({ initialFunds: (1).algo(), suppressLog: true })
     const substitute = await localnet.context.generateAccount({ initialFunds: (1).algo(), suppressLog: true })
     const secret = hexToUint8Array(genPrivateSpendKey())
+    const currentRound = Number((await localnet.algorand.client.algod.status().do()).lastRound)
     const { client } = await deploy(testAccount.addr.toString(), {
       aliXternalPK: getPK(secret), xinAlgoAddr: xin.addr.toString(), xinXternalPK: getPK(secret),
-      t0: Math.floor(Date.now() / 1000) + 3600, t1: Math.floor(Date.now() / 1000) + 7200,
+      t0: currentRound + 1200, t1: currentRound + 2400,
     })
     const algorand = localnet.algorand
     const algod = algorand.client.algod
@@ -220,9 +222,10 @@ describe('LeakSwap contract', () => {
     await localnet.algorand.account.ensureFundedFromEnvironment(testAccount, (20).algo())
     const xin = await localnet.context.generateAccount({ initialFunds: (0).algo(), suppressLog: true })
     const secret = hexToUint8Array(genPrivateSpendKey())
+    const currentRound = Number((await localnet.algorand.client.algod.status().do()).lastRound)
     const { client } = await deploy(testAccount.addr.toString(), {
       aliXternalPK: getPK(secret), xinAlgoAddr: xin.addr.toString(), xinXternalPK: getPK(secret),
-      t0: Math.floor(Date.now() / 1000) + 3600, t1: Math.floor(Date.now() / 1000) + 7200,
+      t0: currentRound + 1200, t1: currentRound + 2400,
     })
     await aliFundContract(localnet.algorand, testAccount, client.appAddress)
     const sponsor = await fundFeeSponsorLsig(localnet.algorand, testAccount, client.appId,

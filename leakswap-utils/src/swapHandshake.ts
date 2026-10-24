@@ -1,6 +1,8 @@
 export interface SwapOffer {
   offerId: string;
   createdAt: number;
+  deadlineUnit: 'round';
+  createdRound: number;
   moneroRestoreHeight?: number;
   algoGenesisHash: string;
   moneroNetwork: 'mainnet' | 'testnet' | 'stagenet' | 'regtest';
@@ -28,6 +30,7 @@ const LIMIT = 12000;
 const HEX_KEY = /^[0-9a-f]{64}$/;
 const ADDRESS = /^[A-Z2-7]{58}$/;
 const ERROR = 'Incomplete or damaged swap link. Ask your counterparty to resend the full link.';
+const LEGACY_ERROR = 'Legacy timestamp swaps are not supported. Request a new round-based invitation.';
 
 function exactFields(value: unknown, fields: string[]): asserts value is Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)
@@ -36,15 +39,17 @@ function exactFields(value: unknown, fields: string[]): asserts value is Record<
 
 export function canonicalOffer(value: unknown): SwapOffer {
   const hasRestoreHeight = Object.prototype.hasOwnProperty.call(value ?? {}, 'moneroRestoreHeight');
-  exactFields(value, ['offerId', 'createdAt', 'algoGenesisHash', 'moneroNetwork', 'algoAmount', 'xmrAmount', 't0', 't1', 'aliAlgoAddress', 'aliPublicSpendKey', 'aliPrivateViewKey', ...(hasRestoreHeight ? ['moneroRestoreHeight'] : [])]);
+  if (value && typeof value === 'object' && (value as SwapOffer).deadlineUnit !== 'round') throw new Error(LEGACY_ERROR);
+  exactFields(value, ['offerId', 'createdAt', 'algoGenesisHash', 'moneroNetwork', 'algoAmount', 'xmrAmount', 't0', 't1', 'aliAlgoAddress', 'aliPublicSpendKey', 'aliPrivateViewKey', ...(hasRestoreHeight ? ['moneroRestoreHeight'] : []), 'deadlineUnit', 'createdRound']);
   const offer = value as unknown as SwapOffer;
   if (typeof offer.offerId !== 'string' || !/^[0-9a-f]{32}$/.test(offer.offerId)
     || !Number.isSafeInteger(offer.createdAt) || offer.createdAt < 0
+    || offer.deadlineUnit !== 'round' || !Number.isSafeInteger(offer.createdRound) || offer.createdRound <= 0
     || (hasRestoreHeight && (!Number.isInteger(offer.moneroRestoreHeight) || offer.moneroRestoreHeight! < 0 || offer.moneroRestoreHeight! > 0xffffffff))
     || typeof offer.algoGenesisHash !== 'string' || !/^[A-Za-z0-9+/]{43}=$/.test(offer.algoGenesisHash)
     || !['mainnet', 'testnet', 'stagenet', 'regtest'].includes(offer.moneroNetwork)
     || ![offer.algoAmount, offer.xmrAmount].every((amount) => typeof amount === 'string' && /^[1-9][0-9]{0,19}$/.test(amount) && BigInt(amount) <= 0xffffffffffffffffn)
-    || !Number.isSafeInteger(offer.t0) || offer.t0 <= offer.createdAt
+    || !Number.isSafeInteger(offer.t0) || offer.t0 <= offer.createdRound
     || !Number.isSafeInteger(offer.t1) || offer.t1 <= offer.t0 || offer.t1 > 8640000000000
     || typeof offer.aliAlgoAddress !== 'string' || !ADDRESS.test(offer.aliAlgoAddress)
     || ![offer.aliPublicSpendKey, offer.aliPrivateViewKey].every((key) => typeof key === 'string' && HEX_KEY.test(key))) throw new Error('Invalid swap offer.');
@@ -53,7 +58,8 @@ export function canonicalOffer(value: unknown): SwapOffer {
     moneroNetwork: offer.moneroNetwork, algoAmount: offer.algoAmount, xmrAmount: offer.xmrAmount,
     t0: offer.t0, t1: offer.t1, aliAlgoAddress: offer.aliAlgoAddress,
     aliPublicSpendKey: offer.aliPublicSpendKey, aliPrivateViewKey: offer.aliPrivateViewKey,
-    ...(hasRestoreHeight ? { moneroRestoreHeight: offer.moneroRestoreHeight } : {})
+    ...(hasRestoreHeight ? { moneroRestoreHeight: offer.moneroRestoreHeight } : {}),
+    deadlineUnit: offer.deadlineUnit, createdRound: offer.createdRound
   };
 }
 
@@ -117,7 +123,7 @@ export async function decodeHandshake(value: string): Promise<Handshake> {
     const message = envelope(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(Uint8Array.from(decoded, (character) => character.charCodeAt(0)))));
     if (message.kind !== parts[1] || await encodeHandshake(message) !== value) throw new Error(ERROR);
     return message;
-  } catch { throw new Error(ERROR); }
+  } catch (error) { throw new Error(error instanceof Error && error.message === LEGACY_ERROR ? LEGACY_ERROR : ERROR); }
 }
 
 export async function buildHandshakeUrl(origin: string, message: Handshake): Promise<string> {
@@ -136,7 +142,7 @@ export async function parseHandshakeLink(value: string): Promise<Handshake> {
     const message = await decodeHandshake(entries[0][1]);
     if (message.kind !== entries[0][0]) throw new Error(ERROR);
     return message;
-  } catch { throw new Error(ERROR); }
+  } catch (error) { throw new Error(error instanceof Error && error.message === LEGACY_ERROR ? LEGACY_ERROR : ERROR); }
 }
 
 export async function verifyHandshake(message: Handshake, publicKey: Uint8Array): Promise<void> {

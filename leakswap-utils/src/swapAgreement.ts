@@ -3,6 +3,7 @@ import { offerDigest, verifyHandshake, type SignedOffer, type SignedAcceptance }
 export interface SwapAgreement { offer: SignedOffer; acceptance: SignedAcceptance }
 
 export interface AgreementState {
+  deadlineUnit: 'round';
   genesisHash: string;
   moneroNetwork: string;
   aliAddress: string;
@@ -27,6 +28,7 @@ export function assertAgreementState(agreement: SwapAgreement, state: AgreementS
   if (state.genesisHash !== offer.algoGenesisHash || state.moneroNetwork !== offer.moneroNetwork
     || state.aliAddress !== offer.aliAlgoAddress || state.xinAddress !== acceptance.xinAlgoAddress
     || state.aliPublicSpendKey !== offer.aliPublicSpendKey || state.xinPublicSpendKey !== acceptance.xinPublicSpendKey
+    || state.deadlineUnit !== 'round' || offer.deadlineUnit !== 'round'
     || state.t0 !== offer.t0 || state.t1 !== offer.t1) throw new Error('Swap does not match the authenticated agreement.');
 }
 

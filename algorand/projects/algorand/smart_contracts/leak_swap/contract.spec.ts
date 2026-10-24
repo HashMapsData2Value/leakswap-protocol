@@ -1,5 +1,5 @@
 import { TestExecutionContext } from '@algorandfoundation/algorand-typescript-testing'
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { Bytes, Global, gtxn, OnCompleteAction, Uint64 } from '@algorandfoundation/algorand-typescript'
 import { sponsorAddress } from './sponsor_address.algo'
 import sponsorFixtures from './sponsor-address-fixtures.json'
@@ -18,11 +18,11 @@ export enum LeakSwapState {
 describe('LeakSwap contract', () => {
   const boundaries = [999, 1000, 1001, 1999, 2000, 2001]
   for (const ready of [false, true]) {
-    for (const timestamp of boundaries) {
+    for (const round of boundaries) {
       for (const method of ['claim', 'refund', 'punish'] as const) {
-        it(`${method} at ${timestamp}, ready=${ready}`, () => {
+        it(`${method} at round ${round}, ready=${ready}`, () => {
           const execution = ctx
-          execution.ledger.patchGlobalData({ latestTimestamp: 100 })
+          execution.ledger.patchGlobalData({ round: 100 })
           const contract = execution.contract.create(LeakSwap)
           const ali = execution.defaultSender
           const xin = execution.any.account()
@@ -32,12 +32,12 @@ describe('LeakSwap contract', () => {
             .execute(() => contract.createApplication(Bytes(getPK(aliSecret)), xin, Bytes(getPK(xinSecret)), 1000, 2000))
           const sponsor = sponsorPayment
           if (ready) readyCall(contract)
-          execution.ledger.patchGlobalData({ latestTimestamp: timestamp })
-          expect(contract.getContractState()).toEqual(timestamp >= 2000 ? LeakSwapState.T1Passed
-            : timestamp > 1000 ? LeakSwapState.T0Passed : ready ? LeakSwapState.Ready : LeakSwapState.NotReady)
+          execution.ledger.patchGlobalData({ round })
+          expect(contract.getContractState()).toEqual(round >= 2000 ? LeakSwapState.T1Passed
+            : round > 1000 ? LeakSwapState.T0Passed : ready ? LeakSwapState.Ready : LeakSwapState.NotReady)
           const address = Buffer.from(execution.ledger.getApplicationForContract(contract).address.bytes as unknown as string, 'hex')
-          const allowed = method === 'claim' ? (ready || timestamp > 1000) && timestamp < 2000
-            : method === 'refund' ? !ready && timestamp <= 1000 : timestamp >= 2000
+          const allowed = method === 'claim' ? (ready || round > 1000) && round < 2000
+            : method === 'refund' ? !ready && round <= 1000 : round >= 2000
           const action = () => settle(contract, method === 'claim' ? xin : ali, () => {
             if (method === 'claim') contract.leakyClaim(Bytes(leakySign(address, xinSecret)), sponsor())
             else if (method === 'refund') contract.leakyRefund(Bytes(leakySign(address, aliSecret)), sponsor())
@@ -45,7 +45,7 @@ describe('LeakSwap contract', () => {
           })
           if (allowed) expect(action).not.toThrow()
           else expect(action).toThrow()
-          execution.ledger.patchGlobalData({ latestTimestamp: 0 })
+          execution.ledger.patchGlobalData({ round: 0 })
           execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract, sender: ali })]).execute(() => { })
         })
       }
@@ -53,6 +53,7 @@ describe('LeakSwap contract', () => {
   }
 
   const ctx = new TestExecutionContext()
+  beforeEach(() => ctx.ledger.patchGlobalData({ round: 100, latestTimestamp: 100 }))
   for (const fixture of sponsorFixtures) {
     it(`derives the independently compiled sponsor for app ${fixture.appId}`, () => {
       const address = sponsorAddress(Uint64(BigInt(fixture.appId)), Account(Bytes.fromHex(fixture.ali)), Account(Bytes.fromHex(fixture.xin)))
@@ -62,7 +63,7 @@ describe('LeakSwap contract', () => {
   for (const method of ['ready', 'claim', 'refund', 'punish'] as const) {
     for (const attack of ['sender', 'prefix', 'suffix', 'reversed', 'payment-rekey', 'call-rekey', 'receiver', 'amount', 'close', 'fee'] as const) {
       it(`${method} rejects invalid sponsor ${attack}`, () => {
-        ctx.ledger.patchGlobalData({ latestTimestamp: 100, minBalance: 100_000, minTxnFee: 1000 })
+        ctx.ledger.patchGlobalData({ round: 100, minBalance: 100_000, minTxnFee: 1000 })
         const contract = ctx.contract.create(LeakSwap)
         const xin = ctx.any.account()
         const secret = hexToUint8Array(genPrivateSpendKey())
@@ -103,7 +104,7 @@ describe('LeakSwap contract', () => {
                       : attack === 'close' ? ready ? 'Cannot close out for setReady' : 'Wrong sponsor close-out recipient'
                         : 'Sponsor payment must not pay a fee')
         expect(contract.aliReady.value).toBe(false)
-        ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
+        ctx.ledger.patchGlobalData({ round: 0 })
         ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => {})
       })
     }
@@ -124,7 +125,7 @@ describe('LeakSwap contract', () => {
   ]) {
     it(`claim fee: escrow=${escrow}, treasury=${treasuryBalance}/${treasuryMinimum}`, () => {
       const execution = ctx
-      execution.ledger.patchGlobalData({ latestTimestamp: 100, minBalance: 100_000 })
+      execution.ledger.patchGlobalData({ round: 100, minBalance: 100_000 })
       execution.ledger.patchAccountData(treasury, { account: { balance: Uint64(treasuryBalance), minBalance: Uint64(treasuryMinimum) } })
       const contract = execution.contract.create(LeakSwap)
       const xin = execution.any.account()
@@ -147,14 +148,14 @@ describe('LeakSwap contract', () => {
         expect(Number(payment.fee)).toEqual(0)
       }
       expect(execution.txn.lastGroup.lastItxnGroup().getPaymentInnerTxn().closeRemainderTo).toEqual(xin)
-      execution.ledger.patchGlobalData({ latestTimestamp: 0 })
+      execution.ledger.patchGlobalData({ round: 0 })
       execution.ledger.patchAccountData(treasury, { account: { balance: Uint64(0), minBalance: Uint64(0) } })
       execution.txn.createScope([execution.any.txn.applicationCall({ appId: contract })]).execute(() => { })
     })
   }
   for (const t0 of [999, 1000, 1001]) {
-    it(`deployment uses committed chain time 1000, not browser time: t0=${t0}`, () => {
-      ctx.ledger.patchGlobalData({ latestTimestamp: 1000 })
+    it(`deployment requires t0 after committed round 1000: t0=${t0}`, () => {
+      ctx.ledger.patchGlobalData({ round: 1000 })
       const contract = ctx.contract.create(LeakSwap)
       const create = () => ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })])
         .execute(() => contract.createApplication(Bytes(new Uint8Array(32)), ctx.any.account(), Bytes(new Uint8Array(32)), t0, t0 + 1))
@@ -162,28 +163,34 @@ describe('LeakSwap contract', () => {
         if (t0 <= 1000) expect(create).toThrow('t0 must be in the future')
         else expect(create).not.toThrow()
       } finally {
-        ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
+        ctx.ledger.patchGlobalData({ round: 0 })
         ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => { })
       }
     })
   }
 
-  it('a stalled chain does not advance expiry; a resumed timestamp may skip the claim window', () => {
-    ctx.ledger.patchGlobalData({ latestTimestamp: 100 })
-    const contract = ctx.contract.create(LeakSwap)
-    ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })])
-      .execute(() => contract.createApplication(Bytes(new Uint8Array(32)), ctx.any.account(), Bytes(new Uint8Array(32)), 1000, 2000))
-    try {
-      ctx.ledger.patchGlobalData({ latestTimestamp: 999 })
-      expect(contract.getContractState()).toEqual(LeakSwapState.NotReady)
-      expect(contract.getContractState()).toEqual(LeakSwapState.NotReady)
-      ctx.ledger.patchGlobalData({ latestTimestamp: 2000 })
-      expect(contract.getContractState()).toEqual(LeakSwapState.T1Passed)
-    } finally {
-      ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
-      ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract })]).execute(() => { })
-    }
-  })
+  for (const resumedRound of [999, 1000]) {
+    it(`Ready survives a huge chain-halt timestamp jump at round ${resumedRound}; punish fails and Xin can claim`, () => {
+      ctx.ledger.patchGlobalData({ round: 999, latestTimestamp: 100 })
+      const contract = ctx.contract.create(LeakSwap)
+      const ali = ctx.defaultSender
+      const xin = ctx.any.account()
+      const xinSecret = hexToUint8Array(genPrivateSpendKey())
+      ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: ali })])
+        .execute(() => contract.createApplication(Bytes(new Uint8Array(32)), xin, Bytes(getPK(xinSecret)), 1000, 2000))
+      readyCall(contract)
+      expect(contract.getContractState()).toEqual(LeakSwapState.Ready)
+      ctx.ledger.patchGlobalData({ round: resumedRound, latestTimestamp: 4_000_000_000 })
+      expect(contract.getContractState()).toEqual(LeakSwapState.Ready)
+      expect(() => settle(contract, ali, () => contract.punishRefund(sponsorPayment())))
+        .toThrow('Cannot punish refund before t1!')
+      expect(contract.getContractState()).toEqual(LeakSwapState.Ready)
+      const address = Buffer.from(ctx.ledger.getApplicationForContract(contract).address.bytes as unknown as string, 'hex')
+      expect(() => settle(contract, xin, () => contract.leakyClaim(Bytes(leakySign(address, xinSecret)), sponsorPayment())))
+        .not.toThrow()
+      expect(ctx.txn.lastGroup.lastItxnGroup().getPaymentInnerTxn().closeRemainderTo).toEqual(xin)
+    })
+  }
 
   const aliAlgoAddr = ctx.defaultSender
   const xinAlgoAddr = ctx.any.account()
@@ -201,7 +208,7 @@ describe('LeakSwap contract', () => {
     ctx.txn.createScope([paymentFor(contract, sender), ctx.any.txn.applicationCall({ appId: contract, sender, onCompletion: OnCompleteAction.DeleteApplication })], 1).execute(action)
 
   it('rejects an ordinary valid Xin signature even with the correct public key and application address', () => {
-    ctx.ledger.patchGlobalData({ latestTimestamp: 100 })
+    ctx.ledger.patchGlobalData({ round: 100 })
     const contract = ctx.contract.create(LeakSwap)
     const ordinaryKeys = ed25519.keygen()
     const aliSecret = hexToUint8Array(genPrivateSpendKey())
@@ -214,7 +221,7 @@ describe('LeakSwap contract', () => {
     expect(ed25519.verify(signature, address, ordinaryKeys.publicKey)).toBe(true)
     expect(() => settle(contract, xinAlgoAddr, () => contract.leakyClaim(Bytes(signature), sponsorPayment())))
       .toThrow('Signature R must be broken')
-    ctx.ledger.patchGlobalData({ latestTimestamp: 0 })
+    ctx.ledger.patchGlobalData({ round: 0 })
     ctx.txn.createScope([ctx.any.txn.applicationCall({ appId: contract, sender: aliAlgoAddr })]).execute(() => { })
   })
 
@@ -267,8 +274,8 @@ describe('LeakSwap contract', () => {
     const aliXternalPK = getPK(aliXternalSK)
     const xinXternalSK = hexToUint8Array(genPrivateSpendKey())
     const xinXternalPK = getPK(xinXternalSK)
-    const t0 = Date.now() + 3600 * 1000 // 1 hour from current time
-    const t1 = t0 + 1800 * 1000 // 30 minutes after t0
+    const t0 = 1000
+    const t1 = 2000
 
     // Create application with the specified parameters
     contract.createApplication(
@@ -319,15 +326,15 @@ describe('LeakSwap contract', () => {
     // Should be in some final state, e.g. funds are empty, contract deleted, added a 5th "complete" state that gets returned, etc
   })
 
-  it('LeakSwap: T0 TimeOut Path', async () => {
+  it('LeakSwap: claim after round t0 without setReady', async () => {
     const contract = ctx.contract.create(LeakSwap)
 
     const aliXternalSK = hexToUint8Array(genPrivateSpendKey())
     const aliXternalPK = getPK(aliXternalSK)
     const xinXternalSK = hexToUint8Array(genPrivateSpendKey())
     const xinXternalPK = getPK(xinXternalSK)
-    const t0 = Date.now() + 3600 * 1000 // 1 hour from current time
-    const t1 = t0 + 1800 * 1000 // 30 minutes after t0
+    const t0 = 1000
+    const t1 = 2000
 
     // Create application with the specified parameters
     contract.createApplication(
@@ -367,7 +374,7 @@ describe('LeakSwap contract', () => {
     expect(contract.getContractState()).toEqual(LeakSwapState.NotReady)
 
     // Ali does not set ready so Xin waits until t0 passes
-    ctx.ledger.patchGlobalData({ latestTimestamp: t0 + 1 })
+    ctx.ledger.patchGlobalData({ round: t0 + 1 })
 
     // Now the contract should be in T0 Passed state
     expect(contract.getContractState()).toEqual(LeakSwapState.T0Passed)
@@ -396,8 +403,8 @@ describe('LeakSwap contract', () => {
     const aliXternalPK = getPK(aliXternalSK)
     const xinXternalSK = hexToUint8Array(genPrivateSpendKey())
     const xinXternalPK = getPK(xinXternalSK)
-    const t0 = Date.now() + 3600 * 1000 // 1 hour from current time
-    const t1 = t0 + 1800 * 1000 // 30 minutes after t0
+    const t0 = 1000
+    const t1 = 2000
 
     // Create application with the specified parameters
     contract.createApplication(
@@ -426,15 +433,15 @@ describe('LeakSwap contract', () => {
     // Should be in some final state, e.g. funds are empty, contract deleted, added a 5th "complete" state that gets returned, etc
   })
 
-  it('LeakSwap: T1 TimeOut PunishRefund Path', async () => {
+  it('LeakSwap: punish refund at round t1', async () => {
     const contract = ctx.contract.create(LeakSwap)
 
     const aliXternalSK = hexToUint8Array(genPrivateSpendKey())
     const aliXternalPK = getPK(aliXternalSK)
     const xinXternalSK = hexToUint8Array(genPrivateSpendKey())
     const xinXternalPK = getPK(xinXternalSK)
-    const t0 = Date.now() + 3600 * 1000 // 1 hour from current time
-    const t1 = t0 + 1800 * 1000 // 30 minutes after t0
+    const t0 = 1000
+    const t1 = 2000
 
     // Create application with the specified parameters
     contract.createApplication(
@@ -451,8 +458,8 @@ describe('LeakSwap contract', () => {
 
     // * <-- Xin does or does not lock up funds in the combined Monero account --> *
 
-    // Xin does not call leakyClaim, so we simulate the passage of time to reach t1
-    ctx.ledger.patchGlobalData({ latestTimestamp: t1 + 1 })
+    // Xin does not call leakyClaim, so advance the round to t1
+    ctx.ledger.patchGlobalData({ round: t1 })
 
     // Now the contract should be in T1 passed state
     expect(contract.getContractState()).toEqual(LeakSwapState.T1Passed)

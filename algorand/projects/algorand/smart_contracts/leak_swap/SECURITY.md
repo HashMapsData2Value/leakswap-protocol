@@ -31,6 +31,24 @@ sponsor artifacts together; keep the original program for existing sponsors.
 Offline tests cover group layout, substitute sponsor senders, payment fields,
 rekeying, address derivation, and existing signature/timing/fee boundaries.
 
+## Round Deadlines
+
+`t0` and `t1` are absolute Algorand round numbers, not Unix timestamps.
+Creation requires `t1 > t0 > Global.round`. Early refund is allowed through
+round `t0` (`<= t0`) only before Ready. Claim requires Ready or `round > t0`,
+and always requires `round < t1`. Punishment starts at `round >= t1`.
+
+The offline boundary matrix covers `t0 - 1`, `t0`, `t0 + 1`, `t1 - 1`, `t1`,
+and `t1 + 1`, both before and after Ready. Chain-halt regressions jump the
+timestamp to 4,000,000,000 while holding round 999 or advancing it to 1000:
+the contract remains Ready, a correctly sponsored punish attempt is rejected,
+and Xin can claim using a valid leaky signature and the designated sponsor.
+Timestamp jumps cannot consume the round-based claim window.
+
+LocalNet tests construct deadlines from a read-only Algod status round, using
+20 rounds per minute for the one-hour and later deadline offsets. Wall-clock
+time is not used to construct contract deadlines.
+
 `contract.e2e.spec.ts` runs against LocalNet using disposable accounts and the
 generated application and sponsor artifacts. It covers:
 
@@ -50,15 +68,17 @@ now reserve 2400 remaining opcode units after sponsor validation and before
 signature verification. The LocalNet tests exercise the existing 7000-microALGO
 pooled settlement fee without increasing it.
 
-From the Algorand project directory, regenerate artifacts and run the suite with:
+From the Algorand project directory, regenerate artifacts and run offline checks:
 
 ```sh
 npm run build
 npm run check-types
-npx --no-install vitest run smart_contracts/leak_swap/contract.spec.ts smart_contracts/leak_swap/sponsor_lsig.spec.ts smart_contracts/leak_swap/contract.e2e.spec.ts
+npx --no-install vitest run smart_contracts/leak_swap/contract.spec.ts smart_contracts/leak_swap/sponsor_lsig.spec.ts
 ```
 
-LocalNet must already be running; these tests do not reset it. The current
+The build only regenerates artifacts and clients; it does not deploy contracts.
+Run `contract.e2e.spec.ts` separately only when node-backed transactions are
+intended. LocalNet must already be running; those tests do not reset it. The current
 node-backed suite does not certify successful expired `punishRefund`, public-chain
 execution, or wallet/swap-page integration with these new artifacts. Deadline
 boundary and punishment behavior remain covered by the offline suite. Matching

@@ -38,8 +38,8 @@ export class LeakSwap extends Contract {
     this.t1.value = t1
 
     assert(t1 > t0, 't1 must be greater than t0')
-    assert(t0 > Global.latestTimestamp, 't0 must be in the future')
-    assert(t1 > Global.latestTimestamp, 't1 must be in the future')
+    assert(t0 > Global.round, 't0 must be in the future')
+    assert(t1 > Global.round, 't1 must be in the future')
   }
 
   private requireSponsor(payment: gtxn.PaymentTxn, recipient: Account, ready: boolean): void {
@@ -112,10 +112,10 @@ export class LeakSwap extends Contract {
    * Conforms to the LeakSwapState enum.
    */
   public getContractState(): uint64 {
-    if (Global.latestTimestamp >= this.t1.value) {
+    if (Global.round >= this.t1.value) {
       return 3
     }
-    if (Global.latestTimestamp > this.t0.value) {
+    if (Global.round > this.t0.value) {
       return 2
     }
     if (this.aliReady.value) {
@@ -134,7 +134,7 @@ export class LeakSwap extends Contract {
     assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do leaky refund!')
     this.requireSponsor(sponsorPayment, this.aliAlgoAddr.value, false)
     ensureBudget(2400)
-    assert(Global.latestTimestamp <= this.t0.value, 'Cannot refund after t0!')
+    assert(Global.round <= this.t0.value, 'Cannot refund after t0!')
     assert(!this.aliReady.value, 'Cannot refund after set ready!')
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
 
@@ -154,8 +154,8 @@ export class LeakSwap extends Contract {
     assertMatch(Txn, { sender: this.xinAlgoAddr.value }, 'Only Xin can do leaky claim!')
     this.requireSponsor(sponsorPayment, this.xinAlgoAddr.value, false)
     ensureBudget(2400)
-    assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
-    assert(Global.latestTimestamp < this.t1.value, 'Cannot claim after t1!')
+    assert(Global.round > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
+    assert(Global.round < this.t1.value, 'Cannot claim after t1!')
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
 
     // Forces Xin to leak xternal secret key
@@ -182,7 +182,7 @@ export class LeakSwap extends Contract {
   public punishRefund(sponsorPayment: gtxn.PaymentTxn): void {
     assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do punish refund!')
     this.requireSponsor(sponsorPayment, this.aliAlgoAddr.value, false)
-    assert(Global.latestTimestamp >= this.t1.value, 'Cannot punish refund before t1!')
+    assert(Global.round >= this.t1.value, 'Cannot punish refund before t1!')
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
     this.disburseFunds(this.aliAlgoAddr.value)
   }

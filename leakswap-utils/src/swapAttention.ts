@@ -1,22 +1,23 @@
+import { ROUNDS_PER_MINUTE, roundDeadlineRemaining } from './swapTiming.ts';
+
 export type SwapLiveState = 'unknown' | 'unavailable' | 'awaiting' | 'ready';
 
-export function refundDecisionMargin(t0: number, t1: number): number {
+export function refundDecisionMargin(t0: number, t1: number, deadlineUnit: 'round'): number {
+  if (deadlineUnit !== 'round') throw new Error('Only round-based swap deadlines are supported.');
   const claimWindow = t1 - t0;
-  if (claimWindow === 2 * 3600) return 30 * 60;
-  if (claimWindow === 6 * 3600) return 3600;
-  if (claimWindow === 24 * 3600) return 2 * 3600;
-  return Math.min(3600, Math.max(60, Math.floor(claimWindow / 4)));
+  if (claimWindow === 120 * ROUNDS_PER_MINUTE) return 30 * ROUNDS_PER_MINUTE;
+  if (claimWindow === 360 * ROUNDS_PER_MINUTE) return 60 * ROUNDS_PER_MINUTE;
+  if (claimWindow === 1440 * ROUNDS_PER_MINUTE) return 120 * ROUNDS_PER_MINUTE;
+  return Math.min(60 * ROUNDS_PER_MINUTE, Math.max(ROUNDS_PER_MINUTE, Math.floor(claimWindow / 4)));
 }
 
-export function deadlineRemaining(deadline: number, now: number): string {
-  const seconds = Math.abs(deadline - now);
-  const minutes = Math.ceil(seconds / 60);
-  const duration = minutes >= 60 ? `${Math.floor(minutes / 60)}h ${minutes % 60}m` : `${minutes}m`;
-  return deadline <= now ? `${duration} ago` : `in ${duration}`;
+export function deadlineRemaining(deadline: number, now: number, deadlineUnit: 'round'): string {
+  if (deadlineUnit !== 'round') throw new Error('Only round-based swap deadlines are supported.');
+  return roundDeadlineRemaining(deadline, now);
 }
 
-export function swapAttention(role: 'ali' | 'xin', t0: number, t1: number, now: number, state: SwapLiveState) {
-  const decisionAt = t0 - refundDecisionMargin(t0, t1);
+export function swapAttention(role: 'ali' | 'xin', t0: number, t1: number, now: number, state: SwapLiveState, deadlineUnit: 'round') {
+  const decisionAt = t0 - refundDecisionMargin(t0, t1, deadlineUnit);
   if (state === 'unavailable') return {
     priority: 0, title: 'Application unavailable',
     detail: 'Check settlement history and recovery references. An unavailable application does not confirm who settled it.', decisionAt

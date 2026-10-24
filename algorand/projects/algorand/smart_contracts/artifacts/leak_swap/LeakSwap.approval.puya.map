@@ -1614,7 +1614,7 @@
       ]
     },
     "467": {
-      "op": "global LatestTimestamp",
+      "op": "global Round",
       "defined_out": [
         "t0#0 (copy)",
         "tmp%1#0"
@@ -1645,7 +1645,7 @@
       ]
     },
     "473": {
-      "op": "global LatestTimestamp",
+      "op": "global Round",
       "defined_out": [
         "t1#0 (copy)",
         "tmp%3#0"
@@ -4291,7 +4291,7 @@
       "params": {},
       "block": "getContractState",
       "stack_in": [],
-      "op": "global LatestTimestamp",
+      "op": "global Round",
       "defined_out": [
         "tmp%0#0"
       ],
@@ -4373,7 +4373,7 @@
     "1031": {
       "block": "getContractState_after_if_else@2",
       "stack_in": [],
-      "op": "global LatestTimestamp",
+      "op": "global Round",
       "defined_out": [
         "tmp%2#0"
       ],
@@ -4686,7 +4686,7 @@
       "stack_out": []
     },
     "1084": {
-      "op": "global LatestTimestamp",
+      "op": "global Round",
       "defined_out": [
         "tmp%2#0"
       ],
@@ -5177,7 +5177,7 @@
       ]
     },
     "1156": {
-      "op": "global LatestTimestamp",
+      "op": "global Round",
       "defined_out": [
         "tmp%2#0"
       ],
@@ -5368,7 +5368,7 @@
       ]
     },
     "1175": {
-      "op": "global LatestTimestamp",
+      "op": "global Round",
       "defined_out": [
         "tmp%4#0"
       ],
@@ -6517,7 +6517,7 @@
       "stack_out": []
     },
     "1336": {
-      "op": "global LatestTimestamp",
+      "op": "global Round",
       "defined_out": [
         "tmp%2#0"
       ],
