@@ -16,20 +16,33 @@ describe('sponsor group shape', () => {
       ctx.ledger.patchGlobalData({ minBalance: 100_000, minTxnFee: 1000 })
       const payment = ctx.any.txn.payment({ fee: 0, receiver: ali, amount: 102_000 })
       const call = ctx.any.txn.applicationCall({
-        appId: app, sender: ali, onCompletion: OnCompleteAction.NoOp,
+        appId: app,
+        sender: ali,
+        onCompletion: OnCompleteAction.NoOp,
         appArgs: [arc4.methodSelector('setReady(pay)void')],
       })
       const extra = ctx.any.txn.payment()
-      const group = layout === 'prefix' ? [extra, payment, call]
-        : layout === 'suffix' ? [payment, call, extra]
-          : layout === 'repeated' ? [payment, call, payment, call]
-            : layout === 'reversed' ? [call, payment] : [payment, call]
-      const execute = () => ctx.txn.createScope(group, layout === 'prefix' || layout === 'reversed' ? 1 : 0)
-        .execute(() => ctx.executeLogicSig(new FeeSponsorLSig()))
+      const group =
+        layout === 'prefix'
+          ? [extra, payment, call]
+          : layout === 'suffix'
+            ? [payment, call, extra]
+            : layout === 'repeated'
+              ? [payment, call, payment, call]
+              : layout === 'reversed'
+                ? [call, payment]
+                : [payment, call]
+      const execute = () =>
+        ctx.txn
+          .createScope(group, layout === 'prefix' || layout === 'reversed' ? 1 : 0)
+          .execute(() => ctx.executeLogicSig(new FeeSponsorLSig()))
       if (layout === 'pair') expect(execute()).toBe(true)
-      else expect(execute).toThrow(layout === 'reversed'
-        ? 'Sponsor payment must be first in the group'
-        : 'Sponsored group must contain exactly two transactions')
+      else
+        expect(execute).toThrow(
+          layout === 'reversed'
+            ? 'Sponsor payment must be first in the group'
+            : 'Sponsored group must contain exactly two transactions',
+        )
     })
   }
 })

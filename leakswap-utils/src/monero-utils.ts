@@ -16,7 +16,12 @@ export function genPrivateSpendKey(): string {
   // Generate 32 random bytes
   const arr = genScalar();
   // Convert to BigInt (treat as BE)
-  const bn = BigInt('0x' + Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join(''));
+  const bn = BigInt(
+    '0x' +
+      Array.from(arr)
+        .map((b) => b.toString(16).padStart(2, '0'))
+        .join(''),
+  );
   // Reduce modulo L
   const L = 2n ** 252n + 27742317777372353535851937790883648493n;
   const scalar = bn % L;
@@ -30,9 +35,10 @@ export function genPrivateSpendKey(): string {
   // Reverse for LE
   const leBytes = beBytes.reverse();
   // Return as LE hex string
-  return Array.from(leBytes).map(b => b.toString(16).padStart(2, '0')).join('');
+  return Array.from(leBytes)
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
 }
-
 
 export function genPrivateViewKey(privSpendHex: string): string {
   // Parse spend key as LE hex to bytes
@@ -57,13 +63,18 @@ export function genPrivateViewKey(privSpendHex: string): string {
 export function getCompleteAddressFromPrivate(
   privateSpendKey: string,
   privateViewKey: string,
-  networkType: MoneroNetworkType): string {
+  networkType: MoneroNetworkType,
+): string {
   const spendPubKeyBytes = getPK(hexToUint8Array(privateSpendKey));
   const viewPubKeyBytes = getPK(hexToUint8Array(privateViewKey));
   return getCompleteAddressBase(spendPubKeyBytes, viewPubKeyBytes, networkType);
 }
 
-function getCompleteAddressBase(publicSpendKey: Uint8Array, publicViewKey: Uint8Array, networkType: MoneroNetworkType): string {
+function getCompleteAddressBase(
+  publicSpendKey: Uint8Array,
+  publicViewKey: Uint8Array,
+  networkType: MoneroNetworkType,
+): string {
   let prefix: Uint8Array;
   switch (networkType) {
     case MoneroNetworkType.MAINNET:
@@ -76,7 +87,7 @@ function getCompleteAddressBase(publicSpendKey: Uint8Array, publicViewKey: Uint8
       prefix = new Uint8Array([0x35]); // 53 decimal
       break;
     default:
-      throw new Error("Unsupported network type");
+      throw new Error('Unsupported network type');
   }
 
   // Concatenate prefix, spend key, and view key
@@ -98,7 +109,9 @@ function getCompleteAddressBase(publicSpendKey: Uint8Array, publicViewKey: Uint8
   completeAddress.set(checksum, addressBytes.length);
 
   // Convert to hex string for base58 encoding
-  const completeHex = Array.from(completeAddress).map(b => b.toString(16).padStart(2, '0')).join('');
+  const completeHex = Array.from(completeAddress)
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
   // Return base58 encoded address
   return moneroBase58Encode(completeHex);
 }
@@ -108,28 +121,33 @@ export function computeCombinedAddress(
   myPrivateViewKey: string,
   theirPrivateViewKey: string,
   theirPublicSpendKey: string,
-  networkType: MoneroNetworkType = MoneroNetworkType.MAINNET
+  networkType: MoneroNetworkType = MoneroNetworkType.MAINNET,
 ): {
   combinedPublicSpendKey: string;
   combinedPublicViewKey: string;
   combinedAddress: string;
 } {
-
   const myPublicSpendKey = getPK(hexToUint8Array(myPrivateSpendKey));
   const myPublicViewKey = getPK(hexToUint8Array(myPrivateViewKey));
   const theirPublicViewKey = getPK(hexToUint8Array(theirPrivateViewKey));
   const theirPublicSpendKeyBytes = hexToUint8Array(theirPublicSpendKey);
 
-  const combinedPublicSpendKeyPoint = ed25519.Point.fromBytes(myPublicSpendKey).add(ed25519.Point.fromBytes(theirPublicSpendKeyBytes));
-  const combinedPublicViewKeyPoint = ed25519.Point.fromBytes(myPublicViewKey).add(ed25519.Point.fromBytes(theirPublicViewKey));
+  const combinedPublicSpendKeyPoint = ed25519.Point.fromBytes(myPublicSpendKey).add(
+    ed25519.Point.fromBytes(theirPublicSpendKeyBytes),
+  );
+  const combinedPublicViewKeyPoint = ed25519.Point.fromBytes(myPublicViewKey).add(
+    ed25519.Point.fromBytes(theirPublicViewKey),
+  );
 
   let combinedAddress = getCompleteAddressBase(
-    combinedPublicSpendKeyPoint.toBytes(), combinedPublicViewKeyPoint.toBytes(), networkType
-  )
+    combinedPublicSpendKeyPoint.toBytes(),
+    combinedPublicViewKeyPoint.toBytes(),
+    networkType,
+  );
 
   return {
     combinedPublicSpendKey: combinedPublicSpendKeyPoint.toHex(),
     combinedPublicViewKey: combinedPublicViewKeyPoint.toHex(),
-    combinedAddress
+    combinedAddress,
   };
 }

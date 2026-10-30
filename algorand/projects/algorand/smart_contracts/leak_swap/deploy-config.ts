@@ -22,5 +22,4 @@ export async function deploy() {
       receiver: appClient.appAddress,
     })
   }
-
 }

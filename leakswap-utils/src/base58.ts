@@ -115,14 +115,17 @@ export function moneroBase58Encode(hex: string): string {
     encode_block(
       data.slice(i * fullBlockSize, i * fullBlockSize + fullBlockSize),
       res,
-      i * fullEncodedBlockSize
+      i * fullEncodedBlockSize,
     );
   }
   if (last_block_size > 0) {
     encode_block(
-      data.slice(full_block_count * fullBlockSize, full_block_count * fullBlockSize + last_block_size),
+      data.slice(
+        full_block_count * fullBlockSize,
+        full_block_count * fullBlockSize + last_block_size,
+      ),
       res,
-      full_block_count * fullEncodedBlockSize
+      full_block_count * fullEncodedBlockSize,
     );
   }
   return binToStr(res);

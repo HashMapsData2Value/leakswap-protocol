@@ -1,6 +1,4 @@
-import {
-  genScalar,
-} from './algorand-utils';
+import { genScalar } from './algorand-utils';
 
 describe('algorand-utils test', () => {
   it('genScalar should generate a valid 32-byte scalar', () => {

@@ -5,9 +5,14 @@ import {
   extractScalarFromLeakySignature,
   hexToUint8Array,
   uint8ArrayToHex,
-  scalarSign
+  scalarSign,
 } from './common';
-import { computeCombinedAddress, genPrivateSpendKey, genPrivateViewKey, getCompleteAddressFromPrivate } from './monero-utils';
+import {
+  computeCombinedAddress,
+  genPrivateSpendKey,
+  genPrivateViewKey,
+  getCompleteAddressFromPrivate,
+} from './monero-utils';
 import { moneroBase58Decode } from './base58';
 import { ed25519 } from '@noble/curves/ed25519';
 
@@ -41,7 +46,9 @@ describe('Leaky Schnorr Signature Protocol', () => {
 
   it('extractScalarFromLeakySignature should throw on invalid signature length', () => {
     const message = new Uint8Array([1, 2, 3]);
-    expect(() => extractScalarFromLeakySignature(new Uint8Array(10), message, pk)).toThrow('Invalid signature length');
+    expect(() => extractScalarFromLeakySignature(new Uint8Array(10), message, pk)).toThrow(
+      'Invalid signature length',
+    );
   });
 
   it('extractScalarFromLeakySignature should throw if R is not BASEPOINT', () => {
@@ -49,7 +56,9 @@ describe('Leaky Schnorr Signature Protocol', () => {
     // Create a fake signature with wrong R
     const signature = new Uint8Array(64);
     signature.set(new Uint8Array(32).fill(42), 0); // R is not BASEPOINT
-    expect(() => extractScalarFromLeakySignature(signature, message, pk)).toThrow('R value of signature does not match BASEPOINT');
+    expect(() => extractScalarFromLeakySignature(signature, message, pk)).toThrow(
+      'R value of signature does not match BASEPOINT',
+    );
   });
 });
 
@@ -79,10 +88,18 @@ describe('Combining Addresses', () => {
     expect(publicSpendKeyAli).not.toEqual(publicSpendKeyXin);
     // --->
     // Ali and Xin can generate their own addresses
-    addressAli = getCompleteAddressFromPrivate(privateSpendKeyAli, privateViewKeyAli, MoneroNetworkType.MAINNET);
-    addressXin = getCompleteAddressFromPrivate(privateSpendKeyXin, privateViewKeyXin, MoneroNetworkType.MAINNET);
+    addressAli = getCompleteAddressFromPrivate(
+      privateSpendKeyAli,
+      privateViewKeyAli,
+      MoneroNetworkType.MAINNET,
+    );
+    addressXin = getCompleteAddressFromPrivate(
+      privateSpendKeyXin,
+      privateViewKeyXin,
+      MoneroNetworkType.MAINNET,
+    );
     expect(addressAli).not.toEqual(addressXin);
-  })
+  });
 
   it('Extract from Address: Public SpendKey', () => {
     // First decode the base58 address to get raw bytes
@@ -106,8 +123,12 @@ describe('Combining Addresses', () => {
     const extractedPublicViewKeyAli = decodedAli.slice(33, 65); // Bytes 33-64
     const extractedPublicViewKeyXin = decodedXin.slice(33, 65);
 
-    expect(uint8ArrayToHex(extractedPublicViewKeyAli)).toEqual(uint8ArrayToHex(getPK(hexToUint8Array(privateViewKeyAli))));
-    expect(uint8ArrayToHex(extractedPublicViewKeyXin)).toEqual(uint8ArrayToHex(getPK(hexToUint8Array(privateViewKeyXin))));
+    expect(uint8ArrayToHex(extractedPublicViewKeyAli)).toEqual(
+      uint8ArrayToHex(getPK(hexToUint8Array(privateViewKeyAli))),
+    );
+    expect(uint8ArrayToHex(extractedPublicViewKeyXin)).toEqual(
+      uint8ArrayToHex(getPK(hexToUint8Array(privateViewKeyXin))),
+    );
   });
 
   it('Sign normal (NON-LEAKY) signature with privateSpendKey, proving ownership', () => {
@@ -120,26 +141,34 @@ describe('Combining Addresses', () => {
 
     expect(ed25519.verify(signatureAli, message, hexToUint8Array(publicSpendKeyAli))).toBe(true);
     expect(ed25519.verify(signatureXin, message, hexToUint8Array(publicSpendKeyXin))).toBe(true);
-
   });
-
 
   it('Ali & Xin generate the same complete address from their private spend keys and public info', () => {
     const {
       combinedPublicSpendKey: combinedPublicSpendKey1,
       combinedPublicViewKey: combinedPublicViewKey1,
-      combinedAddress: combinedAddress1
-    } = computeCombinedAddress(privateSpendKeyAli, privateViewKeyAli, privateViewKeyXin, publicSpendKeyXin, MoneroNetworkType.MAINNET);
+      combinedAddress: combinedAddress1,
+    } = computeCombinedAddress(
+      privateSpendKeyAli,
+      privateViewKeyAli,
+      privateViewKeyXin,
+      publicSpendKeyXin,
+      MoneroNetworkType.MAINNET,
+    );
     const {
       combinedPublicSpendKey: combinedPublicSpendKey2,
       combinedPublicViewKey: combinedPublicViewKey2,
-      combinedAddress: combinedAddress2
-    } = computeCombinedAddress(privateSpendKeyXin, privateViewKeyXin, privateViewKeyAli, publicSpendKeyAli, MoneroNetworkType.MAINNET);
+      combinedAddress: combinedAddress2,
+    } = computeCombinedAddress(
+      privateSpendKeyXin,
+      privateViewKeyXin,
+      privateViewKeyAli,
+      publicSpendKeyAli,
+      MoneroNetworkType.MAINNET,
+    );
 
     expect(combinedPublicSpendKey1).toEqual(combinedPublicSpendKey2);
     expect(combinedPublicViewKey1).toEqual(combinedPublicViewKey2);
     expect(combinedAddress1).toEqual(combinedAddress2);
-
-
   });
 });

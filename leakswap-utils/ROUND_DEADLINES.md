@@ -50,13 +50,23 @@ interface RoundDeadlines {
 
 function minutesToRounds(minutes: number): number;
 function assertRoundDeadlines(terms: {
-  deadlineUnit?: string; createdRound?: number; t0: number; t1: number;
+  deadlineUnit?: string;
+  createdRound?: number;
+  t0: number;
+  t1: number;
 }): asserts terms is RoundDeadlines;
-function assertRoundFundingTime(terms: {
-  deadlineUnit?: string; createdRound?: number; t0: number; t1: number;
-}, currentRound: number): void;
+function assertRoundFundingTime(
+  terms: {
+    deadlineUnit?: string;
+    createdRound?: number;
+    t0: number;
+    t1: number;
+  },
+  currentRound: number,
+): void;
 function estimateRoundDuration(rounds: number): {
-  minSeconds: number; maxSeconds: number;
+  minSeconds: number;
+  maxSeconds: number;
 };
 function roundDeadlineRemaining(deadline: number, currentRound: number): string;
 function formatRoundDeadline(deadline: number, currentRound?: number): string;

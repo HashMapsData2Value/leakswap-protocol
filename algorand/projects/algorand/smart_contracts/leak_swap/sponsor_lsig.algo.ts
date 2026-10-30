@@ -1,4 +1,16 @@
-import { Account, arc4, assert, Global, gtxn, LogicSig, OnCompleteAction, TemplateVar, Txn, uint64, Uint64 } from '@algorandfoundation/algorand-typescript'
+import {
+  Account,
+  arc4,
+  assert,
+  Global,
+  gtxn,
+  LogicSig,
+  OnCompleteAction,
+  TemplateVar,
+  Txn,
+  uint64,
+  Uint64,
+} from '@algorandfoundation/algorand-typescript'
 
 /*
  * Per-swap fee-sponsoring LogicSig for the LeakSwap contract.

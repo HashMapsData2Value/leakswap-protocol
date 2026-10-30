@@ -2,31 +2,26 @@
   "folders": [
     {
       "path": "./",
-      "name": "ROOT"
+      "name": "ROOT",
     },
     {
-      "path": "projects/algorand"
-    }
+      "path": "projects/algorand",
+    },
   ],
   "settings": {
     "files.exclude": {
-      "projects/": true
+      "projects/": true,
     },
-    "jest.disabledWorkspaceFolders": [
-      "ROOT",
-      "projects"
-    ]
+    "jest.disabledWorkspaceFolders": ["ROOT", "projects"],
   },
   "extensions": {
-    "recommendations": [
-      "joshx.workspace-terminals"
-    ]
+    "recommendations": ["joshx.workspace-terminals"],
   },
   "tasks": {
     "version": "2.0.0",
-    "tasks": []
+    "tasks": [],
   },
   "launch": {
-    "configurations": []
-  }
+    "configurations": [],
+  },
 }

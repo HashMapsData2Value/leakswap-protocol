@@ -1,10 +1,22 @@
-import { abimethod, Account, assert, assertMatch, Bytes, bytes, Contract, ensureBudget, Global, GlobalState, itxn, uint64 } from '@algorandfoundation/algorand-typescript'
+import {
+  abimethod,
+  Account,
+  assert,
+  assertMatch,
+  Bytes,
+  bytes,
+  Contract,
+  ensureBudget,
+  Global,
+  GlobalState,
+  itxn,
+  uint64,
+} from '@algorandfoundation/algorand-typescript'
 import { gtxn } from '@algorandfoundation/algorand-typescript'
 import { AcctParams, ed25519verifyBare, extract, Txn } from '@algorandfoundation/algorand-typescript/op'
 import { sponsorAddress } from './sponsor_address.algo'
 
 export class LeakSwap extends Contract {
-
   public aliAlgoAddr = GlobalState<Account>()
   public xinAlgoAddr = GlobalState<Account>()
 
@@ -25,9 +37,8 @@ export class LeakSwap extends Contract {
     xinAlgoAddr: Account,
     xinXternalPK: bytes,
     t0: uint64,
-    t1: uint64
+    t1: uint64,
   ): void {
-
     this.aliAlgoAddr.value = Global.creatorAddress
     this.aliXternalPK.value = aliXternalPK
 
@@ -71,7 +82,6 @@ export class LeakSwap extends Contract {
       .submit()
   }
 
-
   // Public method to make leakyVerifyEd25519 available for testing
   public verifySignature(signature: bytes, xternalPK: bytes): void {
     this.leakyVerifyEd25519(signature, xternalPK)
@@ -88,10 +98,13 @@ export class LeakSwap extends Contract {
   private leakyVerifyEd25519(signature: bytes, xternalPK: bytes): void {
     assert(
       extract(signature, 0, 32) === Bytes.fromHex('5866666666666666666666666666666666666666666666666666666666666666'),
-      'R-point encoding not 0x58666... . Signature R must be broken (=BASEPOINT) to allow the secret key to be leaked!')
-    assert(ed25519verifyBare(Global.currentApplicationAddress.bytes, signature, xternalPK), 'Signature verification failed!')
+      'R-point encoding not 0x58666... . Signature R must be broken (=BASEPOINT) to allow the secret key to be leaked!',
+    )
+    assert(
+      ed25519verifyBare(Global.currentApplicationAddress.bytes, signature, xternalPK),
+      'Signature verification failed!',
+    )
   }
-
 
   /*
     Ali sets the contract to ready once Xin has locked up funds on the xternal chain.
@@ -148,13 +161,16 @@ export class LeakSwap extends Contract {
    * The contract has entered "ready" state, either because Ali set it to ready (after noticing that
    * Xin locked funds up) or because t0 has passed. Xin can now claim Ali's Algo/ASA, doing so by
    * leaking the xternal secret key. That will allow Ali to claim the xternal funds
-  */
+   */
   @abimethod({ allowActions: 'DeleteApplication' })
   public leakyClaim(signature: bytes, sponsorPayment: gtxn.PaymentTxn): void {
     assertMatch(Txn, { sender: this.xinAlgoAddr.value }, 'Only Xin can do leaky claim!')
     this.requireSponsor(sponsorPayment, this.xinAlgoAddr.value, false)
     ensureBudget(2400)
-    assert(Global.round > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
+    assert(
+      Global.round > this.t0.value || this.aliReady.value,
+      'Cannot claim: time must be past t0 OR Ali must have set ready!',
+    )
     assert(Global.round < this.t1.value, 'Cannot claim after t1!')
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
 
@@ -166,7 +182,11 @@ export class LeakSwap extends Contract {
     const [minimumBalance, recipientExists] = AcctParams.acctMinBalance(feeRecipient)
     const recipientMinimum = recipientExists && minimumBalance > Global.minBalance ? minimumBalance : Global.minBalance
     // Logic ensures that the platform fee is only paid if it does not violate the minimum balance requirements for both the application and the fee recipient.
-    if (platformFee > 0 && Global.currentApplicationAddress.balance - platformFee >= Global.minBalance && (recipientBalance >= recipientMinimum || platformFee >= recipientMinimum - recipientBalance)) {
+    if (
+      platformFee > 0 &&
+      Global.currentApplicationAddress.balance - platformFee >= Global.minBalance &&
+      (recipientBalance >= recipientMinimum || platformFee >= recipientMinimum - recipientBalance)
+    ) {
       itxn.payment({ receiver: feeRecipient, amount: platformFee, fee: 0 }).submit()
     }
     // Disbuse the funds to Xin
@@ -186,5 +206,4 @@ export class LeakSwap extends Contract {
     assert(sponsorPayment.fee === 0, 'Sponsor payment must not pay a fee')
     this.disburseFunds(this.aliAlgoAddr.value)
   }
-
 }

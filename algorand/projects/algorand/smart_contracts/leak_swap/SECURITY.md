@@ -54,14 +54,14 @@ generated application and sponsor artifacts. It covers:
 
 - Algod assembly parity for all four generated sponsor-address fixtures.
 - Successful ready/claim with a zero-funded Xin, platform-fee accounting,
-	signature recovery, and application deletion.
+  signature recovery, and application deletion.
 - Successful early refund, application deletion, and empty sponsor/escrow accounts.
 - 24 application rejection attempts across all four sponsored methods: substitute
-	sender, prefix, suffix, repeated pair, reversed pair, and application rekey.
+  sender, prefix, suffix, repeated pair, reversed pair, and application rekey.
 - Six real LogicSig rejection attempts: prefix, suffix, repeated pair, reversed
-	pair, payment rekey, and nonzero payment fee.
+  pair, payment rekey, and nonzero payment fee.
 - Unchanged participating balances and readiness after rejected attempts; no
-	sponsor rekey after the LogicSig attacks.
+  sponsor rekey after the LogicSig attacks.
 
 These tests exposed an early-refund opcode-budget regression. Claim and refund
 now reserve 2400 remaining opcode units after sponsor validation and before
