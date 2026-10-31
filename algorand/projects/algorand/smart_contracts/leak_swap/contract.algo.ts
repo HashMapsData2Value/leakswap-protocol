@@ -153,7 +153,7 @@ export class LeakSwap extends Contract {
 
     // Forces Ali to leak xternal secret key
     this.leakyVerifyEd25519(signature, this.aliXternalPK.value)
-    // Disburse the funds to Xin
+    // Disburse the funds to Ali
     this.disburseFunds(this.aliAlgoAddr.value)
   }
 
@@ -189,14 +189,14 @@ export class LeakSwap extends Contract {
     ) {
       itxn.payment({ receiver: feeRecipient, amount: platformFee, fee: 0 }).submit()
     }
-    // Disbuse the funds to Xin
+    // Disburse the funds to Xin
     this.disburseFunds(this.xinAlgoAddr.value)
   }
 
   /*
     If after t1 Xin has still not claimed their Algo, Ali can call punish refund.
     This will disburse the funds to Ali, without forcing Ali to reveal their external PK.
-    Xin's locked up funds will be foreer out of reachl.
+    Xin's locked up funds will be forever out of reach.
   */
   @abimethod({ allowActions: 'DeleteApplication' })
   public punishRefund(sponsorPayment: gtxn.PaymentTxn): void {
