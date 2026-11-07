@@ -6,6 +6,8 @@ import { tmpdir } from 'node:os'
 import { resolve } from 'node:path'
 
 const directory = mkdtempSync(resolve(tmpdir(), 'leakswap-sponsor-'))
+const contractDirectory = process.argv.includes('--asa') ? 'leak_swap_asa' : 'leak_swap'
+const helperName = process.argv.includes('--asa') ? 'asaSponsorAddress' : 'sponsorAddress'
 const encode = (value) => {
   const bytes = []
   do {
@@ -21,7 +23,7 @@ function compile(appId, ali, xin) {
     [
       '--no-install',
       'puya-ts',
-      'smart_contracts/leak_swap/sponsor_lsig.algo.ts',
+      `smart_contracts/${contractDirectory}/sponsor_lsig.algo.ts`,
       '--output-bytecode',
       '--out-dir',
       directory,
@@ -73,7 +75,7 @@ try {
   const source = `import { Account, Bytes, bytes, uint64 } from '@algorandfoundation/algorand-typescript'
 import { itob, sha512_256 } from '@algorandfoundation/algorand-typescript/op'
 
-export function sponsorAddress(appId: uint64, ali: Account, xin: Account): Account {
+export function ${helperName}(appId: uint64, ali: Account, xin: Account): Account {
   let remaining = appId
   let encoded = Bytes('')
   while (remaining >= 128) {
@@ -89,8 +91,17 @@ export function sponsorAddress(appId: uint64, ali: Account, xin: Account): Accou
   return Account(sha512_256(Bytes('Program').concat(program)))
 }
 `
-  writeFileSync('smart_contracts/leak_swap/sponsor_address.algo.ts', source)
-  writeFileSync('smart_contracts/leak_swap/sponsor-address-fixtures.json', JSON.stringify(fixtures, null, 2) + '\n')
+  writeFileSync(`smart_contracts/${contractDirectory}/sponsor_address.algo.ts`, source)
+  writeFileSync(
+    `smart_contracts/${contractDirectory}/sponsor-address-fixtures.json`,
+    JSON.stringify(fixtures, null, 2) + '\n',
+  )
+  if (contractDirectory === 'leak_swap_asa') {
+    writeFileSync(
+      `smart_contracts/${contractDirectory}/sponsor-bytecode-template.json`,
+      JSON.stringify({ parts: parts.map((part) => part.toString('hex')), fixtures }, null, 2) + '\n',
+    )
+  }
   console.log('Generated sponsor address helper; four independent bytecode fixtures match.')
 } finally {
   rmSync(directory, { recursive: true, force: true })

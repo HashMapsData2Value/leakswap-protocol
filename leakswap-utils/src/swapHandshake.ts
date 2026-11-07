@@ -1,4 +1,6 @@
-export interface SwapOffer {
+import { requireCuratedAsset } from './algorandAssets';
+
+export interface AlgoSwapOffer {
   offerId: string;
   createdAt: number;
   deadlineUnit: 'round';
@@ -15,11 +17,26 @@ export interface SwapOffer {
   aliPrivateViewKey: string;
 }
 
+export interface AsaSwapOffer extends Omit<AlgoSwapOffer, 'algoAmount'> {
+  contract: 'asa';
+  asset: { id: string; amount: string; decimals: number };
+  feePolicy: 'asa-0.5%-if-eligible';
+  reservePolicy: 'return-to-ali';
+  algoAmount?: never;
+}
+
+export type SwapOffer = AlgoSwapOffer | AsaSwapOffer;
+
+export function isAsaOffer(offer: SwapOffer): offer is AsaSwapOffer {
+  return 'contract' in offer && offer.contract === 'asa';
+}
+
 export interface SwapAcceptance {
   offerDigest: string;
   xinAlgoAddress: string;
   xinPublicSpendKey: string;
   xinPrivateViewKey: string;
+  contract?: 'asa';
 }
 
 export interface SignedOffer {
@@ -52,6 +69,47 @@ function exactFields(value: unknown, fields: string[]): asserts value is Record<
 }
 
 export function canonicalOffer(value: unknown): SwapOffer {
+  if (value && typeof value === 'object' && 'contract' in value) return canonicalAsaOffer(value);
+  return canonicalAlgoOffer(value);
+}
+
+function canonicalAsaOffer(value: unknown): AsaSwapOffer {
+  if (!value || typeof value !== 'object' || Array.isArray(value))
+    throw new Error('Invalid ASA swap offer.');
+  const { contract, asset, feePolicy, reservePolicy, ...common } = value as AsaSwapOffer;
+  if (
+    contract !== 'asa' ||
+    feePolicy !== 'asa-0.5%-if-eligible' ||
+    reservePolicy !== 'return-to-ali' ||
+    Object.prototype.hasOwnProperty.call(common, 'algoAmount')
+  )
+    throw new Error('Unsupported ASA swap policy.');
+  exactFields(asset, ['id', 'amount', 'decimals']);
+  if (typeof asset.id !== 'string' || typeof asset.amount !== 'string')
+    throw new Error('Invalid ASA swap asset.');
+  const network =
+    common.algoGenesisHash === 'wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8='
+      ? 'mainnet'
+      : common.algoGenesisHash === 'SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI='
+        ? 'testnet'
+        : null;
+  if (!network) throw new Error('ASA swaps require a supported public network.');
+  const curated = requireCuratedAsset(network, asset.id);
+  if (asset.decimals !== curated.decimals)
+    throw new Error('ASA precision does not match the curated asset.');
+  if (common.moneroNetwork !== (network === 'mainnet' ? 'mainnet' : 'stagenet'))
+    throw new Error('ASA swap network pair is not supported.');
+  const { algoAmount, ...checked } = canonicalAlgoOffer({ ...common, algoAmount: asset.amount });
+  return {
+    ...checked,
+    contract: 'asa',
+    asset: { id: curated.id, amount: algoAmount, decimals: curated.decimals },
+    feePolicy: 'asa-0.5%-if-eligible',
+    reservePolicy: 'return-to-ali',
+  };
+}
+
+function canonicalAlgoOffer(value: unknown): AlgoSwapOffer {
   const hasRestoreHeight = Object.prototype.hasOwnProperty.call(value ?? {}, 'moneroRestoreHeight');
   if (value && typeof value === 'object' && (value as SwapOffer).deadlineUnit !== 'round')
     throw new Error(LEGACY_ERROR);
@@ -71,7 +129,7 @@ export function canonicalOffer(value: unknown): SwapOffer {
     'deadlineUnit',
     'createdRound',
   ]);
-  const offer = value as unknown as SwapOffer;
+  const offer = value as unknown as AlgoSwapOffer;
   if (
     typeof offer.offerId !== 'string' ||
     !/^[0-9a-f]{32}$/.test(offer.offerId) ||
@@ -124,9 +182,17 @@ export function canonicalOffer(value: unknown): SwapOffer {
 }
 
 export function canonicalAcceptance(value: unknown): SwapAcceptance {
-  exactFields(value, ['offerDigest', 'xinAlgoAddress', 'xinPublicSpendKey', 'xinPrivateViewKey']);
+  const assetAcceptance = Boolean(value && typeof value === 'object' && 'contract' in value);
+  exactFields(value, [
+    'offerDigest',
+    'xinAlgoAddress',
+    'xinPublicSpendKey',
+    'xinPrivateViewKey',
+    ...(assetAcceptance ? ['contract'] : []),
+  ]);
   const accepted = value as unknown as SwapAcceptance;
   if (
+    (assetAcceptance && accepted.contract !== 'asa') ||
     typeof accepted.offerDigest !== 'string' ||
     !HEX_KEY.test(accepted.offerDigest) ||
     typeof accepted.xinAlgoAddress !== 'string' ||
@@ -141,15 +207,18 @@ export function canonicalAcceptance(value: unknown): SwapAcceptance {
     xinAlgoAddress: accepted.xinAlgoAddress,
     xinPublicSpendKey: accepted.xinPublicSpendKey,
     xinPrivateViewKey: accepted.xinPrivateViewKey,
+    ...(assetAcceptance ? { contract: 'asa' as const } : {}),
   };
 }
 
 export function handshakeSigningBytes(kind: 'invite' | 'accept', payload: unknown): Uint8Array {
   if (kind !== 'invite' && kind !== 'accept') throw new Error('Unsupported swap message type.');
+  const checked = kind === 'invite' ? canonicalOffer(payload) : canonicalAcceptance(payload);
+  const variant = 'contract' in checked && checked.contract === 'asa' ? 'ASA' : 'v1';
   return new TextEncoder().encode(
     JSON.stringify({
-      domain: kind === 'invite' ? 'LeakSwap/Offer/v1' : 'LeakSwap/Acceptance/v1',
-      payload: kind === 'invite' ? canonicalOffer(payload) : canonicalAcceptance(payload),
+      domain: `LeakSwap/${kind === 'invite' ? 'Offer' : 'Acceptance'}/${variant}`,
+      payload: checked,
     }),
   );
 }

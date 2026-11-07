@@ -1,0 +1,3147 @@
+{
+  "version": 3,
+  "sources": [
+    "/Users/yared/dev/hashmapsdata2value/monero-swaps-stuff/leakswap-all/leakswap-protocol/algorand/projects/algorand/smart_contracts/leak_swap_asa/sponsor_lsig.algo.ts"
+  ],
+  "mappings": ";;;;;AAgBkB;;AACF;AACA;AACE;;AAAqB;AAA5B;AAAA;;;AAAyC;;AAAqB;AAA5B;AAAlC;;;;AAAP;AACW;;AAAJ;AAAP;AACW;;AAAJ;AAAP;AACW;;AAAmB;;AAAvB;AAAP;AAC4C;;AAAmB;AAA1B;AAAA;AAAA;;AAAxB;AAAA;;AAAA;;AAAA;AAAA;AACD;AAAA;;AAAL;;AAAA;AAAP;AACY;AAAA;;AAAmB;;AAAxB;AAAP;AACqC;AAApB;;AAAX;AAAA;;AACW;;;;;;AAAb;AAAJ;;;AACgB;;AAAqB;AAA5B;AAAP;AACY;;AAAA;AAAA;;AAAL;;AAAA;AAAA;;AAAA;AAAP;AACY;;AAAL;AAAP;AACW;;AAAJ;AAAP;AACW;;AAAkB;;AAAoB;;AAAmB;AAA1B;AAApB;AAAf;AAAP;AACW;;AAA4B;;AAAhC;AAAP;AACO;AAAP;AAEI;;AAAqB;;;;;;AAAb;AAAR;AAAA;;AAEJ;;;AACE;;AAAa;;;;;;AAAb;AADF;;;AAEE;;AAAa;;;;;;AAAb;AAFF;;;;AADF;AAMkB;AAAA;;AAAA;AAAA;AAAA;;AACN;;AAAA;AAAA;;AAAA;;AAAL;;AAAA;AAAP;AACY;AAAA;;AAAkC;;AAAvC;AAAP;AACW;;AAAJ;AAAP;AACW;;AAAJ;;AAAA;AAAP;AACW;;AAAJ;AAAP;AACW;;AAAqB;AAA5B;AAAJ;;;AAC6C;AAA7B;;AAAA;;AAAA;AAAA;AAA6B;AAC9B;;AAAN;;AAAA;AAAA;;;AADoC;AACA;;AAAN;;AAAA;AAA9B;;;;AAAP;AAD2C;AAE9B;;AAAN;AAAP;AAF2C;AAG9B;;AAAN;AAAP;AAH2C;AAKnC;;AAAwB;;AAA9B;AAAA;;;AALyC;AAKU;;AAAuB;;AAA7B;AAA7C;;;;AADF;AAJ2C;AAQ9B;;AAAmB;;AAAzB;AAAP;AAEK;AAAP;;;;;;;;;;;;;;",
+  "op_pc_offset": 2,
+  "pc_events": {
+    "0": {
+      "op": "intc_1 // 0",
+      "stack_out": [
+        "recipient#0"
+      ]
+    },
+    "1": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0"
+      ]
+    },
+    "2": {
+      "op": "pushbytes \"\"",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0"
+      ]
+    },
+    "4": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0"
+      ]
+    },
+    "5": {
+      "op": "intc 4 // TMPL_APP_ID"
+    },
+    "7": {
+      "op": "bytec_0 // TMPL_ALI_ADDR"
+    },
+    "8": {
+      "op": "bytec_1 // TMPL_XIN_ADDR"
+    },
+    "9": {
+      "op": "global GroupSize"
+    },
+    "11": {
+      "op": "intc_2 // 2",
+      "defined_out": [
+        "2",
+        "ali#0",
+        "appId#0",
+        "tmp%0#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%0#0",
+        "2"
+      ]
+    },
+    "12": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "tmp%1#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%1#0"
+      ]
+    },
+    "13": {
+      "op": "bnz main_bool_true@2",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "16": {
+      "op": "global GroupSize",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "tmp%2#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%2#0"
+      ]
+    },
+    "18": {
+      "op": "intc_3 // 3",
+      "defined_out": [
+        "3",
+        "ali#0",
+        "appId#0",
+        "tmp%2#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%2#0",
+        "3"
+      ]
+    },
+    "19": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "tmp%3#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%3#0"
+      ]
+    },
+    "20": {
+      "op": "bz main_bool_false@3",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "23": {
+      "block": "main_bool_true@2",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ],
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "or_result%0#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "or_result%0#0"
+      ]
+    },
+    "24": {
+      "block": "main_bool_merge@4",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "or_result%0#0"
+      ],
+      "error": "Invalid ASA settlement group size",
+      "op": "assert // Invalid ASA settlement group size",
+      "defined_out": [],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "25": {
+      "op": "txn GroupIndex",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%4#0"
+      ]
+    },
+    "27": {
+      "op": "!",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%5#0"
+      ]
+    },
+    "28": {
+      "error": "Sponsor must be first",
+      "op": "assert // Sponsor must be first",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "29": {
+      "op": "txn Fee",
+      "defined_out": [
+        "tmp%6#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%6#0"
+      ]
+    },
+    "31": {
+      "op": "!",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%7#0"
+      ]
+    },
+    "32": {
+      "error": "Sponsor must not pay fees",
+      "op": "assert // Sponsor must not pay fees",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "33": {
+      "op": "txn RekeyTo",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%8#0"
+      ]
+    },
+    "35": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "tmp%8#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%8#0",
+        "tmp%9#0"
+      ]
+    },
+    "37": {
+      "op": "==",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%10#0"
+      ]
+    },
+    "38": {
+      "error": "Sponsor must not rekey",
+      "op": "assert // Sponsor must not rekey",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "39": {
+      "op": "global GroupSize",
+      "defined_out": [
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%11#0"
+      ]
+    },
+    "41": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%11#0",
+        "1"
+      ]
+    },
+    "42": {
+      "op": "-",
+      "defined_out": [
+        "call#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0"
+      ]
+    },
+    "43": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "call#0"
+      ]
+    },
+    "44": {
+      "op": "bury 6",
+      "defined_out": [
+        "call#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0"
+      ]
+    },
+    "46": {
+      "op": "dup",
+      "defined_out": [
+        "call#0",
+        "call#0 (copy)"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "call#0 (copy)"
+      ]
+    },
+    "47": {
+      "op": "gtxns TypeEnum",
+      "defined_out": [
+        "call#0",
+        "gtxn_type%0#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "gtxn_type%0#0"
+      ]
+    },
+    "49": {
+      "op": "pushint 6 // appl",
+      "defined_out": [
+        "appl",
+        "call#0",
+        "gtxn_type%0#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "gtxn_type%0#0",
+        "appl"
+      ]
+    },
+    "51": {
+      "op": "==",
+      "defined_out": [
+        "call#0",
+        "gtxn_type_matches%0#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "gtxn_type_matches%0#0"
+      ]
+    },
+    "52": {
+      "error": "transaction type is appl",
+      "op": "assert // transaction type is appl",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0"
+      ]
+    },
+    "53": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "call#0 (copy)"
+      ]
+    },
+    "54": {
+      "op": "gtxns ApplicationID",
+      "defined_out": [
+        "call#0",
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%12#0"
+      ]
+    },
+    "56": {
+      "op": "dig 4",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%12#0",
+        "appId#0"
+      ]
+    },
+    "58": {
+      "op": "==",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%13#0"
+      ]
+    },
+    "59": {
+      "error": "Wrong ASA swap application",
+      "op": "assert // Wrong ASA swap application",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0"
+      ]
+    },
+    "60": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "call#0 (copy)"
+      ]
+    },
+    "61": {
+      "op": "gtxns RekeyTo",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%14#0"
+      ]
+    },
+    "63": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "tmp%14#0",
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%14#0",
+        "tmp%15#0"
+      ]
+    },
+    "65": {
+      "op": "==",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%16#0"
+      ]
+    },
+    "66": {
+      "error": "Application call must not rekey",
+      "op": "assert // Application call must not rekey",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0"
+      ]
+    },
+    "67": {
+      "op": "intc_1 // 0",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "0"
+      ]
+    },
+    "68": {
+      "op": "gtxnsas ApplicationArgs",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0"
+      ]
+    },
+    "70": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0",
+        "selector#0"
+      ]
+    },
+    "71": {
+      "op": "bury 7",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0"
+      ]
+    },
+    "73": {
+      "op": "pushbytes 0xdda05a7a // method \"setReady(pay)void\"",
+      "defined_out": [
+        "Method(setReady(pay)void)",
+        "appId#0",
+        "call#0",
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0",
+        "Method(setReady(pay)void)"
+      ]
+    },
+    "79": {
+      "op": "==",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%17#0"
+      ]
+    },
+    "80": {
+      "op": "bz main_after_if_else@6",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "83": {
+      "op": "global GroupSize",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%18#0"
+      ]
+    },
+    "85": {
+      "op": "intc_2 // 2",
+      "defined_out": [
+        "2",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%18#0",
+        "2"
+      ]
+    },
+    "86": {
+      "op": "==",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%19#0"
+      ]
+    },
+    "87": {
+      "error": "Readiness must use two transactions",
+      "op": "assert // Readiness must use two transactions",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "88": {
+      "op": "dig 4",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0"
+      ]
+    },
+    "90": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "call#0 (copy)"
+      ]
+    },
+    "91": {
+      "op": "gtxns Sender",
+      "defined_out": [
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%20#0"
+      ]
+    },
+    "93": {
+      "op": "dig 3",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%20#0",
+        "ali#0"
+      ]
+    },
+    "95": {
+      "op": "dup",
+      "defined_out": [
+        "ali#0",
+        "ali#0 (copy)",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "tmp%20#0",
+        "ali#0 (copy)",
+        "ali#0 (copy)"
+      ]
+    },
+    "96": {
+      "op": "cover 3",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0",
+        "call#0",
+        "tmp%20#0",
+        "ali#0 (copy)"
+      ]
+    },
+    "98": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0",
+        "call#0",
+        "tmp%21#0"
+      ]
+    },
+    "99": {
+      "error": "Only Ali can set ready",
+      "op": "assert // Only Ali can set ready",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0",
+        "call#0"
+      ]
+    },
+    "100": {
+      "op": "gtxns OnCompletion",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%22#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0",
+        "tmp%22#0"
+      ]
+    },
+    "102": {
+      "op": "!",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0",
+        "tmp%23#0"
+      ]
+    },
+    "103": {
+      "error": "Readiness must not delete",
+      "op": "assert // Readiness must not delete",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0"
+      ]
+    },
+    "104": {
+      "op": "txn Receiver",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0",
+        "tmp%24#0"
+      ]
+    },
+    "106": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%25#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%25#0"
+      ]
+    },
+    "107": {
+      "error": "Readiness top-up must go to Ali",
+      "op": "assert // Readiness top-up must go to Ali",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "108": {
+      "op": "txn Amount",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%26#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%26#0"
+      ]
+    },
+    "110": {
+      "op": "global MinBalance",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%26#0",
+        "tmp%27#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%26#0",
+        "tmp%27#0"
+      ]
+    },
+    "112": {
+      "op": "global MinTxnFee",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%26#0",
+        "tmp%27#0",
+        "tmp%28#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%26#0",
+        "tmp%27#0",
+        "tmp%28#0"
+      ]
+    },
+    "114": {
+      "op": "intc_2 // 2",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%26#0",
+        "tmp%27#0",
+        "tmp%28#0",
+        "2"
+      ]
+    },
+    "115": {
+      "op": "*",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%26#0",
+        "tmp%27#0",
+        "tmp%29#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%26#0",
+        "tmp%27#0",
+        "tmp%29#0"
+      ]
+    },
+    "116": {
+      "op": "+",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%26#0",
+        "tmp%30#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%26#0",
+        "tmp%30#0"
+      ]
+    },
+    "117": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%31#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%31#0"
+      ]
+    },
+    "118": {
+      "error": "Wrong readiness top-up",
+      "op": "assert // Wrong readiness top-up",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "119": {
+      "op": "txn CloseRemainderTo",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%32#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%32#0"
+      ]
+    },
+    "121": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%32#0",
+        "tmp%33#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%32#0",
+        "tmp%33#0"
+      ]
+    },
+    "123": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "appId#0",
+        "call#0",
+        "selector#0",
+        "tmp%34#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%34#0"
+      ]
+    },
+    "124": {
+      "error": "Readiness must not close sponsor",
+      "op": "assert // Readiness must not close sponsor",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "125": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "126": {
+      "op": "return",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "127": {
+      "block": "main_after_if_else@6",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ],
+      "op": "dig 5",
+      "defined_out": [
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0"
+      ]
+    },
+    "129": {
+      "op": "pushbytes 0xdda88be3 // method \"leakyClaim(byte[])void\"",
+      "defined_out": [
+        "Method(leakyClaim(byte[])void)",
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0",
+        "Method(leakyClaim(byte[])void)"
+      ]
+    },
+    "135": {
+      "op": "==",
+      "defined_out": [
+        "claim#0",
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "claim#0"
+      ]
+    },
+    "136": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "claim#0",
+        "claim#0"
+      ]
+    },
+    "137": {
+      "op": "bury 5",
+      "defined_out": [
+        "claim#0",
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "claim#0"
+      ]
+    },
+    "139": {
+      "op": "bnz main_bool_true@9",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "142": {
+      "op": "dig 5",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0"
+      ]
+    },
+    "144": {
+      "op": "pushbytes 0x9ee84c01 // method \"leakyRefund(byte[])void\"",
+      "defined_out": [
+        "Method(leakyRefund(byte[])void)",
+        "claim#0",
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0",
+        "Method(leakyRefund(byte[])void)"
+      ]
+    },
+    "150": {
+      "op": "==",
+      "defined_out": [
+        "claim#0",
+        "selector#0",
+        "tmp%35#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%35#0"
+      ]
+    },
+    "151": {
+      "op": "bnz main_bool_true@9",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "154": {
+      "op": "dig 5",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0"
+      ]
+    },
+    "156": {
+      "op": "pushbytes 0x084e7c58 // method \"punishRefund()void\"",
+      "defined_out": [
+        "Method(punishRefund()void)",
+        "claim#0",
+        "selector#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "selector#0",
+        "Method(punishRefund()void)"
+      ]
+    },
+    "162": {
+      "op": "==",
+      "defined_out": [
+        "claim#0",
+        "selector#0",
+        "tmp%36#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%36#0"
+      ]
+    },
+    "163": {
+      "op": "bz main_bool_false@10",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "166": {
+      "block": "main_bool_true@9",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ],
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "or_result%1#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "or_result%1#0"
+      ]
+    },
+    "167": {
+      "block": "main_bool_merge@11",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "or_result%1#0"
+      ],
+      "error": "Unsupported ASA settlement",
+      "op": "assert // Unsupported ASA settlement",
+      "defined_out": [],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "168": {
+      "op": "dup2",
+      "defined_out": [
+        "ali#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "169": {
+      "op": "dig 5",
+      "defined_out": [
+        "ali#0",
+        "claim#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "ali#0",
+        "xin#0",
+        "claim#0"
+      ]
+    },
+    "171": {
+      "op": "select",
+      "defined_out": [
+        "ali#0",
+        "claim#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0"
+      ]
+    },
+    "172": {
+      "op": "dup",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "recipient#0"
+      ]
+    },
+    "173": {
+      "op": "bury 8",
+      "defined_out": [
+        "ali#0",
+        "claim#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0"
+      ]
+    },
+    "175": {
+      "op": "dig 5",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "call#0"
+      ]
+    },
+    "177": {
+      "op": "dup",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "call#0 (copy)",
+        "claim#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "call#0 (copy)",
+        "call#0 (copy)"
+      ]
+    },
+    "178": {
+      "op": "cover 2",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "recipient#0",
+        "call#0 (copy)"
+      ]
+    },
+    "180": {
+      "op": "gtxns Sender",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%37#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "recipient#0",
+        "tmp%37#0"
+      ]
+    },
+    "182": {
+      "op": "dig 1",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "recipient#0 (copy)",
+        "tmp%37#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "recipient#0",
+        "tmp%37#0",
+        "recipient#0 (copy)"
+      ]
+    },
+    "184": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%38#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "recipient#0",
+        "tmp%38#0"
+      ]
+    },
+    "185": {
+      "error": "Wrong settlement sender",
+      "op": "assert // Wrong settlement sender",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "call#0",
+        "recipient#0"
+      ]
+    },
+    "186": {
+      "op": "swap",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "call#0"
+      ]
+    },
+    "187": {
+      "op": "gtxns OnCompletion",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%39#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%39#0"
+      ]
+    },
+    "189": {
+      "op": "pushint 5 // 5",
+      "defined_out": [
+        "5",
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%39#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%39#0",
+        "5"
+      ]
+    },
+    "191": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%40#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%40#0"
+      ]
+    },
+    "192": {
+      "error": "Settlement must delete",
+      "op": "assert // Settlement must delete",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0"
+      ]
+    },
+    "193": {
+      "op": "txn Amount",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%41#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%41#0"
+      ]
+    },
+    "195": {
+      "op": "!",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%42#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%42#0"
+      ]
+    },
+    "196": {
+      "error": "Settlement top-up must use close-out only",
+      "op": "assert // Settlement top-up must use close-out only",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0"
+      ]
+    },
+    "197": {
+      "op": "txn Receiver",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%43#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%43#0"
+      ]
+    },
+    "199": {
+      "op": "dig 1",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%43#0",
+        "recipient#0 (copy)"
+      ]
+    },
+    "201": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%44#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%44#0"
+      ]
+    },
+    "202": {
+      "error": "Wrong settlement receiver",
+      "op": "assert // Wrong settlement receiver",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0"
+      ]
+    },
+    "203": {
+      "op": "txn CloseRemainderTo",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%45#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "recipient#0",
+        "tmp%45#0"
+      ]
+    },
+    "205": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%46#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%46#0"
+      ]
+    },
+    "206": {
+      "error": "Wrong settlement close-out",
+      "op": "assert // Wrong settlement close-out",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "207": {
+      "op": "global GroupSize",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%47#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%47#0"
+      ]
+    },
+    "209": {
+      "op": "intc_3 // 3",
+      "defined_out": [
+        "3",
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%47#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%47#0",
+        "3"
+      ]
+    },
+    "210": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%48#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%48#0"
+      ]
+    },
+    "211": {
+      "op": "bz main_after_if_else@21",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "214": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "215": {
+      "op": "gtxns TypeEnum",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "gtxn_type%1#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "gtxn_type%1#0"
+      ]
+    },
+    "217": {
+      "op": "pushint 4 // axfer",
+      "defined_out": [
+        "ali#0",
+        "axfer",
+        "call#0",
+        "claim#0",
+        "gtxn_type%1#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "gtxn_type%1#0",
+        "axfer"
+      ]
+    },
+    "219": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "gtxn_type_matches%1#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "gtxn_type_matches%1#0"
+      ]
+    },
+    "220": {
+      "error": "transaction type is axfer",
+      "op": "assert // transaction type is axfer",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "221": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "222": {
+      "op": "gtxns Sender",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%49#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%49#0"
+      ]
+    },
+    "224": {
+      "op": "dig 7",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%49#0",
+        "recipient#0"
+      ]
+    },
+    "226": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%50#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%50#0"
+      ]
+    },
+    "227": {
+      "op": "bz main_bool_false@15",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "230": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "231": {
+      "op": "gtxns AssetReceiver",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%51#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%51#0"
+      ]
+    },
+    "233": {
+      "op": "dig 7",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%51#0",
+        "recipient#0"
+      ]
+    },
+    "235": {
+      "op": "==",
+      "defined_out": [
+        "ali#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "tmp%52#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%52#0"
+      ]
+    },
+    "236": {
+      "op": "bz main_bool_false@15",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "239": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "ali#0",
+        "and_result%0#0",
+        "call#0",
+        "claim#0",
+        "recipient#0",
+        "xin#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "and_result%0#0"
+      ]
+    },
+    "240": {
+      "block": "main_bool_merge@16",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "and_result%0#0"
+      ],
+      "error": "Opt-in must belong to recipient",
+      "op": "assert // Opt-in must belong to recipient",
+      "defined_out": [],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "241": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "242": {
+      "op": "gtxns AssetAmount",
+      "defined_out": [
+        "tmp%53#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%53#0"
+      ]
+    },
+    "244": {
+      "op": "!",
+      "defined_out": [
+        "tmp%54#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%54#0"
+      ]
+    },
+    "245": {
+      "error": "Opt-in must have zero amount",
+      "op": "assert // Opt-in must have zero amount",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "246": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "247": {
+      "op": "gtxns Fee",
+      "defined_out": [
+        "tmp%55#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%55#0"
+      ]
+    },
+    "249": {
+      "op": "!",
+      "defined_out": [
+        "tmp%56#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%56#0"
+      ]
+    },
+    "250": {
+      "error": "Opt-in fees must be pooled",
+      "op": "assert // Opt-in fees must be pooled",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "251": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "252": {
+      "op": "gtxns AssetCloseTo",
+      "defined_out": [
+        "tmp%57#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%57#0"
+      ]
+    },
+    "254": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "tmp%57#0",
+        "tmp%58#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%57#0",
+        "tmp%58#0"
+      ]
+    },
+    "256": {
+      "op": "==",
+      "defined_out": [
+        "tmp%59#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%59#0"
+      ]
+    },
+    "257": {
+      "op": "bz main_bool_false@19",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "260": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "261": {
+      "op": "gtxns AssetSender",
+      "defined_out": [
+        "tmp%60#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%60#0"
+      ]
+    },
+    "263": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "tmp%60#0",
+        "tmp%61#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%60#0",
+        "tmp%61#0"
+      ]
+    },
+    "265": {
+      "op": "==",
+      "defined_out": [
+        "tmp%62#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%62#0"
+      ]
+    },
+    "266": {
+      "op": "bz main_bool_false@19",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "269": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "and_result%1#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "and_result%1#0"
+      ]
+    },
+    "270": {
+      "block": "main_bool_merge@20",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "and_result%1#0"
+      ],
+      "error": "Opt-in must not close or claw back",
+      "op": "assert // Opt-in must not close or claw back",
+      "defined_out": [],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "271": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "272": {
+      "op": "gtxns RekeyTo",
+      "defined_out": [
+        "tmp%63#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%63#0"
+      ]
+    },
+    "274": {
+      "op": "global ZeroAddress",
+      "defined_out": [
+        "tmp%63#0",
+        "tmp%64#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%63#0",
+        "tmp%64#0"
+      ]
+    },
+    "276": {
+      "op": "==",
+      "defined_out": [
+        "tmp%65#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "tmp%65#0"
+      ]
+    },
+    "277": {
+      "error": "Opt-in must not rekey",
+      "op": "assert // Opt-in must not rekey",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "278": {
+      "block": "main_after_if_else@21",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ],
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "1"
+      ]
+    },
+    "279": {
+      "op": "return",
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ]
+    },
+    "280": {
+      "block": "main_bool_false@19",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "and_result%1#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "and_result%1#0"
+      ]
+    },
+    "281": {
+      "op": "b main_bool_merge@20"
+    },
+    "284": {
+      "block": "main_bool_false@15",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "and_result%0#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "and_result%0#0"
+      ]
+    },
+    "285": {
+      "op": "b main_bool_merge@16"
+    },
+    "288": {
+      "block": "main_bool_false@10",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "or_result%1#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "or_result%1#0"
+      ]
+    },
+    "289": {
+      "op": "b main_bool_merge@11"
+    },
+    "292": {
+      "block": "main_bool_false@3",
+      "stack_in": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0"
+      ],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "or_result%0#0"
+      ],
+      "stack_out": [
+        "recipient#0",
+        "selector#0",
+        "call#0",
+        "claim#0",
+        "appId#0",
+        "ali#0",
+        "xin#0",
+        "or_result%0#0"
+      ]
+    },
+    "293": {
+      "op": "b main_bool_merge@4"
+    }
+  }
+}
