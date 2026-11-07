@@ -1,3 +1,10 @@
+# [leakswap-utils-v2.1.0](https://github.com/HashMapsData2Value/leakswap-protocol/compare/leakswap-utils-v2.0.0...leakswap-utils-v2.1.0) (2026-11-07)
+
+
+### Features
+
+* add curated ASA swaps and conditional claim fees ([940a5cb](https://github.com/HashMapsData2Value/leakswap-protocol/commit/940a5cba7a8a17a8ac8207b4e7a841517d4cf91b))
+
 # [leakswap-utils-v2.0.0](https://github.com/HashMapsData2Value/leakswap-protocol/compare/leakswap-utils-v1.2.1...leakswap-utils-v2.0.0) (2026-10-24)
 
 
