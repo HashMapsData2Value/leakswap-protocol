@@ -7,3 +7,4 @@ node_modules
 **/node_modules/
 dist/
 .DS_Store
+/algorand/projects/algorand/tests/fixtures/asa_localnet.algo.ts

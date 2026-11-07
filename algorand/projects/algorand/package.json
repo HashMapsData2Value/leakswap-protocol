@@ -4,7 +4,7 @@
   "description": "Smart contract deployer",
   "main": "smart_contracts/index.ts",
   "scripts": {
-    "build": "node scripts/generate-sponsor-address.mjs && algokit compile ts smart_contracts --output-source-map --out-dir artifacts && algokit generate client smart_contracts/artifacts --output {app_spec_dir}/{contract_name}Client.ts",
+    "build": "node scripts/generate-sponsor-address.mjs && node scripts/generate-sponsor-address.mjs --asa && algokit compile ts smart_contracts --output-source-map --out-dir artifacts && algokit generate client smart_contracts/artifacts --output {app_spec_dir}/{contract_name}Client.ts",
     "deploy": "ts-node-dev --transpile-only --watch .env -r dotenv/config smart_contracts/index.ts",
     "deploy:ci": "ts-node --transpile-only -r dotenv/config smart_contracts/index.ts",
     "lint": "eslint smart_contracts",
@@ -12,6 +12,8 @@
     "audit": "better-npm-audit audit",
     "format": "prettier --write .",
     "test": "vitest run --coverage",
+    "test:asa": "vitest run smart_contracts/leak_swap_asa/contract.spec.ts smart_contracts/leak_swap_asa/sponsor_lsig.spec.ts",
+    "test:asa:localnet": "node --test scripts/test-asa-localnet.mjs",
     "test:watch": "vitest watch",
     "check-types": "tsc --noEmit"
   },
